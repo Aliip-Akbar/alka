@@ -33,34 +33,34 @@
                 </div>
                 <div class="modal-body">
                     <form id="pelangganForm" name="pelangganForm" class="form-horizontal">
-                        <input type="hidden" name="id" id="id">
                             <div class="form-group">
+                                <input type="hidden" name="id" id="id">
                                 <label for="name" class="col-sm-4 control-label">Nama Pelanggan</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Masukkan Nama Pelanggan" value="" maxlength="50" required>
+                                        <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Masukkan Nama pelanggan" value="" maxlength="50" required>
                                     </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="name" class="col-sm-4 control-label">Alamat</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Pelanggan" value="" maxlength="50" required>
+                                     <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat pelanggan" value="" maxlength="50" required>
                                     </div>
                             </div>
                             <div class="form-group">
                                 <label for="name" class="col-sm-4 control-label">Telp.</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan No.telp Pelanggan" value="" maxlength="50" required>
+                                        <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan No.telp pelanggan" value="" maxlength="50" required>
                                     </div>
                             </div>
                             <div class="form-group">
                                 <label for="name" class="col-sm-4 control-label">Email</label>
                                     <div class="col-sm-12">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Pelanggan" value="" maxlength="50" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email pelanggan" value="" maxlength="50" required>
+                                        <input type="hidden" class="form-control" id="j_pelanggan" name="j_pelanggan" value="biasa" maxlength="50" required>
                                     </div>
                             </div>
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan</button>
+                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create" onclick="return notification = alertify.notify('Data Baru Saja Ditambahkan', 'success', 10, function(){  console.log('dismissed'); });">Simpan</button>
                             </div>
                     </form>
                 </div>
@@ -109,10 +109,10 @@
     --------------------------------------------
     --------------------------------------------*/
     $('#createNewPelanggan').click(function () {
-        $('#saveBtn').val("create-pelanggan");
+        $('#saveBtn').val("create-Pelanggan");
         $('#id').val('');
         $('#pelangganForm').trigger("reset");
-        $('#modelHeading').html("Tambah pelanggan Baru");
+        $('#modelHeading').html("Tambah Pelanggan Baru");
         $('#ajaxModel').modal('show');
     });
 
@@ -124,33 +124,35 @@
     $('body').on('click', '.editPelanggan', function () {
       var id = $(this).data('id');
       $.get("{{ route('pelanggan.index') }}" +'/' + id +'/edit', function (data) {
-          $('#modelHeading').html("Edit pelanggan");
+          $('#modelHeading').html("Edit Pelanggan");
           $('#ajaxModel').modal('show');
           $('#id').val(data.id);
           $('#nama_pelanggan').val(data.nama_pelanggan).prop('readonly', false);
           $('#alamat').val(data.alamat).prop('readonly', false);
           $('#telp').val(data.telp).prop('readonly', false);
           $('#email').val(data.email).prop('readonly', false);
+          $('#j_pelanggan').val(data.j_pelanggan).prop('readonly', false);
       })
     });
 
     /*------------------------------------------
     --------------------------------------------
-    show pelanggan Code
+    show Pelanggan Code
     --------------------------------------------
     --------------------------------------------*/
 
     $('body').on('click', '.showPelanggan', function () {
       var id = $(this).data('id');
       $.get("{{ route('pelanggan.index') }}" +'/' + id, function (data) {
-          $('#modelHeading').html("Detail pelanggan");
-          $('#saveBtn').val("edit pelanggan");
+          $('#modelHeading').html("Detail Pelanggan");
+          $('#saveBtn').val("edit Pelanggan");
           $('#ajaxModel').modal('show');
           $('#id').val(data.id);
           $('#nama_pelanggan').val(data.nama_pelanggan).prop('readonly', true);
           $('#alamat').val(data.alamat).prop('readonly', true);
           $('#telp').val(data.telp).prop('readonly', true);
           $('#email').val(data.email).prop('readonly', true);
+          $('#j_pelanggan').val(data.j_pelanggan).prop('readonly', true);
       })
     });
     /*------------------------------------------
@@ -182,7 +184,7 @@
 
     /*------------------------------------------
     --------------------------------------------
-    Delete pelanggan Code
+    Delete Pelanggan Code
     --------------------------------------------
     --------------------------------------------*/
     $('body').on('click', '.deletePelanggan', function () {

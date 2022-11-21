@@ -3,7 +3,7 @@
 @section('konten')
 <div class="card shadow mb-2">
     <div class="card-header">
-        <h6 class="font-weight-bold text-primary">Transaksi / Penjualan <a href="" class="btn btn-sm btn-danger float-right"><i class="fas fa-times"></i> Reset Transaksi</a></h6>
+        <h6 class="font-weight-bold text-primary">Transaksi / Penjualan <a href="" class="btn btn-sm btn-danger float-right" onclick="alertify.confirm('Cancel button is focused by default.').set('defaultFocus', 'cancel'); "><i class="fas fa-times"></i> Reset Transaksi</a></h6>
     </div>
     <form id="pelangganForm" name="pelangganForm" class="form-horizontal">
     <div class="card-body">
@@ -45,9 +45,9 @@
                 <thead class="table-primary">
                     <tr>
                         <th>Barang</th>
+                        <th>Exp Date</th>
                         <th>Jumlah</th>
                         <th>Satuan</th>
-                        <th>Exp Date</th>
                         <th>@</th>
                         <th>Subtotal</th>
                         <th>Hapus</th>
@@ -78,23 +78,27 @@
                 <div class="col-sm-6">
                     <div class="form-inline  mb-4">
                         <label for="" class="mr-2 ">Total Harga</label>
-                        <input type="number" class="form-control col-lg text-end" value="0" readonly aria-readonly="true">
+                        <input type="number" class="form-control col-lg text-end" id="total" value="0" readonly aria-readonly="true">
                     </div>
                     <div class="form-inline  mb-4">
                         <label for="" class="mr-2 ">Diskon Toko</label>
-                        <input type="number" class="form-control col-lg  text-end" value="0">
+                        <input type="number" class="form-control col-lg  text-end" id="diskon" value="0">
                     </div>
                     <div class="form-inline  mb-4">
                         <label for="" class="mr-2 ">Biaya Ongkir</label>
-                        <input type="number" class="form-control col-lg  text-end" value="0">
+                        <input type="number" class="form-control col-lg  text-end" id="ongkir" value="0">
                     </div>
                     <div class="form-inline  mb-4">
                         <label for="" class="mr-2">Total Belanja</label>
-                        <input type="number" class="form-control col-lg  text-end" value="0" readonly aria-readonly="true">
+                        <input type="number" class="form-control col-lg  text-end" id="grand_total" value="0" readonly aria-readonly="true">
                     </div>
-                    <div class="form-inline  mb-0">
+                    <div class="form-inline  mb-4">
                         <label for="" class="mr-3">Pembayaran</label>
-                        <input type="number" class="form-control col-lg  text-end" value="0">
+                        <input type="number" class="form-control col-lg  text-end" value="0" id="pembayaran">
+                    </div>
+                    <div class="form-inline  mb-4">
+                        <label for="" class="mr-3">Kembalian</label>
+                        <input type="number" class="form-control col-lg  text-end" value="0" id="kembalian">
                     </div>
                 </div>
                 <div class="card-body">
@@ -152,18 +156,31 @@
             }
         }
     });
+
         $("#jumlah, #harga_beli").keyup(function() {
-            // var table = document.getElementById("nilai"), sumHsl = 0;
-		    // for(var t = 1; t < table.rows.length; t++)
-		    // {
-			// sumHsl = sumHsl + parseInt(table.rows[t].cells[3].innerHTML);
-		    // }
-		    // document.getElementById("total").innerHTML = "Sum Value = "+ sumHsl;
             var harga  = $("#harga_beli").val();
             var jumlah = $("#jumlah").val();
+            var subtotal = parseFloat(harga) * parseFloat(jumlah);
+            $("#subtotal").val(subtotal);
 
-            var total = parseInt(harga) * parseInt(jumlah);
-            $("#subtotal").val(total);
+        });
+
+        $("#grand_total, #pembayaran").keyup(function() {
+            var grand_total  = $("#grand_total").val();
+            var pembayaran = $("#pembayaran").val();
+            var kembalian = parseFloat(grand_total) - parseFloat(pembayaran);
+            $("#kembalian").val(kembalian);
+
+        });
+
+        $("#total, #diskon, #ongkir").keyup(function() {
+            var diskon  = $("#diskon").val();
+            var total = $("#total").val();
+            var ongkir = $("#ongkir").val();
+
+            var grand_total = parseInt(total) - parseInt(diskon) + parseInt(ongkir) || parseInt(total) - parseInt(diskon) || parseInt(total) + parseInt(ongkir);
+            $("#grand_total").val(grand_total);
+
         });
 
         $("#btnAdd").click(function () {
@@ -179,7 +196,7 @@
                         $("#tblData tbody").html("");
                     }
 
-                    var dynamicTr = "<tr><td>"+ nama_barang +"</td><td>"+ jumlah +"</td><td>"+satuan_jual+"</td><td>"+ exp_date +"</td><td id='harga'>"+ harga_beli +"</td><td>"+ subtotal +"</td><td> <button class='btn btn-danger btn-sm'>Delete</button></tr>";
+                    var dynamicTr = "<tr><td>"+ nama_barang +"</td><td>"+ exp_date +"</td><td>"+ jumlah +"</td><td>"+satuan_jual+"</td><td>"+ harga_beli +"</td><td>"+ subtotal +"</td><td> <button class='btn btn-danger btn-sm'>Delete</button></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");

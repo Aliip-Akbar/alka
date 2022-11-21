@@ -14,16 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('barangs', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_barang');
+            $table->string('id');
+            $table->string('kd_barang');
             $table->string('nama_barang');
             $table->string('kategori');
             $table->string('satuan_beli');
+            $table->double('harga_beli');
             $table->string('satuan_jual');
-            $table->string('harga_normal');
-            $table->string('harga_mitra');
-            $table->string('harga_grosir');
-            $table->string('stok');
-            $table->string('point');
+            $table->double('harga_normal');
+            $table->double('harga_mitra');
+            $table->double('harga_grosir');
+            $table->double('stok');
+            $table->double('point');
             $table->timestamps();
         });
     }

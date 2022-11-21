@@ -28,20 +28,20 @@ use App\Http\Controllers\StokController;
 // Sistem Utility Route
 
 // Data Master Route
-Route::resource('/kategori',    KategoriController::class);
-Route::resource('/pelanggan',   PelangganController::class);
-Route::resource('/mitra',       MitraController::class);
-Route::resource('/satuan',      SatuanController::class);
-Route::resource('/barang',      BarangController::class);
+Route::resource('/kategori',             KategoriController::class);
+Route::resource('/pelanggan',            PelangganController::class);
+Route::resource('/satuan',               SatuanController::class);
+Route::resource('/barang',               BarangController::class);
 
 // transaksi Route
-Route::get('/pembelian', [App\Http\Controllers\PembelianController::class, 'index']);
-Route::get('/get-data/{nama_barang}', [App\Http\Controllers\PembelianController::class, 'getData']);
-Route::resource('/p_mitra',        PmitraController::class);
-Route::resource('/penjualan',      PenjualanController::class);
-Route::resource('/user',           DataUserController::class);
-Route::resource('/point',          PointController::class);
-Route::resource('/hutang',         HutangController::class);
-Route::resource('/stok',           StokController::class);
+Route::get('/pembelian',                [App\Http\Controllers\PembelianController::class, 'index']);
+Route::get('/get-data/{nama_barang}',   [App\Http\Controllers\PembelianController::class, 'getData']);
+Route::resource('/p_mitra',             PmitraController::class);
+Route::resource('/penjualan',           PenjualanController::class);
+Route::get('/get-data/{nama_barang}',   [App\Http\Controllers\PenjualanController::class, 'getData']);
+Route::resource('/user',                DataUserController::class);
+Route::resource('/point',               PointController::class);
+Route::resource('/hutang',              HutangController::class);
+Route::resource('/stok',                StokController::class);
 // Cetak Route
-Route::resource('/cetak/laporan',          LaporanController::class);
+Route::resource('/cetak/laporan',       LaporanController::class);

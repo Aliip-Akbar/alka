@@ -2,38 +2,32 @@
 
 @section('judul', 'Halaman Data Barang')
 @section('konten')
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
+    <div class="card shadow">
+        <div class="card-header">
             <h1 class="h5 text-gray-800">Data Barang</h1>
             <h6 class="m-0 font-weight-bold text-primary">Data Master / Data Barang  <a class="btn btn-success btn-sm float-right mr-4" href="javascript:void(0)" id="createNewBarang"><i class="fas fa-plus-circle"></i> Tambah barang</a></h6>
         </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div class="container">
-                        <table class="table table-bordered data-table table-sm">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th width="10px">#</th>
-                                    <th width="100px">Action</th>
-                                    <th>Nama</th>
-                                    <th>Kategori</th>
-                                    <th>Satuan Beli</th>
-                                    <th>Satuan Jual</th>
-                                    <th>Harga Beli</th>
-                                    <th>Harga Normal</th>
-                                    <th>Harga Mitra</th>
-                                    <th>Harga Grosir</th>
-                                    <th>Stok</th>
-                                    <th>Point</th>
-
-                                </tr>
-                            </thead>
-                            <tbody  class="table-striped">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="card-body">
+            <table class="table table-bordered data-table table-sm text-start">
+                <thead class="table-primary">
+                    <tr>
+                        <th width="10px">#</th>
+                        <th width="100px">Action</th>
+                        <th>Nama</th>
+                        <th>Kategori</th>
+                        <th>Satuan Beli</th>
+                        <th>Satuan Jual</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Normal</th>
+                        <th>Harga Mitra</th>
+                        <th>Harga Grosir</th>
+                        <th>Stok</th>
+                        <th>Point</th>
+                    </tr>
+                </thead>
+                <tbody  class="table-striped"></tbody>
+            </table>
+        </div>
             <div class="modal fade" id="ajaxModel" aria-hidden="true">
                 <div class="modal-lg modal-dialog modal-dialog-centered">
                     <div class="modal-content">

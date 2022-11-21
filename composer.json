@@ -8,6 +8,7 @@
         "php": "^8.1.10",
         "dirape/token": "^2.3",
         "guzzlehttp/guzzle": "^7.2",
+        "haruncpi/laravel-id-generator": "^1.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",

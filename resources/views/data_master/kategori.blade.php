@@ -15,6 +15,7 @@
                                         <th width="10px">#</th>
                                         <th width="100px">Action</th>
                                         <th>Nama</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody  class="table-striped"></tbody>
@@ -32,13 +33,19 @@
                             <form id="kategoriForm" name="kategoriForm" class="form-horizontal">
                             <input type="hidden" name="id" id="id">
                                 <div class="form-group">
-                                    <label for="name" class="col-sm-2 control-label">Name</label>
+                                    <label for="name" class="col-sm-5 control-label">Nama Kategori</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" placeholder="Enter Name" value="" maxlength="50" required="">
+                                        <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" placeholder="Isi Nama kategori" value="" maxlength="50" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-5 control-label">Keterangan</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="k_kategori" name="k_kategori" placeholder="Isi keterangan kategori" value="" maxlength="50" required="">
                                     </div>
                                 </div>
                                 <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create" onclick="return notification = alertify.notify('Data Baru Saja Ditambahkan', 'success', 10, function(){  console.log('dismissed'); });">Save changes
                                 </button>
                                 </div>
                             </form>
@@ -74,6 +81,7 @@
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
             {data: 'nama_kategori', name: 'nama_kategori'},
+            {data: 'k_kategori', name: 'k_kategori'},
 
         ]
     });
@@ -104,6 +112,7 @@
           $('#ajaxModel').modal('show');
           $('#id').val(data.id);
           $('#nama_kategori').val(data.nama_kategori).prop('readonly', false);
+          $('#k_kategori').val(data.k_kategori).prop('readonly', false);
       })
     });
     /*------------------------------------------
@@ -120,6 +129,7 @@
     $('#ajaxModel').modal('show');
     $('#id').val(data.id);
     $('#nama_kategori').val(data.nama_kategori).prop('readonly', true);
+    $('#k_kategori').val(data.k_kategori).prop('readonly', true);
     })
     });
 
@@ -160,8 +170,6 @@
     $('body').on('click', '.deleteKategori', function () {
 
         var id = $(this).data("id");
-        confirm("Are You sure want to delete !");
-
         $.ajax({
             type: "DELETE",
             url: "{{ route('kategori.store') }}"+'/'+id,

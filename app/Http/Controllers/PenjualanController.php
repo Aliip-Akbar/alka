@@ -18,13 +18,18 @@ class PenjualanController extends Controller
         return view('transaksi.penjualan', ['pelanggans' => $pelanggans]);
     }
 
-    public function searchQuery(Request $request)
+    public function getData($nama_barang)
     {
-        $data = Barang::select("nama_barang")
-                ->where("nama_barang","LIKE","%{$request->get('query')}%")
-                ->get();
+        if (empty($nama_barang)) {
+            return [];
+        }
+        $barangs = DB::table('barangs')
+            ->select('barangs.*')
+            ->where('nama_barang', 'LIKE', "$nama_barang%")
+            ->limit(25)
+            ->get();
 
-        return response()->json($data);
+        return $barangs;
     }
     /**
      * Show the form for creating a new resource.

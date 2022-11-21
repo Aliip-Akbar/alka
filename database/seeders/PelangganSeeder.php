@@ -29,19 +29,6 @@ class PelangganSeeder extends Seeder
     		]);
 
     	}
-        $faker = Faker::create('id_ID');
-
-    	for($i = 1; $i <= 5; $i++){
-
-    	      // insert data ke table pegawai menggunakan Faker
-    		DB::table('mitras')->insert([
-    			'nama_mitra' => $faker->company,
-                'alamat'=> $faker->address,
-                'telp'=> $faker->phoneNumber,
-                'email' => $faker->email,
-    		]);
-
-    	}
 
 }
 }

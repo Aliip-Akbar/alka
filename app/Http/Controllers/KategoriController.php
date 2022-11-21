@@ -60,6 +60,7 @@ class KategoriController extends Controller
         ],
         [
             'nama_kategori' => $request->nama_kategori,
+            'k_kategori' => $request->k_kategori,
         ]);
 
         return response()->json(['success'=>'Kategori baru Berhasil Ditambahkan.']);

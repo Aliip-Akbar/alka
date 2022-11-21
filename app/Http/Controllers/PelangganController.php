@@ -17,7 +17,7 @@ class pelangganController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = Pelanggan::all();
+            $data = Pelanggan::where('j_pelanggan', 'biasa')->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()
@@ -65,6 +65,7 @@ class pelangganController extends Controller
             'telp' => $request->telp,
             'email' => $request->email,
             'kategori' => $request->kategori,
+            'j_pelanggan' => $request->j_pelanggan,
         ]);
 
         return response()->json(['success'=>'pelanggan baru Berhasil Ditambahkan.']);
