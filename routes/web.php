@@ -30,6 +30,7 @@ use App\Http\Controllers\StokController;
 // Data Master Route
 Route::resource('/kategori',             KategoriController::class);
 Route::resource('/pelanggan',            PelangganController::class);
+Route::resource('/mitra',            MitraController::class);
 Route::resource('/satuan',               SatuanController::class);
 Route::resource('/barang',               BarangController::class);
 

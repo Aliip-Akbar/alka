@@ -15,12 +15,8 @@
                         <th width="100px">Action</th>
                         <th>Nama</th>
                         <th>Kategori</th>
-                        <th>Satuan Beli</th>
                         <th>Satuan Jual</th>
                         <th>Harga Beli</th>
-                        <th>Harga Normal</th>
-                        <th>Harga Mitra</th>
-                        <th>Harga Grosir</th>
                         <th>Stok</th>
                         <th>Point</th>
                     </tr>
@@ -124,12 +120,9 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                                <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
-                                </button>
-                                </div>
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes</button>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -166,12 +159,8 @@
         {data: 'action', name: 'action', orderable: false, searchable: false},
         {data: 'nama_barang', name: 'nama_barang'},
         {data: 'kategori', name: 'kategori'},
-        {data: 'satuan_beli', name: 'satuan_beli'},
         {data: 'satuan_jual', name: 'satuan_jual'},
         {data: 'harga_beli', name: 'harga_beli'},
-        {data: 'harga_normal', name: 'harga_normal'},
-        {data: 'harga_mitra', name: 'harga_mitra'},
-        {data: 'harga_grosir', name: 'harga_grosir'},
         {data: 'stok', name: 'stok'},
         {data: 'point', name: 'point'},
 

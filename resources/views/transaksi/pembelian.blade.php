@@ -111,7 +111,6 @@
 </div>
 <script>
     $(document).ready(function(){
-
         var basePath = $("#base_path").val();
     //Array of Values
     $("#nama_barang").autocomplete({
@@ -162,15 +161,14 @@
             var jumlah = $("#jumlah").val();
             var subtotal = parseFloat(harga) * parseFloat(jumlah);
             $("#subtotal").val(subtotal);
-
         });
+
 
         $("#grand_total, #pembayaran").keyup(function() {
             var grand_total  = $("#grand_total").val();
             var pembayaran = $("#pembayaran").val();
             var kembalian = parseFloat(grand_total) - parseFloat(pembayaran);
             $("#kembalian").val(kembalian);
-
         });
 
         $("#total, #diskon, #ongkir").keyup(function() {
@@ -182,7 +180,6 @@
             $("#grand_total").val(grand_total);
 
         });
-
         $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();
@@ -190,12 +187,10 @@
                 var satuan_jual = $("#satuan_jual").val().trim();
                 var harga_beli = $("#harga_beli").val().trim();
                 var exp_date = $("#ed").val().trim();
-
                 if(nama_barang != "" && jumlah != "" && harga_beli != "" && exp_date != ""){
                     if ($("tblData tbody").children().children().children().children().lenght == 1){
                         $("#tblData tbody").html("");
                     }
-
                     var dynamicTr = "<tr><td>"+ nama_barang +"</td><td>"+ exp_date +"</td><td>"+ jumlah +"</td><td>"+satuan_jual+"</td><td>"+ harga_beli +"</td><td>"+ subtotal +"</td><td> <button class='btn btn-danger btn-sm'>Delete</button></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");

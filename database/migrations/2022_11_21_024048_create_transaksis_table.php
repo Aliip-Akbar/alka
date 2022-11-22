@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('id');
             $table->string('kd_trx');
             $table->string('nama_barang');
-            $table->date('exp_date');
             $table->double('jumlah');
             $table->double('satuan');
             $table->double('harga_beli');

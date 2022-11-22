@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create" onclick="return notification = alertify.notify('Data Baru Saja Ditambahkan', 'success', 10, function(){  console.log('dismissed'); });">Save changes
+                                <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
                                 </button>
                                 </div>
                             </form>
@@ -141,6 +141,7 @@
     $('#saveBtn').click(function (e) {
         e.preventDefault();
         $(this).html('Tambah');
+        alertify.notify('Data Baru Saja Ditambahkan', 'success', 10, function(){  console.log('dismissed'); });
         var id = $(this).data("id");
 
         $.ajax({
@@ -168,8 +169,8 @@
     --------------------------------------------
     --------------------------------------------*/
     $('body').on('click', '.deleteKategori', function () {
-
         var id = $(this).data("id");
+
         $.ajax({
             type: "DELETE",
             url: "{{ route('kategori.store') }}"+'/'+id,

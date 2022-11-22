@@ -12,7 +12,7 @@ class Barang extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->kd_barang = IdGenerator::generate(['table' => 'barangs', 'length' => 12, 'prefix' =>'BRG-']);
+            $model->kd_barang = IdGenerator::generate(['table' => 'barangs', 'length' => 8, 'prefix' =>'BRG-']);
             $model->id = IdGenerator::generate(['table' => 'barangs', 'length' => 4, 'prefix' => '1']);
         });
     }

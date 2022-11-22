@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kd_barang');
             $table->string('nama_barang');
             $table->string('kategori');
+            $table->date('exp_date');
             $table->string('satuan_beli');
             $table->double('harga_beli');
             $table->string('satuan_jual');
