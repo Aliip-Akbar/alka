@@ -14,6 +14,7 @@
     "dependencies": {
         "datatables.net": "^1.12.1",
         "datatables.net-dt": "^1.12.1",
+        "jautocalc": "^1.4.2",
         "jquery": "^3.6.1",
         "jQuery": "^1.7.4",
         "jsbarcode": "^3.11.5",

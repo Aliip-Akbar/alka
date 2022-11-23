@@ -156,33 +156,6 @@
             }
         }
     });
-
-        $("#jumlah, #harga_beli").keyup(function() {
-            var harga  = $("#harga_beli").val();
-            var jumlah = $("#jumlah").val();
-            var subtotal = parseFloat(harga) * parseFloat(jumlah);
-            $("#subtotal").val(subtotal);
-
-        });
-
-        $("#grand_total, #pembayaran").keyup(function() {
-            var grand_total  = $("#grand_total").val();
-            var pembayaran = $("#pembayaran").val();
-            var kembalian = parseFloat(grand_total) - parseFloat(pembayaran);
-            $("#kembalian").val(kembalian);
-
-        });
-
-        $("#total, #diskon, #ongkir").keyup(function() {
-            var diskon  = $("#diskon").val();
-            var total = $("#total").val();
-            var ongkir = $("#ongkir").val();
-
-            var grand_total = parseInt(total) - parseInt(diskon) + parseInt(ongkir) || parseInt(total) - parseInt(diskon) || parseInt(total) + parseInt(ongkir);
-            $("#grand_total").val(grand_total);
-
-        });
-
         $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();

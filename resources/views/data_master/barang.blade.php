@@ -267,11 +267,9 @@
         --------------------------------------------
         --------------------------------------------*/
         $('body').on('click', '.deleteBarang', function () {
-
-        var id = $(this).data("id");
-        confirm("Are You sure want to delete !");
-
-        $.ajax({
+            var id = $(this).data("id");
+            if(confirm("Yakin Mau Dihapus")){
+                $.ajax({
         type: "DELETE",
         url: "{{ route('barang.store') }}"+'/'+id,
         success: function (data) {
@@ -281,8 +279,8 @@
             console.log('Error:', data);
         }
         });
+        }
         });
-
         });
 </script>
 
