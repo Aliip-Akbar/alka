@@ -1,7 +1,7 @@
 @extends('template')
 @section('judul', 'Halaman Data Satuan Barang')
 @section('konten')
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 mt-4">
         <div class="card-header mb-0">
         <h1 class="h5 text-gray-800 mb-3">Data Satuan</h1>
         <h6 class="font-weight-bold text-primary">Data Master / Data Satuan <a class=" btn btn-success btn-sm float-right mr-4" href="javascript:void(0)" id="createNewSatuan"><i class="fas fa-user-plus"></i> Tambah Satuan</a></h6>

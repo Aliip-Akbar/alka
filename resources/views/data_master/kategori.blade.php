@@ -1,7 +1,6 @@
 @extends('template')
-@section('judul', 'Halaman Kategori Barang')
 @section('konten')
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 mt-4">
         <div class="card-header py-3">
             <h1 class="h5 text-gray-800">Kategori Barang</h1>
             <h6 class="m-0 font-weight-bold text-primary">Data Master / Kategori Barang  <a class="btn btn-success btn-sm float-right mr-4" href="javascript:void(0)" id="createNewKategori"><i class="fas fa-plus-circle"></i> Tambah Kategori</a></h6>
@@ -10,7 +9,7 @@
                     <div class="table-responsive">
                         <div class="container">
                             <table class="table table-bordered data-table table-sm">
-                                <thead class="table-primary">
+                                <thead class="bg-primary text-light">
                                     <tr>
                                         <th width="10px">#</th>
                                         <th width="100px">Action</th>

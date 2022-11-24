@@ -50,7 +50,7 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Sistem Utility</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse active" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"><i class="fas fa-users"></i> Data User :</h6>
                         <a class="collapse-item" href="/user"> User</a>
@@ -117,7 +117,7 @@
         <!-- Topbar & Content -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                {{-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div class="container">
                         <h5 class="text-dark p-3">Hai Admin, Selamat Datang Di @yield('judul')</h5>
                     </div>
@@ -230,7 +230,7 @@
                             </div>
                         </li>
                     </ul>
-                </nav>
+                </nav> --}}
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-xl">
