@@ -50,7 +50,15 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Pembelian::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'nama_bararng' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+        ]);
+
+        return response()->json(['success'=>'Kategori baru Berhasil Ditambahkan.']);
     }
 
     /**

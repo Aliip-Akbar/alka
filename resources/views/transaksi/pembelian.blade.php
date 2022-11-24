@@ -1,10 +1,13 @@
 @extends('template')
 @section('judul', 'Halaman Penjualan')
 @section('konten')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <div class="card shadow mb-2">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-3 col-sm-6 p-2">
+            <div class="col-md-3 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
                 <input type="hidden" class="form-control" placeholder="" id="id" name="id">
                 <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang">
@@ -76,6 +79,8 @@
                     </tr>
                 </tfoot>
             </table>
+            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+            </button>
         </form>
     </div>
 </div>
@@ -83,9 +88,8 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 	<script type="text/javascript">
-
-var basePath = $("#base_path").val();
-    //Array of Values
+    $(document).ready(function(){
+        var basePath = $("#base_path").val();
     $("#nama_barang").autocomplete({
         source: function(request, cb){
             $.ajax({
@@ -96,7 +100,7 @@ var basePath = $("#base_path").val();
                     var result;
                     result = [
                         {
-                            label: 'There is no matching record found for '+request.term,
+                            label:  request.term + ' Tidak Ditemukan',
                             value: ''
                         }
                     ];
@@ -126,7 +130,6 @@ var basePath = $("#base_path").val();
             }
         }
     });
-		<!--
         $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();
@@ -162,5 +165,6 @@ var basePath = $("#base_path").val();
                     alert("Isi Dulu");
                 }
             });
+    });
 	</script>
 @endsection
