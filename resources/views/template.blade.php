@@ -88,11 +88,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"><i class="fas fa-dollar-sign"></i> Data Transaksi :</h6>
                         <a class="collapse-item" id="" href="/stok">Set Stok Awal</a>
-                        <a class="collapse-item" href="/point">Transaksi Point</a>
-                        <a class="collapse-item" href="/pembelian">Pembelian Barang</a>
-                        <a class="collapse-item" href="/penjualan">Penjualan Barang</a>
-                        <a class="collapse-item" href="/p_mitra">Penjualan Barang Mitra</a>
-                        <a class="collapse-item" href="/hutang">Pembayaran Hutang</a>
+                        <a class="collapse-item" href="/trx_point">Transaksi Point</a>
+                        <a class="collapse-item" href="/trx_pembelian">Pembelian Barang</a>
+                        <a class="collapse-item" href="/trx_penjualan">Penjualan Barang</a>
+                        <a class="collapse-item" href="/trx_penjualanmitra">Penjualan Barang Mitra</a>
+                        <a class="collapse-item" href="/trx_hutang">Pembayaran Hutang</a>
                     </div>
                 </div>
             </li>

@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="container">
-                            <table class="table table-bordered data-table table-sm">
+                            <table class="table table-borderless data-table table-sm">
                                 <thead class="bg-primary text-light">
                                     <tr>
                                         <th width="10px">#</th>

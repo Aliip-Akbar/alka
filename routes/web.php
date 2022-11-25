@@ -35,14 +35,14 @@ Route::resource('/satuan',               SatuanController::class);
 Route::resource('/barang',               BarangController::class);
 
 // transaksi Route
-Route::get('/pembelian',                [App\Http\Controllers\PembelianController::class, 'index']);
+Route::get('/trx_pembelian',                [App\Http\Controllers\PembelianController::class, 'index']);
 Route::get('/get-data/{nama_barang}',   [App\Http\Controllers\PembelianController::class, 'getData']);
-Route::resource('/p_mitra',             PmitraController::class);
-Route::resource('/penjualan',           PenjualanController::class);
+Route::resource('/trx_penjualanmitra',             PmitraController::class);
+Route::resource('/trx_penjualan',           PenjualanController::class);
 Route::get('/get-data/{nama_barang}',   [App\Http\Controllers\PenjualanController::class, 'getData']);
 Route::resource('/user',                DataUserController::class);
-Route::resource('/point',               PointController::class);
-Route::resource('/hutang',              HutangController::class);
-Route::resource('/stok',                StokController::class);
+Route::resource('/trx_point',               PointController::class);
+Route::resource('/trx_hutang',              HutangController::class);
+Route::resource('/trx_stok',                StokController::class);
 // Cetak Route
 Route::resource('/cetak/laporan',       LaporanController::class);

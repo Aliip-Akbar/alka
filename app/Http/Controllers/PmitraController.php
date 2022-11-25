@@ -14,8 +14,8 @@ class PmitraController extends Controller
      */
     public function index()
     {
-        $mitras = DB::table('mitras')->get();
-        return view('transaksi.p_mitra', ['mitras' => $mitras]);
+        $pelanggans = DB::table('pelanggans')->get();
+        return view('transaksi.pembelian_mitra', ['pelanggans' => $pelanggans]);
     }
 
     /**

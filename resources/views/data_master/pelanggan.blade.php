@@ -2,14 +2,14 @@
 @section('konten')
 <div class="card shadow mb-4 mt-4">
     <div class="card-header mb-0">
-        <h1 class="h5 text-gray-800 mb-3">Data Pelanggan</h1>
+        <h1 class="h5 text-gray-800">Data Pelanggan</h1>
         <h6 class="font-weight-bold text-primary">Data Master / Data Pelanggan <a class=" btn btn-success btn-sm float-right mr-4" href="javascript:void(0)" id="createNewPelanggan"><i class="fas fa-user-plus"></i> Tambah Pelanggan</a></h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <div class="container">
-                <table class="table table-bordered data-table table-sm">
-                    <thead class="table-primary">
+                <table class="table table-borderless data-table table-sm">
+                    <thead class="bg-primary text-light">
                         <tr>
                             <th width="10px">#</th>
                             <th width="100px">Action</th>

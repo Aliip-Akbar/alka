@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-1 col-sm-6 p-2 mt-2">
                 <label for=""></label>
-                <input type="button" id="btnAdd" class=" form-control btn btn-primary" placeholder="" value="Input">
+                <button id="btnAdd" class=" form-control btn btn-primary" placeholder="" value="Input"><i class="fas fa-download"></i></button>
             </div>
         </div>
     </div>

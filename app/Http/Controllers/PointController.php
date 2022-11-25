@@ -16,7 +16,7 @@ class PointController extends Controller
      */
     public function index(Request $request)
     {
-        $mitras = DB::table('mitras')->get();
+        // $mitras = DB::table('mitras')->get();
         $pelanggans = DB::table('pelanggans')->get();
         if ($request->ajax()) {
 
@@ -37,7 +37,7 @@ class PointController extends Controller
                     ->make(true);
         }
 
-        return view('transaksi.point', ['mitras' => $mitras], ['pelanggans' => $pelanggans]);
+        return view('transaksi.point', ['pelanggans' => $pelanggans]);
     }
 
     /**

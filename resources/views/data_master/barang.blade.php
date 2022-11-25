@@ -6,8 +6,8 @@
             <h6 class="m-0 font-weight-bold text-primary">Data Master / Data Barang  <a class="btn btn-success btn-sm float-right mr-4" href="javascript:void(0)" id="createNewBarang"><i class="fas fa-plus-circle"></i> Tambah barang</a></h6>
         </div>
         <div class="card-body">
-            <table class="table table-bordered data-table table-sm text-start">
-                <thead class="table-primary">
+            <table class="table table-borderless data-table table-sm">
+                <thead class="bg-primary text-light">
                     <tr>
                         <th width="10px">#</th>
                         <th width="100px">Action</th>

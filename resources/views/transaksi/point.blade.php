@@ -9,8 +9,8 @@
     <div class="card-body">
         <div class="table-responsive">
             <div class="container">
-                <table class="table table-bordered data-table table-sm">
-                    <thead class="table-primary">
+                <table class="table table-borderless data-table table-sm">
+                    <thead class="bg-primary text-light">
                         <tr>
                             <th width="10px">#</th>
                             <th width="55px">Action</th>
@@ -39,12 +39,12 @@
                                <div class="col-sm-12">
                                 <select name="nama_pelanggan" id="nama_pelanggan" class="form-control">
                                     <option>-- Pilih Pelanggan --</option>
-                                    @foreach ($mitras as $i)
+                                    {{-- @foreach ($mitras as $i)
                                         <option value="{{ $i->nama_mitra }}">{{ $i->nama_mitra }}</option>
                                      @endforeach
                                      @foreach ($pelanggans as $i)
                                 <option value="{{ $i->nama_pelanggan }}">{{ $i->nama_pelanggan }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                </div>
                             </div>
