@@ -72,6 +72,7 @@ class BarangController extends Controller
             'kategori'     => $request->kategori,
             'satuan_beli' => $request->satuan_beli,
             'satuan_jual' => $request->satuan_jual,
+            'harga_beli' => $request->harga_beli,
             'harga_normal' => $request->harga_normal,
             'harga_mitra' => $request->harga_mitra,
             'harga_grosir' => $request->harga_grosir,

@@ -1,5 +1,5 @@
-@extends('template')
-@section('konten')
+@extends('layout.main')
+@section('isi')
     <div class="card shadow mb-4 mt-4">
         <div class="card-header py-3">
             <h1 class="h5 text-gray-800">Kategori Barang</h1>
@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="container">
-                            <table class="table table-bordered data-table table-sm">
+                            <table class="table table-borderless data-table table-sm">
                                 <thead class="bg-primary text-light">
                                     <tr>
                                         <th width="10px">#</th>

@@ -1,19 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\SatuanController;
-use App\Http\Controllers\PelangganController;
-use App\Http\Controllers\MitraController;
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\PenjualanController;
-use App\Http\Controllers\PmitraController;
-use App\Http\Controllers\PembelianController;
-use App\Http\Controllers\DataUserController;
-use App\Http\Controllers\PointController;
-use App\Http\Controllers\HutangController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\StokController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,24 +12,31 @@ use App\Http\Controllers\StokController;
 |
 */
 
-// Sistem Utility Route
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Data Master Route
-Route::resource('/kategori',             KategoriController::class);
-Route::resource('/pelanggan',            PelangganController::class);
-Route::resource('/mitra',            MitraController::class);
-Route::resource('/satuan',               SatuanController::class);
-Route::resource('/barang',               BarangController::class);
+Route::get('/', [App\Http\Controllers\LayoutController::class, 'index'])->middleware('auth');
+Route::get('/home', [App\Http\Controllers\LayoutController::class, 'index'])->middleware('auth');
+// Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
 
-// transaksi Route
-Route::get('/pembelian',                [App\Http\Controllers\PembelianController::class, 'index']);
-Route::get('/get-data/{nama_barang}',   [App\Http\Controllers\PembelianController::class, 'getData']);
-Route::resource('/p_mitra',             PmitraController::class);
-Route::resource('/penjualan',           PenjualanController::class);
-Route::get('/get-data/{nama_barang}',   [App\Http\Controllers\PenjualanController::class, 'getData']);
-Route::resource('/user',                DataUserController::class);
-Route::resource('/point',               PointController::class);
-Route::resource('/hutang',              HutangController::class);
-Route::resource('/stok',                StokController::class);
-// Cetak Route
-Route::resource('/cetak/laporan',       LaporanController::class);
+Route::controller(App\Http\Controllers\LoginController::class)->group(function () {
+    Route::get('login', 'index')->name('login');
+    Route::post('login/proses', 'proses')->name('proses');
+    Route::get('logout', 'logout')->name('logout');
+});
+
+Route::group(['middleware'=>['auth']],function () {
+    Route::group(['middleware' => ['CekUserLogin:1']],function () {
+        Route::resource('satuan', App\Http\Controllers\SatuanController::class);
+        Route::resource('kategori', App\Http\Controllers\KategoriController::class);
+        Route::resource('produk', App\Http\Controllers\ProdukController::class);
+        Route::resource('pembelian', App\Http\Controllers\PembelianController::class);
+        Route::resource('penjualan', App\Http\Controllers\PenjualanController::class);
+        Route::resource('laporan', App\Http\Controllers\LaporanController::class);
+    });
+    Route::group(['middleware' => ['CekUserLogin:2']],function () {
+        Route::resource('Kasir', App\Http\Controllers\KasirController::class);
+        Route::resource('penjualan', App\Http\Controllers\PenjualanController::class);
+    });
+});

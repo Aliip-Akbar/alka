@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('kd_trx');
             $table->string('nama_barang');
             $table->double('jumlah');
-            $table->double('satuan');
             $table->double('harga_beli');
             $table->double('subtotal');
             $table->date('tgl_pembayaran');
@@ -30,10 +29,6 @@ return new class extends Migration
             $table->double('diskon');
             $table->double('pajak');
             $table->double('grand_total');
-            $table->double('point_masuk');
-            $table->double('point_ditebus');
-            $table->double('saldo_point');
-            $table->double('kembalian');
             $table->timestamps();
         });
     }

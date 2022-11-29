@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Barang;
+use App\Models\transaksi;
 use Illuminate\Support\Facades\DB;
 
 class PembelianController extends Controller
@@ -50,7 +50,22 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        transaksi::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+                'nama_barang' =>$request->nama_barang,
+                'exp_date' =>$request->exp_date,
+                'jumlah' =>$request->jumlah,
+                'satuan' =>$request->satuan,
+                'harga_beli'=>$request->harga_beli,
+                'subtotal'=>$request->subtotal,
+                'total'=>$request->total,
+                'grand_total'=>$request->grand_total
+
+        ]);
+
+        return response()->json(['success'=>'Kategori baru Berhasil Ditambahkan.']);
     }
 
     /**

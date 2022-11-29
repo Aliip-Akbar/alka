@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use DataTables;
-
+use Auth;
 class KategoriController extends Controller
 {
     /**
@@ -34,7 +34,9 @@ class KategoriController extends Controller
                     ->make(true);
         }
 
-        return view('data_master.kategori');
+        return view('data_master.kategori')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**

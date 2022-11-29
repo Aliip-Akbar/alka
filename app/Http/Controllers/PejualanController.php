@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class PmitraController extends Controller
+class PejualanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class PmitraController extends Controller
      */
     public function index()
     {
-        $pelanggans = DB::table('pelanggans')->get();
-        return view('transaksi.pembelian_mitra', ['pelanggans' => $pelanggans]);
+        //
     }
 
     /**

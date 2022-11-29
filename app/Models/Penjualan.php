@@ -11,8 +11,9 @@ class Penjualan extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->kd_trx = IdGenerator::generate(['table' => 'transaksis', 'length' =>10, 'prefix' =>'OUTR-']);
-                $model->id = IdGenerator::generate(['table' => 'pelanggans', 'length' => 4, 'prefix' => '1']);
+            $model->kd_trx = IdGenerator::generate(['table' => 'transaksis', 'length' =>12, 'prefix' =>'TrxOut-']);
+                $model->id = IdGenerator::generate(['table' => 'transaksis', 'length' => 1, 'prefix' => '1']);
+                $model->id_transaksi = IdGenerator::generate(['table' => 'transaksis', 'length' => 4, 'prefix' => '0']);
         });
     }
     use HasFactory;
@@ -31,7 +32,7 @@ class Penjualan extends Model
         'ongkir',
         'diskon',
         'pembayaran',
-        'kembalian'
+        'grand_total',
 
 
     ];
