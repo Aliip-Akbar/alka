@@ -58,7 +58,7 @@
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
-                            <td><input type="text" name="sub_total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                            <td><input type="text" name="subtotal" value="0" jAutoCalc="SUM({subtotal})" class="form-control"></td>
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
@@ -88,7 +88,7 @@
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" name="grand_total" value="0" jAutoCalc="{sub_total} - {total_diskon} + {Pajak}" class="form-control"></td>
+                            <td><input type="text" name="grand_total" value="0" jAutoCalc="{subtotal} - {total_diskon} + {Pajak}" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -104,10 +104,12 @@
 	<script type="text/javascript">
     $(document).ready(function(){
         var basePath = $("#base_path").val();
+
+});
     $("#nama_barang").autocomplete({
         source: function(request, cb){
             $.ajax({
-                url: basePath+'/get-data/'+request.term,
+                url: 'pembelian/get-data/'+request.term,
                 method: 'GET',
                 dataType: 'json',
                 success: function(res){
@@ -154,9 +156,9 @@
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' name='qty' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='price' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='item_total' value='0' jAutoCalc='{qty} * {price}' class='form-control'></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><input type='text' name='nama_barang' value="+nama_barang+"></td><td><input type='text' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='subtotal' value='0' jAutoCalc='{jumlah} * {harga_beli}' class='form-control'></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
-                        $("#barang").val("");
+                        $("#nama_barang").val("");
                         $("#jumlah").val("");
                         $("#harga_beli").val("");
                         $(function() {
@@ -179,6 +181,9 @@
                     alert("Isi Dulu");
                 }
             });
+
+
+
 });
 </script>
 @endsection

@@ -52,22 +52,18 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        transaksi::updateOrCreate([
-            'id' => $request->id
-        ],
-        [
-                'nama_barang' =>$request->nama_barang,
-                'exp_date' =>$request->exp_date,
-                'jumlah' =>$request->jumlah,
-                'satuan' =>$request->satuan,
-                'harga_beli'=>$request->harga_beli,
-                'subtotal'=>$request->subtotal,
-                'total'=>$request->total,
-                'grand_total'=>$request->grand_total
-
-        ]);
-
-        return response()->json(['success'=>'Kategori baru Berhasil Ditambahkan.']);
+        DB::table('transaksis')->insert($save_data);
+        $save_data=[];
+        foreach($data['kd_trx'] as $key=>$kd_trx){
+        $save_data[]=[
+            'kd_trx'=>$desc,
+            'nama_barang'=>$data['nama_barang'][$key],
+            'jumlah'=>$data['jumlah'][$key],
+            'harga_beli'=>$data['harga_beli'][$key],
+            'subtotal'=>$data['subtotal'][$key],
+            'tgl_pembayaran'=>$data['tgl_pembayaran'][$key],
+        ];
+    }
     }
 
     /**

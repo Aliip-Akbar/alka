@@ -34,7 +34,7 @@ Route::group(['middleware'=>['auth']],function () {
         Route::resource('kategori', App\Http\Controllers\KategoriController::class);
         Route::resource('produk', App\Http\Controllers\ProdukController::class);
         Route::resource('pembelian', App\Http\Controllers\PembelianController::class);
-        Route::resource('penjualan', App\Http\Controllers\PenjualanController::class);
+        Route::get('pembelian/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getData');
         Route::resource('laporan', App\Http\Controllers\LaporanController::class);
         Route::resource('user', App\Http\Controllers\DataUserController::class);
         Route::resource('mitra', App\Http\Controllers\MitraController::class);
