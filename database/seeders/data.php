@@ -18,10 +18,10 @@ class data extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-        	'name' => 'Admin',
+        	'name' => 'Administrator',
         	'username' => 'admin',
             'password' => bcrypt('12345'),
-            'level' => 3,
+            'level' => 1,
             'email' => 'admin@admin.com'
         ]);
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 class PmitraController extends Controller
 {
     /**
@@ -15,7 +15,9 @@ class PmitraController extends Controller
     public function index()
     {
         $pelanggans = DB::table('pelanggans')->get();
-        return view('transaksi.pembelian_mitra', ['pelanggans' => $pelanggans]);
+        return view('transaksi.pembelian_mitra', ['pelanggans' => $pelanggans])->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**

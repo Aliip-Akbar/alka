@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
 use DataTables;
-
+use Auth;
 class SatuanController extends Controller
 {
     /**
@@ -34,7 +34,8 @@ class SatuanController extends Controller
                     ->make(true);
         }
 
-        return view('data_master.satuan');
+        return view('data_master.satuan')->with([
+            'user' => Auth::user()]);
     }
 
     /**

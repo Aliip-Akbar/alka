@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\transaksi;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 class PembelianController extends Controller
 {
     /**
@@ -15,7 +15,9 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        return view('transaksi.pembelian');
+        return view('transaksi.pembelian')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     public function getData($nama_barang)
@@ -50,22 +52,15 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        transaksi::updateOrCreate([
-            'id' => $request->id
-        ],
-        [
-                'nama_barang' =>$request->nama_barang,
-                'exp_date' =>$request->exp_date,
-                'jumlah' =>$request->jumlah,
-                'satuan' =>$request->satuan,
-                'harga_beli'=>$request->harga_beli,
-                'subtotal'=>$request->subtotal,
-                'total'=>$request->total,
-                'grand_total'=>$request->grand_total
 
-        ]);
-
-        return response()->json(['success'=>'Kategori baru Berhasil Ditambahkan.']);
+        $save_data=[];
+        foreach(['kd_trx'] as $key=>$kd_trx){
+        $save_data[]=[
+            'nama_barang'=> $request->nama_barang,
+            'jumlah'=>$request->jumlah,
+        ];
+        DB::table('transaksis')->insert($save_data);
+    }
     }
 
     /**

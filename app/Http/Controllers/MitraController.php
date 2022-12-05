@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use DataTables;
-
+use Auth;
 class MitraController extends Controller
 {
     /**
@@ -35,7 +35,9 @@ class MitraController extends Controller
                     ->make(true);
         }
 
-        return view('data_master.mitra');
+        return view('data_master.mitra')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**

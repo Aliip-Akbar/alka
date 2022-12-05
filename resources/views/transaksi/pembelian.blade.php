@@ -1,6 +1,5 @@
-@extends('template')
-@section('judul', 'Halaman Penjualan')
-@section('konten')
+@extends('layout.main')
+@section('isi')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <div class="card shadow mb-2 mt-4">
@@ -8,7 +7,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
-                <input type="hidden" class="form-control" placeholder="" id="id" name="id">
+                <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx">
                 <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang">
             </div>
             <div class="col-md-3 col-sm-6 p-2">
@@ -51,15 +50,15 @@
                             <td>&nbsp;</td>
                             <td colspan="1">Pembeli</td>
                             <td><select name="" id="" class="form-select">
-                                {{-- <option value="">Piih Pelanggan</option>
-                                @foreach ($pelanggans as $i)
+                                <option value="">Piih Pelanggan</option>
+                                {{-- @foreach ($pelanggans as $i)
                                 <option value="{{ $i->nama_pelanggan }}"></option>
                                 @endforeach --}}
                             </select>
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
-                            <td><input type="text" name="sub_total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                            <td><input type="text" name="sub_total" value="0" jAutoCalc="SUM({subtotal})" class="form-control"></td>
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
@@ -108,14 +107,14 @@
     $("#nama_barang").autocomplete({
         source: function(request, cb){
             $.ajax({
-                url: basePath+'/get-data/'+request.term,
+                url: 'pembelian/get-data/'+request.term,
                 method: 'GET',
                 dataType: 'json',
                 success: function(res){
                     var result;
                     result = [
                         {
-                            label: request.term+ 'Tidak Ditemukan',
+                            label: request.term+ ' Tidak Ditemukan',
                             value: ''
                         }
                     ];
@@ -155,9 +154,9 @@
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' name='qty' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='price' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='item_total' value='0' jAutoCalc='{qty} * {price}' class='form-control'></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><input name='nama_barang' value="+nama_barang+"></td><td><input type='text' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='subtotal' value='0' jAutoCalc='{jumlah} * {harga_beli}' class='form-control'></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
-                        $("#barang").val("");
+                        $("#nama_barang").val("");
                         $("#jumlah").val("");
                         $("#harga_beli").val("");
                         $(function() {
@@ -180,6 +179,34 @@
                     alert("Isi Dulu");
                 }
             });
+
+            $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#saveBtn').click(function (e) {
+            e.preventDefault();
+            $(this).html('Tambah');
+            alertify.notify('Data Baru Saja Ditambahkan', 'success', 10, function(){  console.log('dismissed'); });
+            var kd_trx = $(this).data("kd_trx");
+
+            $.ajax({
+            data: $('#tblData').serialize(),
+            url: "{{ route('pembelian.store') }}",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+                $('#saveBtn').html('Save Changes');
+            }
+        });
+        });
+    });
 });
 </script>
 @endsection

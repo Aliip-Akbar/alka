@@ -1,6 +1,5 @@
-@extends('template')
-@section('judul', 'Halaman Data Stok barang')
-@section('konten')
+@extends('layout.main')
+@section('isi')
 <div class="card shadow mb-4 mt-4">
     <div class="card-header mb-0">
         <h1 class="h5 text-gray-800 mb-3">Stok Barang</h1>

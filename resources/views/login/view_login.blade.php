@@ -20,51 +20,44 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ URL::to('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
 <body class="bg-gradient-primary">
 
-    <div class="container bg-white col-4 align-self-center mt-5">
-        <div class="card-body">
+    <div class="container bg-white col-4 align-self-center mt-5 rounded">
+        <div class="card-body ">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-b"><strong>P O S - LOGIN</strong></h1>
                     </div>
                     <form class="user" action="{{ url('login/proses') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input autofocus type="text"
-                            @error('username');
+                            @error('username')
                                 is-invalid
                             @enderror
-                            class="form-control form-control-user" placeholder="Enter Username..." name="username">
+                            class="form-control mb-4" placeholder="Masukkan Username Anda" name="username">
                         </div>
-                        @error('username');
+                        @error('username')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         <div class="form-group">
                             <input type="password" name="password"
-                            @error('password');
+                            @error('password')
                                 is-invalid
                             @enderror
-                            class="form-control form-control-user" placeholder="Password">
+                            class="form-control mb-4" placeholder="Masukkan Password Anda">
                         </div>
-                        @error('password');
+                        @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                                 @enderror
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox small">
-                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                <label class="custom-control-label" for="customCheck">Remember
-                                    Me</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary col-xl">Login</button>
+                        <button type="submit" class="btn btn-primary col-xl mb-4">Login</button>
                 </div>
     </div>
 
@@ -78,7 +71,7 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{ URL::to('js/sb-admin-2.min.js') }}"></script>
 
 </body>
 

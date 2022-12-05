@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('home') }}">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-cash-register"></i>
         </div>
@@ -10,7 +10,7 @@
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link ">
+        <a class="nav-link">
             <img class="img-profile rounded-circle" src="img/manager.png">
                 <span class="mr-2 d-none d-lg-inline text-light">{{ $user->name }}</span>
         </a>
@@ -110,7 +110,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('home') }}">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-cash-register"></i>
         </div>
@@ -118,9 +118,8 @@
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="img-profile rounded-circle" src="img/clerk.png">
+        <a class="nav-link">
+            <img class="img-profile" src="img/cashier.png">
                 <span class="mr-2 d-none d-lg-inline text-light">{{ $user->name }}</span>
         </a>
     </li>
@@ -178,7 +177,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('home') }}">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-cash-register"></i>
         </div>
@@ -188,8 +187,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle">
             <img class="img-profile rounded-circle" src="img/inventory.png">
                 <span class="mr-2 d-none d-lg-inline text-light">{{ $user->name }}</span>
         </a>

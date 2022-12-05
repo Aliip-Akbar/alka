@@ -2,8 +2,8 @@
 @section('isi')
     <div class="card shadow mb-4 mt-4">
         <div class="card-header py-3">
-            <h1 class="h5 text-gray-800">Kategori Barang</h1>
-            <h6 class="m-0 font-weight-bold text-primary">Data Master / Kategori Barang  <a class="btn btn-success btn-sm float-right mr-4" href="javascript:void(0)" id="createNewKategori"><i class="fas fa-plus-circle"></i> Tambah Kategori</a></h6>
+            <h1 class="h5 text-gray-800">Kategori Barang <a class="btn btn-success btn-sm float-right" href="javascript:void(0)" id="createNewKategori"><i class="fas fa-plus-circle"></i></a></h1>
+            <h6 class="m-0 font-weight-bold text-primary">Data Master / Kategori Barang</h6>
         </div>
                 <div class="card-body">
                     <div class="table-responsive">

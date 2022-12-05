@@ -6,7 +6,7 @@ use App\Models\Point;
 use Illuminate\Http\Request;
 use DataTables;
 use DB;
-
+use Auth;
 class PointController extends Controller
 {
     /**
@@ -37,7 +37,9 @@ class PointController extends Controller
                     ->make(true);
         }
 
-        return view('transaksi.point', ['pelanggans' => $pelanggans]);
+        return view('transaksi.point', ['pelanggans' => $pelanggans])->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**

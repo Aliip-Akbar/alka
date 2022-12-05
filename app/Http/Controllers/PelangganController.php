@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use DataTables;
-
+use Auth;
 class pelangganController extends Controller
 {
     /**
@@ -35,7 +35,9 @@ class pelangganController extends Controller
                     ->make(true);
         }
 
-        return view('data_master.pelanggan');
+        return view('data_master.pelanggan')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**

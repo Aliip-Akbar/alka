@@ -11,7 +11,7 @@ class Pembelian extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->kd_barang = IdGenerator::generate(['table' => 'transaksis', 'length' => 12, 'prefix' =>'INV-']);
+            $model->kd_trx = IdGenerator::generate(['table' => 'transaksis', 'length' => 12, 'prefix' =>'INV-']);
             $model->id = IdGenerator::generate(['table' => 'transaksis', 'length' => 4, 'prefix' => '1']);
         });
     }

@@ -12,7 +12,7 @@ class Pelanggan extends Model
 {
     parent::boot();
     self::creating(function ($model) {
-        $model->kd_user = IdGenerator::generate(['table' => 'pelanggans', 'length' =>8, 'prefix' =>'PLG-']);
+        $model->kd_user = IdGenerator::generate(['table' => 'pelanggans', 'length' =>6, 'prefix' =>'M-']);
             $model->id = IdGenerator::generate(['table' => 'pelanggans', 'length' => 4, 'prefix' => '1']);
     });
 }

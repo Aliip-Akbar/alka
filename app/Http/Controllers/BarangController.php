@@ -6,7 +6,7 @@ use App\Models\Barang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use DataTables;
-
+use Auth;
 class BarangController extends Controller
 {
 
@@ -43,7 +43,9 @@ class BarangController extends Controller
         $satuans = DB::table('satuans')->get();
         $kategoris = DB::table('kategoris')->get();
 
-        return view('data_master.barang', ['satuans' => $satuans], ['kategoris' => $kategoris]);
+        return view('data_master.barang', ['satuans' => $satuans], ['kategoris' => $kategoris])->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**

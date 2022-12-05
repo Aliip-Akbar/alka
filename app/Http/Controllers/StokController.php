@@ -6,6 +6,7 @@ use App\Models\Stok;
 use Illuminate\Http\Request;
 use DataTables;
 use DB;
+use Auth;
 class StokController extends Controller
 {
     /**
@@ -37,7 +38,9 @@ class StokController extends Controller
                     ->make(true);
         }
 
-        return view('transaksi.stok', ['satuans' => $satuans], ['barangs' => $barangs]);
+        return view('transaksi.stok', ['satuans' => $satuans], ['barangs' => $barangs])->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**
