@@ -21,7 +21,7 @@
                 <input type="text" class="form-control" placeholder="" id="harga_beli" name="harga_beli" value="">
                 <input type="hidden" class="form-control" placeholder="" id="subtotal" name="subtotal" value="">
             </div>
-            <div class="col-md-1 col-sm-6 p-2 mt-2">
+            <div class="col-md-1 p-2 mt-2">
                 <label for=""></label>
                 <button id="btnAdd" class=" form-control btn btn-primary" placeholder="" value="Input"><i class="fas fa-download"></i></button>
             </div>
@@ -53,22 +53,24 @@
                         <tr class="table-light">
                             <td>&nbsp;</td>
                             <td colspan="1">Pembeli</td>
-                            <td><select name="" id="" class="form-select">
+                            <input type="hidden" name="trx_id" id="trx_id" value="">
+                            <td><select name="nama_pelanggan" id="nama_pelanggan" class="form-select">
                                 <option value="">Piih Pelanggan</option>
                                 @foreach ($pelanggans as $i)
                                 <option value="{{ $i->nama_pelanggan }}"></option>
                                 @endforeach
+                                <option value="Tono">Tono</option>
                             </select>
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
-                            <td><input type="text" name="sub_total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                            <td><input type="text" name="subtotal" value="0" class="form-control"></td>
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
                             <td colspan="1">Metode Pembayaran</td>
                             <td>
-                                <select name="" id="" class="form-select">
+                                <select name="metode_pembayaran" id="metode_pembayaran" class="form-select">
                                     <option value="">Pilih Metode</option>
                                 </select>
                             </td>
@@ -76,7 +78,7 @@
                                 Diskon:
                             </td>
                             &nbsp;
-                            <td><input type="text" name="total_diskon" value="0" class="form-control">
+                            <td><input type="text" name="diskon" value="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="table-light">
@@ -85,14 +87,14 @@
                                 Pajak:
                             </td>
                             &nbsp;
-                            <td><input type="text" name="Pajak" value="1500" jAutoCalc="" class="form-control">
+                            <td><input type="text" name="pajak" value="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="table-light">
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" name="grand_total" value="0" jAutoCalc="{sub_total} - {total_diskon} + {Pajak}" class="form-control"></td>
+                            <td><input type="text" name="grand_total" value="0"  class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -122,7 +124,9 @@ $.ajaxSetup({
 $(function() {
   var randomnumber = Math.floor(Math.random() * 10000)
   var kd = 'TRX-';
-  $('#kd_trx').val(kd + randomnumber);
+  var kd_trx = kd + randomnumber;
+  $('#trx_id').val(kd_trx);
+  $('#kd_trx').val(kd_trx);
 
 })
 
@@ -204,23 +208,14 @@ $('#btnAdd').click(function (e) {
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' name='qty' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='price' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='item_total' value='0' jAutoCalc='{qty} * {price}' class='form-control'></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='subtotal' value='0' class='form-control'></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");
                         $("#harga_beli").val("");
-                        $(function() {
 
-                        function autoCalcSetup() {
-                            $('form#tblData').jAutoCalc('destroy');
-                            $('form#tblData tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
-                            $('form#tblData').jAutoCalc({decimalPlaces: 2});
-                        }
-                        autoCalcSetup();
-
-                        });
                         $(".btn-sm").click(function () {
-                            $(this).parent().parent().remove();
+                            $(this).parent().parent().parent().remove();
                             if ($("tblData tbody").children().children().children().children().lenght == 0){
 
                             }
@@ -229,6 +224,23 @@ $('#btnAdd').click(function (e) {
                     alert("Isi Dulu");
                 }
             });
+
+            $('#saveBtn').click(function (e) {
+            e.preventDefault();
+            $(this).html('Tambah');
+            $.ajax({
+            data: $('#tblData').serialize(),
+            url: "{{ route('detailtrx.store') }}",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+                console.log('SUCCESS:', data);
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+        });
 });
 </script>
 @endsection

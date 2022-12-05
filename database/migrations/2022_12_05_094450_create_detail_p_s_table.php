@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detailtrx', function (Blueprint $table) {
+        Schema::create('detail_p_s', function (Blueprint $table) {
             $table->id();
             $table->string('trx_id')->unique();
             $table->string('nama_pelanggan');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detailtrxes');
+        Schema::dropIfExists('detail_p_s');
     }
 };

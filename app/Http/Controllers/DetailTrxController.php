@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\DetailP;
+use DB;
 class DetailTrxController extends Controller
 {
     /**
@@ -38,7 +39,17 @@ class DetailTrxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DetailP::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'trx_id' => $request->trx_id,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'subtotal' => $request->subtotal,
+            'diskon' => $request->diskon,
+            'grand_total' => $request->grand_total,
+
+        ]);
     }
 
     /**
