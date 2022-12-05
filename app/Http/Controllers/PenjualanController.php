@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\transaksi;
-use Illuminate\Support\Facades\DB;
-use Auth;
-class PembelianController extends Controller
+use DB;
+use App\Models\Barang;
+class PenjualanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,7 @@ class PembelianController extends Controller
     public function index()
     {
         $pelanggans = DB::table('pelanggans')->get();
-
-        return view('transaksi.pembelian', ['pelanggans' => $pelanggans])->with([
-            'user' => Auth::user()
-        ]);
+        return view('transaksi.penjualan', ['pelanggans' => $pelanggans]);
     }
 
     public function getData($nama_barang)
@@ -35,7 +31,6 @@ class PembelianController extends Controller
 
         return $barangs;
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -54,17 +49,7 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        transaksi::updateOrCreate([
-            'id' => $request->id
-        ],
-        [
-            'kd_trx' => $request->kd_trx,
-            'nama_barang' => $request->nama_barang,
-            'jumlah' => $request->jumlah,
-            'harga_beli' => $request->harga_beli,
-            'subtotal' => $request->subtotal,
-
-        ]);
+        //
     }
 
     /**
