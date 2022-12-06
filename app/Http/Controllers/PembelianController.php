@@ -15,7 +15,9 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        return view('transaksi.pembelian')->with([
+        $pelanggans = DB::table('pelanggans')->get();
+
+        return view('transaksi.pembelian', ['pelanggans' => $pelanggans])->with([
             'user' => Auth::user()
         ]);
     }
@@ -52,15 +54,17 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
+        transaksi::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'kd_trx' => $request->kd_trx,
+            'nama_barang' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+            'harga_beli' => $request->harga_beli,
+            'subtotal' => $request->subtotal,
 
-        $save_data=[];
-        foreach(['kd_trx'] as $key=>$kd_trx){
-        $save_data[]=[
-            'nama_barang'=> $request->nama_barang,
-            'jumlah'=>$request->jumlah,
-        ];
-        DB::table('transaksis')->insert($save_data);
-    }
+        ]);
     }
 
     /**

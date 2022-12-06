@@ -23,6 +23,20 @@ class data extends Seeder
             'password' => bcrypt('12345'),
             'level' => 1,
             'email' => 'admin@admin.com'
+        ],
+        [
+        	'name' => 'Kasir',
+        	'username' => 'kasir',
+            'password' => bcrypt('12345'),
+            'level' => 2,
+            'email' => 'kasit@kasir.com'
+        ],
+        [
+        	'name' => 'Gudang',
+        	'username' => 'gudang',
+            'password' => bcrypt('12345'),
+            'level' => 3,
+            'email' => 'gudang@gudang.com'
         ]);
     }
 }

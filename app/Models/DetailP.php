@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class transaksi extends Model
+class DetailP extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
-        'kd_trx',
-        'nama_barang',
-        'harga_beli',
-        'jumlah',
-        'subtotal'
+        'trx_id',
+        'nama_pelanggan',
+        'subtotal',
+        'diskon',
+        'pajak',
+        'grand_total',
 
 
     ];

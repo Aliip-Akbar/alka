@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class PejualanController extends Controller
+use App\Models\DetailP;
+use DB;
+class DetailTrxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class PejualanController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +35,18 @@ class PejualanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DetailP::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'trx_id' => $request->trx_id,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'subtotal' => $request->subtotal,
+            'diskon' => $request->diskon,
+            'pajak' => $request->pajak,
+            'grand_total' => $request->grand_total,
+
+        ]);
     }
 
     /**

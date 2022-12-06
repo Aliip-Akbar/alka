@@ -4,30 +4,34 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <div class="card shadow mb-2 mt-4">
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 p-2 ui-widget">
+           <form id="transaksi">
+            <div class="row">
+            <div class="col-md-4 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
-                <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx">
-                <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang">
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
+                <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang" value="">
             </div>
             <div class="col-md-3 col-sm-6 p-2">
                 <label for="">Jumlah</label>
-                <input type="number" class="form-control" placeholder="" id="jumlah" name="jumlah">
+                <input type="number" class="form-control" placeholder="" id="jumlah" name="jumlah" value="">
             </div>
-            <div class="col-md-3 col-sm-6 p-2">
+            <div class="col-md-4 col-sm-6 p-2">
                 <label for="">Harga Beli</label>
-                <input type="text" class="form-control" placeholder="" id="harga_beli" name="harga_beli">
+                <input type="text" class="form-control" placeholder="" id="harga_beli" name="harga_beli" value="">
+                <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
-            <div class="col-md-1 col-sm-6 p-2 mt-2">
+            <div class="col-md-1 p-2 mt-2">
                 <label for=""></label>
                 <button id="btnAdd" class=" form-control btn btn-primary" placeholder="" value="Input"><i class="fas fa-download"></i></button>
             </div>
         </div>
+    </form>
     </div>
 </div>
 <div class="card shadow">
     <div class="card-body">
-        <div class="coniner">
+        <div class="container">
             <form id="tblData">
                 <table name="tblData" class="table table-borderless">
                     <thead>
@@ -49,22 +53,24 @@
                         <tr class="table-light">
                             <td>&nbsp;</td>
                             <td colspan="1">Pembeli</td>
-                            <td><select name="" id="" class="form-select">
+                            <input type="hidden" name="trx_id" id="trx_id" value="">
+                            <td><select name="nama_pelanggan" id="nama_pelanggan" class="form-select">
                                 <option value="">Piih Pelanggan</option>
-                                {{-- @foreach ($pelanggans as $i)
+                                @foreach ($pelanggans as $i)
                                 <option value="{{ $i->nama_pelanggan }}"></option>
-                                @endforeach --}}
+                                @endforeach
+                                <option value="Tono">Tono</option>
                             </select>
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
-                            <td><input type="text" name="sub_total" value="0" jAutoCalc="SUM({subtotal})" class="form-control"></td>
+                            <td><input type="text" id='subtotal' name="subtotal" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
                             <td colspan="1">Metode Pembayaran</td>
                             <td>
-                                <select name="" id="" class="form-select">
+                                <select name="metode_pembayaran" id="metode_pembayaran" class="form-select">
                                     <option value="">Pilih Metode</option>
                                 </select>
                             </td>
@@ -72,7 +78,7 @@
                                 Diskon:
                             </td>
                             &nbsp;
-                            <td><input type="text" name="total_diskon" value="0" class="form-control">
+                            <td><input type="text" id="diskon" name="diskon" value="" placeholder="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="table-light">
@@ -81,14 +87,14 @@
                                 Pajak:
                             </td>
                             &nbsp;
-                            <td><input type="text" name="Pajak" value="1500" jAutoCalc="" class="form-control">
+                            <td><input type="text" id="pajak" name="pajak" value="" placeholder="0" class="form-control">
                             </td>
                         </tr>
-                        <tr class="table-light">
+                        <tr>
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" name="grand_total" value="0" jAutoCalc="{sub_total} - {total_diskon} + {Pajak}" class="form-control"></td>
+                            <td><input type="text" id="grand_total" name="grand_total" value="" placeholder="0" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -102,6 +108,45 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 	<script type="text/javascript">
+    $(function () {
+$.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+});
+
+$(function() {
+  var randomnumber = Math.floor(Math.random() * 10000)
+  var kd = 'Out-';
+  var kd_trx = kd + randomnumber;
+  $('#trx_id').val(kd_trx);
+  $('#kd_trx').val(kd_trx);
+});
+
+$("#jumlah, #harga_beli").keyup(function() {
+            var harga  = $("#harga_beli").val();
+            var jumlah = $("#jumlah").val();
+
+            var total = parseInt(harga) * parseInt(jumlah);
+            $("#item_total").val(total);
+        });
+$('#btnAdd').click(function (e) {
+    e.preventDefault();
+    $(this).html('Tambah');
+    $.ajax({
+      data: $('#transaksi').serialize(),
+      url: "{{ route('pembelian.store') }}",
+      type: "POST",
+      dataType: 'json',
+      success: function (data) {
+        console.log('SUCCESS:', data);
+      },
+      error: function (data) {
+          console.log('Error:', data);
+      }
+  });
+});
+});
     $(document).ready(function(){
         var basePath = $("#base_path").val();
     $("#nama_barang").autocomplete({
@@ -114,7 +159,7 @@
                     var result;
                     result = [
                         {
-                            label: request.term+ ' Tidak Ditemukan',
+                            label: request.term+ 'Tidak Ditemukan',
                             value: ''
                         }
                     ];
@@ -144,33 +189,43 @@
             }
         }
     });
-        $("#btnAdd").click(function () {
+    $("#subtotal, #diskon, #pajak").keyup(function() {
+            var subtotal  = $("#subtotal").val();
+            var diskon = $("#diskon").val();
+            var pajak = $("#pajak").val();
+
+            var total = parseInt(subtotal) - parseInt(diskon) + parseInt(pajak) || parseInt(subtotal) + parseInt(pajak) - parseInt(diskon)
+            || parseInt(subtotal) + parseInt(pajak) || parseInt(subtotal) - parseInt(diskon);
+            $("#grand_total").val(total);
+        });
+    $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();
                 var harga_beli = $("#harga_beli").val().trim();
+                var item_total = $("#item_total").val().trim();
 
                 if(nama_barang != "" && jumlah != "" && harga_beli != "" ){
                     if ($("tblData tbody").children().children().children().children().lenght == 1){
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><input name='nama_barang' value="+nama_barang+"></td><td><input type='text' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='subtotal' value='0' jAutoCalc='{jumlah} * {harga_beli}' class='form-control'></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='jumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='harga_beli' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' name='item_total' value="+item_total+" class='form-control'></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
-                        $("#nama_barang").val("");
+                        $("#barang").val("");
                         $("#jumlah").val("");
                         $("#harga_beli").val("");
+                        $("#item_total").val("");
                         $(function() {
 
                         function autoCalcSetup() {
                             $('form#tblData').jAutoCalc('destroy');
-                            $('form#tblData tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
-                            $('form#tblData').jAutoCalc({decimalPlaces: 2});
+                            $('form#tblData').jAutoCalc({decimalPlaces: false});
                         }
                         autoCalcSetup();
 
                         });
                         $(".btn-sm").click(function () {
-                            $(this).parent().parent().remove();
+                            $(this).parent().parent().parent().remove();
                             if ($("tblData tbody").children().children().children().children().lenght == 0){
 
                             }
@@ -180,33 +235,22 @@
                 }
             });
 
-            $(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             $('#saveBtn').click(function (e) {
             e.preventDefault();
             $(this).html('Tambah');
-            alertify.notify('Data Baru Saja Ditambahkan', 'success', 10, function(){  console.log('dismissed'); });
-            var kd_trx = $(this).data("kd_trx");
-
             $.ajax({
             data: $('#tblData').serialize(),
-            url: "{{ route('pembelian.store') }}",
+            url: "{{ route('detailtrx.store') }}",
             type: "POST",
             dataType: 'json',
             success: function (data) {
-
+                console.log('SUCCESS:', data);
             },
             error: function (data) {
                 console.log('Error:', data);
-                $('#saveBtn').html('Save Changes');
             }
         });
         });
-    });
 });
 </script>
 @endsection
