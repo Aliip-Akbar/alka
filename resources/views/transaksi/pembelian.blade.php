@@ -52,11 +52,12 @@
                     <tfoot>
                         <tr class="table-light line_items">
                             <td>&nbsp;</td>
-                            <td colspan="1">Pengguna</td>
+                            <td colspan="1">Tanggal Transaksi</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
                             <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Pembelian" maxlength="50" required>
                             <td>
-                            <input type="text" class="form-control" name="nama" id="nama" readonly aria-readonly="true" value="{{ $user->name }}">
+                            <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
+                            <input type="hidden" class="form-control" name="nama" id="nama" readonly aria-readonly="true" value="{{ $user->name }}">
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
@@ -66,13 +67,13 @@
                             <td>&nbsp;</td>
                             <td colspan="1">Keterangan</td>
                             <td>
-                                <textarea name="keterangan" id="keterangan" cols="10" rows="5" class="form-control" style="resize: none;"></textarea>
+                                <textarea name="keterangan" id="keterangan" cols="5" rows="3" class="form-control" style="resize: none;"></textarea>
                             </td>
                             <td>
                                 Diskon:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="diskon" name="diskon" value="" placeholder="0" class="form-control">
+                            <td><input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="table-light line_items">
@@ -81,7 +82,7 @@
                                 Pajak:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="pajak" name="pajak" value="" placeholder="0" class="form-control">
+                            <td><input type="text" id="pajak" name="pajak" value="0" placeholder="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="line_items">
@@ -92,8 +93,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                <button type="submit" class="btn btn-primary float-right mr-2" id="saveBtn" value="create">Save changes
-                </button>
+                <input type="submit" class="btn btn-primary float-right mr-2" id="saveBtn" value="Simpan">
             </form>
         </div>
     </div>
@@ -108,7 +108,6 @@ $.ajaxSetup({
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
 });
-
 $(function() {
   var randomnumber = Math.floor(Math.random() * 10000)
   var kd = 'In-';
@@ -256,14 +255,14 @@ $('#btnAdd').click(function (e) {
 
             $('#saveBtn').click(function (e) {
             e.preventDefault();
-            $(this).html('Tambah');
             $.ajax({
             data: $('#tblData').serialize(),
             url: "{{ route('detailtrx.store') }}",
             type: "POST",
             dataType: 'json',
             success: function (data) {
-                console.log('SUCCESS:', data);
+                console.log('success:', data);
+                window.location.href = "/pembelian";
             },
             error: function (data) {
                 console.log('Error:', data);

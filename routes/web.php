@@ -43,11 +43,19 @@ Route::group(['middleware'=>['auth']],function () {
         Route::resource('mitra', App\Http\Controllers\MitraController::class);
     });
     Route::group(['middleware' => ['CekUserLogin:2']],function () {
-        Route::resource('Kasir', App\Http\Controllers\KasirController::class);
         Route::resource('pembelian', App\Http\Controllers\PembelianController::class);
         Route::resource('penjualan', App\Http\Controllers\PenjualanPelangganController::class);
         Route::resource('penjualanmitra', App\Http\Controllers\PmitraController::class);
         Route::resource('detailtrx', App\Http\Controllers\DetailTrxController::class);
         Route::get('pembelian/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getData');
+    });
+    Route::group(['middleware' => ['CekUserLogin:3']],function () {
+        Route::resource('pembelian', App\Http\Controllers\PembelianController::class);
+        Route::resource('detailtrx', App\Http\Controllers\DetailTrxController::class);
+        Route::get('pembelian/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getData');
+        Route::resource('barang', App\Http\Controllers\BarangController::class);
+        Route::resource('satuan', App\Http\Controllers\SatuanController::class);
+        Route::resource('kategori', App\Http\Controllers\KategoriController::class);
+        Route::resource('produk', App\Http\Controllers\ProdukController::class);
     });
 });

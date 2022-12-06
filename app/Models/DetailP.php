@@ -10,11 +10,12 @@ class DetailP extends Model
     use HasFactory;
     protected $fillable = [
         'trx_id',
+        'tgl_transaksi',
         'keterangan',
         'nama',
         'subtotal',
         'diskon',
-        'pajak',
+        'biaya_tambahan',
         'grand_total',
         'j_transaksi'
 

@@ -8,6 +8,8 @@ class KasirController extends Controller
 {
     public function index()
     {
-        echo 'Kasir';
+        return view('layout.home')->with([
+            'user' => Auth::user()
+        ]);
     }
 }

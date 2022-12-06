@@ -41,14 +41,16 @@ class DetailTrxController extends Controller
         [
             'trx_id' => $request->trx_id,
             'keterangan' => $request->keterangan,
+            'tgl_transaksi' => $request->tgl_transaksi,
             'nama' => $request->nama,
             'subtotal' => $request->subtotal,
             'diskon' => $request->diskon,
-            'pajak' => $request->pajak,
+            'biaya_tambahan' => $request->biaya_tambahan,
             'grand_total' => $request->grand_total,
             'j_transaksi' => $request->j_transaksi
 
         ]);
+        return response()->json(['success'=>'pelanggan baru Berhasil Ditambahkan.']);
     }
 
     /**

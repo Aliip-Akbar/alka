@@ -54,11 +54,12 @@
                             <td>&nbsp;</td>
                             <td colspan="1">Pembeli</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
+                            <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Keluar">
                             <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Penjualan Reguler" maxlength="50" required>
                             <td><select name="nama" id="nama" class="form-select">
-                                <option value="">Piih Pelanggan</option>
+                                <option>-- Piih Pelanggan --</option>
                                 @foreach ($pelanggans as $i)
-                                <option value="{{ $i->nama_pelanggan }}"></option>
+                                <option value="{{ $i->nama_pelanggan }}">{{ $i->nama_pelanggan }}</option>
                                 @endforeach
                                 <option value="Tono">Tono</option>
                             </select>
@@ -69,18 +70,28 @@
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
-                            <td colspan="1"></td>
+                            <td colspan="1">Tanggal Transaksi</td>
                             <td>
-                                {{-- <select name="metode_pembayaran" id="metode_pembayaran" class="form-select">
-                                    <option value="">Pilih Metode</option>
-                                </select> --}}
+                                <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
                             </td>
                             <td>
                                 Diskon:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
+                            <td>
+                                <input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
                             </td>
+                           <tr class="table-light">
+                            <td></td>
+                            <td colspan="2"></td>
+                            <td colspan="1">
+                                Pajak:
+                            </td>
+                            &nbsp;
+                            <td>
+                                <input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
+                            </td>
+                           </tr>
                         </tr>
                         <tr class="line_items">
                             <td colspan="3">&nbsp;</td>
@@ -152,12 +163,12 @@ $('#btnAdd').click(function (e) {
       url: "{{ route('pembelian.store') }}",
       type: "POST",
       dataType: 'json',
-      success: function (data) {
-        console.log('SUCCESS:', data);
-      },
-      error: function (data) {
-          console.log('Error:', data);
-      }
+        success: function (data) {
+            console.log('success:', data);
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
   });
 });
 });
@@ -261,7 +272,8 @@ $('#btnAdd').click(function (e) {
             type: "POST",
             dataType: 'json',
             success: function (data) {
-                console.log('SUCCESS:', data);
+                console.log('success:', data);
+                window.location.href = "/penjualan";
             },
             error: function (data) {
                 console.log('Error:', data);

@@ -65,6 +65,7 @@ class PenjualanPelangganController extends Controller
             'subtotal' => $request->subtotal,
 
         ]);
+        return response()->json(['success'=>'Data baru Berhasil Ditambahkan.']);
     }
 
     /**

@@ -12,7 +12,7 @@ class Barang extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->kd_barang = IdGenerator::generate(['table' => 'barangs', 'length' => 8, 'prefix' =>'BRG-']);
+            $model->kd_barang = IdGenerator::generate(['table' => 'barangs', 'length' => 8, 'prefix' =>'Brg']);
             $model->id = IdGenerator::generate(['table' => 'barangs', 'length' => 4, 'prefix' => '1']);
         });
     }
@@ -20,7 +20,6 @@ class Barang extends Model
 
     protected $fillable = [
         'nama_barang',
-        'kode_barang',
         'kategori',
         'satuan_beli',
         'harga_beli',
