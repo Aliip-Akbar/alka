@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Models\Barang;
-class PenjualanController extends Controller
+use App\Models\transaksi;
+use Illuminate\Support\Facades\DB;
+use Auth;
+class PenjualanPelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,10 @@ class PenjualanController extends Controller
     public function index()
     {
         $pelanggans = DB::table('pelanggans')->get();
-        return view('transaksi.penjualan', ['pelanggans' => $pelanggans]);
+
+        return view('transaksi.p_pelanggan', ['pelanggans' => $pelanggans])->with([
+            'user' => Auth::user()
+        ]);
     }
 
     public function getData($nama_barang)
@@ -31,6 +35,7 @@ class PenjualanController extends Controller
 
         return $barangs;
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +54,17 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        transaksi::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'kd_trx' => $request->kd_trx,
+            'nama_barang' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+            'harga_beli' => $request->harga_beli,
+            'subtotal' => $request->subtotal,
+
+        ]);
     }
 
     /**

@@ -62,6 +62,7 @@ class pelangganController extends Controller
             'id' => $request->id
         ],
         [
+            'kd_user' => $request->kd_user,
             'nama_pelanggan' => $request->nama_pelanggan,
             'alamat' => $request->alamat,
             'telp' => $request->telp,

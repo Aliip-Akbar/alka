@@ -14,11 +14,7 @@ class DetailTrxController extends Controller
      */
     public function index()
     {
-        $pelanggans = DB::table('pelanggans')->get();
 
-        return view('transaksi.pembelian', ['pelanggans' => $pelanggans])->with([
-            'user' => Auth::user()
-        ]);
     }
 
     /**
@@ -44,10 +40,13 @@ class DetailTrxController extends Controller
         ],
         [
             'trx_id' => $request->trx_id,
-            'nama_pelanggan' => $request->nama_pelanggan,
+            'keterangan' => $request->keterangan,
+            'nama' => $request->nama,
             'subtotal' => $request->subtotal,
             'diskon' => $request->diskon,
+            'pajak' => $request->pajak,
             'grand_total' => $request->grand_total,
+            'j_transaksi' => $request->j_transaksi
 
         ]);
     }

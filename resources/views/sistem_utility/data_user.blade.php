@@ -37,13 +37,13 @@
                                 <div class="form-group">
                                     <label for="name" class="col-sm-5 control-label">Nama User</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="nama_User" name="nama_User" placeholder="Isi Nama User" value="" maxlength="50" required="">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Isi Nama User" value="" maxlength="50" required="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="col-sm-5 control-label">Keterangan</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="k_User" name="k_User" placeholder="Isi keterangan User" value="" maxlength="50" required="">
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Isi keterangan User" value="" maxlength="50" required="">
                                     </div>
                                 </div>
                                 <div class="col-sm-offset-2 col-sm-10">
@@ -115,8 +115,8 @@
           $('#saveBtn').val("edit User");
           $('#ajaxModel').modal('show');
           $('#id').val(data.id);
-          $('#nama_User').val(data.nama_User).prop('readonly', false);
-          $('#k_User').val(data.k_User).prop('readonly', false);
+          $('#name').val(data.name).prop('readonly', false);
+          $('#username').val(data.username).prop('readonly', false);
       })
     });
     /*------------------------------------------
@@ -132,8 +132,8 @@
     $('#saveBtn').val("edit satuan");
     $('#ajaxModel').modal('show');
     $('#id').val(data.id);
-    $('#nama_User').val(data.nama_User).prop('readonly', true);
-    $('#k_User').val(data.k_User).prop('readonly', true);
+    $('#name').val(data.name).prop('readonly', true);
+    $('#username').val(data.username).prop('readonly', true);
     })
     });
 

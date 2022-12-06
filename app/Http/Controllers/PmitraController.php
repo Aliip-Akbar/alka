@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\transaksi;
 use Illuminate\Support\Facades\DB;
 use Auth;
 class PmitraController extends Controller
@@ -15,9 +16,24 @@ class PmitraController extends Controller
     public function index()
     {
         $pelanggans = DB::table('pelanggans')->get();
-        return view('transaksi.pembelian_mitra', ['pelanggans' => $pelanggans])->with([
+
+        return view('transaksi.p_mitra', ['pelanggans' => $pelanggans])->with([
             'user' => Auth::user()
         ]);
+    }
+
+    public function getData($nama_barang)
+    {
+        if (empty($nama_barang)) {
+            return [];
+        }
+        $barangs = DB::table('barangs')
+            ->select('barangs.*')
+            ->where('nama_barang', 'LIKE', "$nama_barang%")
+            ->limit(25)
+            ->get();
+
+        return $barangs;
     }
 
     /**
@@ -38,7 +54,17 @@ class PmitraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        transaksi::updateOrCreate([
+            'id' => $request->id
+        ],
+        [
+            'kd_trx' => $request->kd_trx,
+            'nama_barang' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+            'harga_beli' => $request->harga_beli,
+            'subtotal' => $request->subtotal,
+
+        ]);
     }
 
     /**

@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('detail_p_s', function (Blueprint $table) {
             $table->id();
             $table->string('trx_id')->unique();
-            $table->string('nama_pelanggan');
-            $table->double('subtotal');
+            $table->string('keterangan')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('subtotal');
             $table->double('diskon');
-            $table->double('pajak');
-            $table->double('grand_total');
+            $table->double('pajak')->nullable();
+            $table->string('grand_total');
+            $table->string('j_transaksi');
             $table->timestamps();
         });
     }

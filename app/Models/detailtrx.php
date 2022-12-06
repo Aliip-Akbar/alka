@@ -11,10 +11,12 @@ class detailtrx extends Model
 
     protected $fillable =[
         'trx_id',
+        'keterangan',
         'nama_pelanggan',
         'subtotal',
         'diskon',
         'pajak',
         'grand_total',
+        'j_transaksi'
     ];
 }

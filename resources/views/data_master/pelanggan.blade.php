@@ -34,6 +34,7 @@
                     <form id="pelangganForm" name="pelangganForm" class="form-horizontal">
                             <div class="form-group">
                                 <input type="hidden" name="id" id="id">
+                                <input type="hidden" name="kd_user" id="kd_user" value="">
                                 <label for="name" class="col-sm-4 control-label">Nama Pelanggan</label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Masukkan Nama pelanggan" value="" maxlength="50" required>
@@ -68,6 +69,13 @@
     </div>
 </div>
 <script type="text/javascript">
+
+$(function() {
+  var randomnumber = Math.floor(Math.random() * 10000)
+  var kd = 'User-';
+  var kd_user = kd + randomnumber;
+  $('#kd_user').val(kd_user);
+});
   $(function () {
 
     /*------------------------------------------

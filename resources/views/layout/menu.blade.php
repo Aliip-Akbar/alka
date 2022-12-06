@@ -80,7 +80,7 @@
                 <a class="collapse-item" href="/pembelian">Pembelian Barang</a>
                 <a class="collapse-item" href="/penjualan">Penjualan Barang</a>
                 <a class="collapse-item" href="/penjualanmitra">Penjualan Barang Mitra</a>
-                <a class="collapse-item" href="/hutang">Pembayaran Hutang</a>
+
             </div>
         </div>
     </li>
@@ -147,7 +147,6 @@
                 <a class="collapse-item" href="/point">Transaksi Point</a>
                 <a class="collapse-item" href="/penjualan">Penjualan Barang</a>
                 <a class="collapse-item" href="/penjualanmitra">Penjualan Barang Mitra</a>
-                <a class="collapse-item" href="/hutang">Pembayaran Hutang</a>
             </div>
         </div>
     </li>

@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-4 col-sm-6 p-2">
                 <label for="">Harga Beli</label>
-                <input type="number" class="form-control" placeholder="" id="harga_beli" name="harga_beli" value="">
+                <input type="text" class="form-control" placeholder="" id="harga_beli" name="harga_beli" value="">
                 <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
             <div class="col-md-1 p-2 mt-2">
@@ -50,13 +50,18 @@
                     </tbody>
 
                     <tfoot>
-                        <tr class="table-light line_items">
+                        <tr class="table-light">
                             <td>&nbsp;</td>
-                            <td colspan="1">Pengguna</td>
+                            <td colspan="1">Pembeli</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
-                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Pembelian" maxlength="50" required>
-                            <td>
-                            <input type="text" class="form-control" name="nama" id="nama" readonly aria-readonly="true" value="{{ $user->name }}">
+                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Penjualan Reguler" maxlength="50" required>
+                            <td><select name="nama" id="nama" class="form-select">
+                                <option value="">Piih Pelanggan</option>
+                                @foreach ($pelanggans as $i)
+                                <option value="{{ $i->nama_pelanggan }}"></option>
+                                @endforeach
+                                <option value="Tono">Tono</option>
+                            </select>
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
@@ -64,31 +69,24 @@
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
-                            <td colspan="1">Keterangan</td>
+                            <td colspan="1"></td>
                             <td>
-                                <textarea name="keterangan" id="keterangan" cols="10" rows="5" class="form-control" style="resize: none;"></textarea>
+                                {{-- <select name="metode_pembayaran" id="metode_pembayaran" class="form-select">
+                                    <option value="">Pilih Metode</option>
+                                </select> --}}
                             </td>
                             <td>
                                 Diskon:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="diskon" name="diskon" value="" placeholder="0" class="form-control">
-                            </td>
-                        </tr>
-                        <tr class="table-light line_items">
-                            <td colspan="3">&nbsp;</td>
-                            <td>
-                                Pajak:
-                            </td>
-                            &nbsp;
-                            <td><input type="text" id="pajak" name="pajak" value="" placeholder="0" class="form-control">
+                            <td><input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="line_items">
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" jAutoCalc="{subtotal} - {diskon} + {pajak}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                            <td><input type="text" jAutoCalc="{subtotal} - {diskon}" name="grand_total" value="" placeholder="0" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -111,7 +109,7 @@ $.ajaxSetup({
 
 $(function() {
   var randomnumber = Math.floor(Math.random() * 10000)
-  var kd = 'In-';
+  var kd = 'Out-';
   var kd_trx = kd + randomnumber;
   $('#trx_id').val(kd_trx);
   $('#kd_trx').val(kd_trx);
