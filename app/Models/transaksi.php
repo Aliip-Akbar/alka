@@ -12,9 +12,11 @@ class transaksi extends Model
         'id',
         'kd_trx',
         'nama_barang',
-        'harga_beli',
+        'harga_barang',
         'jumlah',
-        'subtotal'
+        'subtotal',
+        'keterangan',
+        'j_transaksi'
 
 
     ];

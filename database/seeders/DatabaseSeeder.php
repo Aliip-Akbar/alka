@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
                         'kd_barang' => 'Brg1002',
                         'kategori' => 'Atk',
                         'satuan_beli' => 'Lusin',
-                        'harga_beli' => 51000,
+                        'harga_beli' => 40000,
                         'satuan_jual' => 'Pcs',
                         'harga_normal' => 1500,
                         'harga_mitra' => 2000,
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
                             'kd_barang' => 'Brg1003',
                             'kategori' => 'Atk',
                             'satuan_beli' => 'Lusin',
-                            'harga_beli' => 51000,
+                            'harga_beli' => 6000,
                             'satuan_jual' => 'Pcs',
                             'harga_normal' => 1500,
                             'harga_mitra' => 2000,
@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
                             'nama_satuan' => 'Kg',
                         ]);
                         DB::table('satuans')->insert([
-                            'nama_satuan' => 'M',
+                            'nama_satuan' => 'Meter',
                         ]);
     }
 }

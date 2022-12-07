@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
+use App\Models\detailP;
+use App\Models\transaksi;
+use PDF;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -13,9 +16,19 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+        return view('cetak.laporan')->with([
+            'user' => Auth::user()
+        ]);
     }
 
+    public function cetak_penjualan()
+{
+	$detail = detailP::where('j_transaksi', 'Transaksi Barang Masuk')->get();
+    $transaksi = transaksi::where('j_transaksi', 'Transaksi Barang Masuk')->get();
+
+	$pdf = PDF::loadview('laporan.penjualan',['detail'=>$detail], ['transaksi'=>$transaksi] );
+	return $pdf->download('laporan-pembelian.pdf');
+}
     /**
      * Show the form for creating a new resource.
      *

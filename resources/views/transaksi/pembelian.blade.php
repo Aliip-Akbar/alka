@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-4 col-sm-6 p-2">
                 <label for="">Harga Beli</label>
-                <input type="number" class="form-control" placeholder="" id="harga_beli" name="harga_beli" value="">
+                <input type="number" class="form-control" placeholder="" id="harga_barang" name="harga_barang" value="">
                 <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
             <div class="col-md-1 p-2 mt-2">
@@ -54,10 +54,11 @@
                             <td>&nbsp;</td>
                             <td colspan="1">Tanggal Transaksi</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
-                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Pembelian" maxlength="50" required>
+                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk" maxlength="50" required>
                             <td>
                             <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
-                            <input type="hidden" class="form-control" name="nama" id="nama" readonly aria-readonly="true" value="{{ $user->name }}">
+                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk">
+                            <input type="hidden" class="form-control" name="nama" id="nama" value="{{ $user->name }}">
                             </td>
                             <td>Subtotal</td>
                             &nbsp;
@@ -79,17 +80,17 @@
                         <tr class="table-light line_items">
                             <td colspan="3">&nbsp;</td>
                             <td>
-                                Pajak:
+                                biaya_tambahan:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="pajak" name="pajak" value="0" placeholder="0" class="form-control">
+                            <td><input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
                             </td>
                         </tr>
                         <tr class="line_items">
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" jAutoCalc="{subtotal} - {diskon} + {pajak}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                            <td><input type="text" jAutoCalc="{subtotal} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -138,8 +139,8 @@ $(function() {
 //     updateTextView($(this));
 //   });
 // });
-$("#jumlah, #harga_beli").keyup(function() {
-            var harga  = $("#harga_beli").val();
+$("#jumlah, #harga_barang").keyup(function() {
+            var harga  = $("#harga_barang").val();
             var jumlah = $("#jumlah").val();
 
             var total = parseInt(harga) * parseInt(jumlah);
@@ -147,7 +148,6 @@ $("#jumlah, #harga_beli").keyup(function() {
         });
 $('#btnAdd').click(function (e) {
     e.preventDefault();
-    $(this).html('Tambah');
     $.ajax({
       data: $('#transaksi').serialize(),
       url: "{{ route('pembelian.store') }}",
@@ -200,35 +200,35 @@ $('#btnAdd').click(function (e) {
 
             if (selectedData && selectedData.item && selectedData.item.data){
                 var data = selectedData.item.data;
-                $('#harga_beli').val(data.harga_beli);
+                $('#harga_barang').val(data.harga_beli);
             }
         }
     });
-    $("#subtotal, #diskon, #pajak").keyup(function() {
+    $("#subtotal, #diskon, #biaya_tambahan").keyup(function() {
             var subtotal  = $("#subtotal").val();
             var diskon = $("#diskon").val();
-            var pajak = $("#pajak").val();
+            var biaya_tambahan = $("#biaya_tambahan").val();
 
-            var total = parseInt(subtotal) - parseInt(diskon) + parseInt(pajak) || parseInt(subtotal) + parseInt(pajak) - parseInt(diskon)
-            || parseInt(subtotal) + parseInt(pajak) || parseInt(subtotal) - parseInt(diskon);
+            var total = parseInt(subtotal) - parseInt(diskon) + parseInt(biaya_tambahan) || parseInt(subtotal) + parseInt(biaya_tambahan) - parseInt(diskon)
+            || parseInt(subtotal) + parseInt(biaya_tambahan) || parseInt(subtotal) - parseInt(diskon);
             $("#grand_total").val(total);
         });
 
     $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();
-                var harga_beli = $("#harga_beli").val().trim();
+                var harga_barang = $("#harga_barang").val().trim();
 
-                if(nama_barang != "" && jumlah != "" && harga_beli != "" ){
+                if(nama_barang != "" && jumlah != "" && harga_barang != "" ){
                     if ($("tblData tbody").children().children().children().children().lenght == 1){
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='dyharga_beli' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_beli}' value=''></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");
-                        $("#harga_beli").val("");
+                        $("#harga_barang").val("");
                         $("#item_total").val("");
                         $(function() {
 
@@ -249,7 +249,7 @@ $('#btnAdd').click(function (e) {
                         });
                     });
                 } else {
-                    alert("Isi Dulu");
+                    swal("Ada Data Yang Masih Kosong!", "Tolong Isi Dulu Yaaa!", "error");
                 }
             });
 
@@ -262,7 +262,8 @@ $('#btnAdd').click(function (e) {
             dataType: 'json',
             success: function (data) {
                 console.log('success:', data);
-                window.location.href = "/pembelian";
+                swal("Teransaksi Berhasil!", "", "success");
+                location.reload();
             },
             error: function (data) {
                 console.log('Error:', data);

@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('detail_p_s', function (Blueprint $table) {
             $table->id();
             $table->string('trx_id')->unique();
-            $table->date('tgl_transaksi')->nullable();
-            $table->string('keterangan')->nullable();
             $table->string('nama')->nullable();
+            $table->string('j_transaksi');
             $table->string('subtotal');
             $table->double('diskon');
             $table->double('biaya_tambahan')->nullable();
             $table->string('grand_total');
-            $table->string('j_transaksi');
+            $table->string('keterangan')->nullable();
+            $table->date('tgl_transaksi')->nullable();
             $table->timestamps();
         });
     }

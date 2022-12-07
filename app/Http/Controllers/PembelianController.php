@@ -36,6 +36,16 @@ class PembelianController extends Controller
         return $barangs;
     }
 
+    public function getInfo($trx_id)
+    {
+        $trx = DB::table('detail_p_s')
+        ->select('detail_p_s.*')
+        ->where('trx_id',"$trx_id")
+        -get();
+
+        return $trx;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -61,7 +71,7 @@ class PembelianController extends Controller
             'kd_trx' => $request->kd_trx,
             'nama_barang' => $request->nama_barang,
             'jumlah' => $request->jumlah,
-            'harga_beli' => $request->harga_beli,
+            'harga_barang' => $request->harga_barang,
             'subtotal' => $request->subtotal,
 
         ]);

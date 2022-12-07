@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-4 col-sm-6 p-2">
                 <label for="">Harga Beli</label>
-                <input type="text" class="form-control" placeholder="" id="harga_beli" name="harga_beli" value="">
+                <input type="text" class="form-control" placeholder="" id="harga_barang" name="harga_barang" value="">
                 <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
             <div class="col-md-1 p-2 mt-2">
@@ -55,7 +55,7 @@
                             <td colspan="1">Pembeli</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
                             <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Keluar">
-                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Penjualan Reguler" maxlength="50" required>
+                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
                             <td><select name="nama" id="nama" class="form-select">
                                 <option>-- Piih Pelanggan --</option>
                                 @foreach ($pelanggans as $i)
@@ -73,6 +73,7 @@
                             <td colspan="1">Tanggal Transaksi</td>
                             <td>
                                 <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
+                                <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
                             </td>
                             <td>
                                 Diskon:
@@ -97,7 +98,7 @@
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" jAutoCalc="{subtotal} - {diskon}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                            <td><input type="text" jAutoCalc="{subtotal} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -125,31 +126,9 @@ $(function() {
   $('#trx_id').val(kd_trx);
   $('#kd_trx').val(kd_trx);
 });
-// function updateTextView(_obj){
-//   var num = getNumber(_obj.val());
-//   if(num==0){
-//     _obj.val('');
-//   }else{
-//     _obj.val(num.toLocaleString());
-//   }
-// }
-// function getNumber(_str){
-//   var arr = _str.split('');
-//   var out = new Array();
-//   for(var cnt=0;cnt<arr.length;cnt++){
-//     if(isNaN(arr[cnt])==false){
-//       out.push(arr[cnt]);
-//     }
-//   }
-//   return Number(out.join(''));
-// }
-// $(document).ready(function(){
-//   $('input[type=text]').on('keyup',function(){
-//     updateTextView($(this));
-//   });
-// });
-$("#jumlah, #harga_beli").keyup(function() {
-            var harga  = $("#harga_beli").val();
+
+$("#jumlah, #harga_barang").keyup(function() {
+            var harga  = $("#harga_barang").val();
             var jumlah = $("#jumlah").val();
 
             var total = parseInt(harga) * parseInt(jumlah);
@@ -157,7 +136,6 @@ $("#jumlah, #harga_beli").keyup(function() {
         });
 $('#btnAdd').click(function (e) {
     e.preventDefault();
-    $(this).html('Tambah');
     $.ajax({
       data: $('#transaksi').serialize(),
       url: "{{ route('pembelian.store') }}",
@@ -210,7 +188,7 @@ $('#btnAdd').click(function (e) {
 
             if (selectedData && selectedData.item && selectedData.item.data){
                 var data = selectedData.item.data;
-                $('#harga_beli').val(data.harga_beli);
+                $('#harga_barang').val(data.harga_mitra);
             }
         }
     });
@@ -227,18 +205,18 @@ $('#btnAdd').click(function (e) {
     $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();
-                var harga_beli = $("#harga_beli").val().trim();
+                var harga_barang = $("#harga_barang").val().trim();
 
-                if(nama_barang != "" && jumlah != "" && harga_beli != "" ){
+                if(nama_barang != "" && jumlah != "" && harga_barang != "" ){
                     if ($("tblData tbody").children().children().children().children().lenght == 1){
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='dyharga_beli' name='harga_beli' value="+harga_beli+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_beli}' value=''></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");
-                        $("#harga_beli").val("");
+                        $("#harga_barang").val("");
                         $("#item_total").val("");
                         $(function() {
 

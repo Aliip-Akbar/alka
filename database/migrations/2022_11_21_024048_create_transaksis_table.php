@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('kd_trx')->uniqe();
             $table->string('nama_barang');
             $table->double('jumlah');
-            $table->double('harga_beli');
+            $table->double('harga_barang');
             $table->double('subtotal');
+            $table->string('keterangan');
+            $table->string('j_transaksi');
             $table->timestamps();
         });
     }

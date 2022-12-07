@@ -61,7 +61,7 @@ class PmitraController extends Controller
             'kd_trx' => $request->kd_trx,
             'nama_barang' => $request->nama_barang,
             'jumlah' => $request->jumlah,
-            'harga_beli' => $request->harga_beli,
+            'harga_barang' => $request->harga_barang,
             'subtotal' => $request->subtotal,
 
         ]);
