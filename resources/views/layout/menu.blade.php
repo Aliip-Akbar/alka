@@ -94,7 +94,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
                 <a class="collapse-item" id="" href="/laporan">Laporan</a>
-                <a class="collapse-item" href="#">Barcode</a>
+                
             </div>
         </div>
     </li>
@@ -160,7 +160,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
                 <a class="collapse-item" id="" href="/laporan">Laporan</a>
-                <a class="collapse-item" href="#">Barcode</a>
+
             </div>
         </div>
     </li>
@@ -242,7 +242,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
                 <a class="collapse-item" id="" href="/laporan">Laporan</a>
-                <a class="collapse-item" href="#">Barcode</a>
+
             </div>
         </div>
     </li>

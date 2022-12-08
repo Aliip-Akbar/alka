@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('trx_id')->unique();
             $table->string('nama')->nullable();
             $table->string('j_transaksi');
-            $table->string('subtotal');
+            $table->string('total');
             $table->double('diskon');
             $table->double('biaya_tambahan')->nullable();
             $table->string('grand_total');

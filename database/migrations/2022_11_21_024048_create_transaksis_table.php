@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_trx')->uniqe();
+            $table->string('kd_trx');
             $table->string('nama_barang');
             $table->double('jumlah');
             $table->double('harga_barang');

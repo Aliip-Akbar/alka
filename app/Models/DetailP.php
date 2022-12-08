@@ -11,7 +11,7 @@ class DetailP extends Model
     protected $fillable = [
         'trx_id',
         'nama',
-        'subtotal',
+        'total',
         'diskon',
         'biaya_tambahan',
         'grand_total',

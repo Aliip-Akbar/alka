@@ -10,6 +10,8 @@
                 <label for="">Nama Barang</label>
                 <input type="hidden" name="id" id="id">
                 <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
+                <input type="hidden" class="form-control" id="keterangan" name="keterangan" value="Transaksi Masuk">
+                <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk">
                 <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang" value="">
             </div>
             <div class="col-md-3 col-sm-6 p-2">
@@ -57,12 +59,11 @@
                             <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk" maxlength="50" required>
                             <td>
                             <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
-                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk">
                             <input type="hidden" class="form-control" name="nama" id="nama" value="{{ $user->name }}">
                             </td>
-                            <td>Subtotal</td>
+                            <td>total</td>
                             &nbsp;
-                            <td><input type="text" id='subtotal' name="subtotal" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                            <td><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
@@ -80,7 +81,7 @@
                         <tr class="table-light line_items">
                             <td colspan="3">&nbsp;</td>
                             <td>
-                                biaya_tambahan:
+                                Ongkir:
                             </td>
                             &nbsp;
                             <td><input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
@@ -90,7 +91,7 @@
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" jAutoCalc="{subtotal} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                            <td><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -262,8 +263,8 @@ $('#btnAdd').click(function (e) {
             dataType: 'json',
             success: function (data) {
                 console.log('success:', data);
+                location.reload(),
                 swal("Teransaksi Berhasil!", "", "success");
-                location.reload();
             },
             error: function (data) {
                 console.log('Error:', data);

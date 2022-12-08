@@ -37,7 +37,12 @@ Route::group(['middleware'=>['auth']],function () {
         Route::resource('penjualan', App\Http\Controllers\PenjualanPelangganController::class);
         Route::resource('penjualanmitra', App\Http\Controllers\PmitraController::class);
         Route::resource('detailtrx', App\Http\Controllers\DetailTrxController::class);
-        Route::get('cetak/penjualan', 'App\Http\Controllers\LaporanController@cetak_penjualan');
+        Route::get('cetak/pembelian', 'App\Http\Controllers\LaporanController@cetak_pembelian');
+        Route::get('cetak/penjualan_reguler', 'App\Http\Controllers\LaporanController@cetak_penjualan');
+        Route::get('cetak/penjualan_mitra', 'App\Http\Controllers\LaporanController@cetak_mitra');
+        Route::get('cetak/stok_barang', 'App\Http\Controllers\LaporanController@cetak_barang');
+        Route::get('cetak/barang_masuk', 'App\Http\Controllers\LaporanController@cetak_masuk');
+        Route::get('cetak/barang_keluar', 'App\Http\Controllers\LaporanController@cetak_keluar');
         Route::get('pembelian/{trx_id}', 'App\Http\Controllers\PembelianController@getInfo');
         Route::get('pembelian/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getData');
         Route::resource('laporan', App\Http\Controllers\LaporanController::class);

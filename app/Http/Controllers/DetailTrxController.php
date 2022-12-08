@@ -16,7 +16,6 @@ class DetailTrxController extends Controller
     {
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +40,7 @@ class DetailTrxController extends Controller
         [
             'trx_id' => $request->trx_id,
             'nama' => $request->nama,
-            'subtotal' => $request->subtotal,
+            'total' => $request->total,
             'diskon' => $request->diskon,
             'biaya_tambahan' => $request->biaya_tambahan,
             'grand_total' => $request->grand_total,
@@ -59,9 +58,9 @@ class DetailTrxController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+
     }
 
     /**

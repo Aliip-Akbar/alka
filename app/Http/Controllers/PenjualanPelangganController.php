@@ -60,9 +60,11 @@ class PenjualanPelangganController extends Controller
         [
             'kd_trx' => $request->kd_trx,
             'nama_barang' => $request->nama_barang,
+            'keterangan' => $request->keterangan,
             'jumlah' => $request->jumlah,
             'harga_barang' => $request->harga_barang,
             'subtotal' => $request->subtotal,
+            'j_transaksi' => $request->j_transaksi
 
         ]);
         return response()->json(['success'=>'Data baru Berhasil Ditambahkan.']);

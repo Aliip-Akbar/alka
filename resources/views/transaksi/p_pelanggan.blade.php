@@ -9,8 +9,10 @@
             <div class="col-md-4 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
                 <input type="hidden" name="id" id="id">
+                <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Keluar">
                 <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
                 <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang" value="">
+                <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
             </div>
             <div class="col-md-3 col-sm-6 p-2">
                 <label for="">Jumlah</label>
@@ -54,7 +56,6 @@
                             <td>&nbsp;</td>
                             <td colspan="1">Pembeli</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
-                            <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Keluar">
                             <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
                             <td><select name="nama" id="nama" class="form-select">
                                 <option>-- Piih Pelanggan --</option>
@@ -64,15 +65,16 @@
                                 <option value="Tono">Tono</option>
                             </select>
                             </td>
-                            <td>Subtotal</td>
+                            <td>total</td>
                             &nbsp;
-                            <td><input type="text" id='subtotal' name="subtotal" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                            <td><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
                         </tr>
                         <tr class="table-light">
                             <td>&nbsp;</td>
                             <td colspan="1">Tanggal Transaksi</td>
                             <td>
                                 <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
+                                <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Reguler">
                                 <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
                             </td>
                             <td>
@@ -98,7 +100,7 @@
                             <td colspan="3">&nbsp;</td>
                             <td>Grand Total</td>
                             &nbsp;
-                            <td><input type="text" jAutoCalc="{subtotal} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                            <td><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -138,7 +140,7 @@ $('#btnAdd').click(function (e) {
     e.preventDefault();
     $.ajax({
       data: $('#transaksi').serialize(),
-      url: "{{ route('pembelian.store') }}",
+      url: "{{ route('penjualan.store') }}",
       type: "POST",
       dataType: 'json',
         success: function (data) {
@@ -250,7 +252,6 @@ $('#btnAdd').click(function (e) {
             dataType: 'json',
             success: function (data) {
                 console.log('success:', data);
-                location.reload();
             },
             error: function (data) {
                 console.log('Error:', data);
