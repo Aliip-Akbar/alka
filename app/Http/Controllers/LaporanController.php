@@ -80,7 +80,7 @@ public function cetak_keluar()
     $todayDate = Carbon::now()->isoFormat('dddd, D MMMM Y');
 	$keluar= transaksi::where('j_transaksi', 'Transaksi Barang keluar')->get();
 
-	$pdf = PDF::loadview('laporan.cetak_masuk', ['transaksi'=>$keluar], ['Carbon'=>$todayDate] );
+	$pdf = PDF::loadview('laporan.cetak_keluar', ['transaksi'=>$keluar], ['Carbon'=>$todayDate] );
 	return $pdf->download('laporan-barang-keluar.pdf');
 }
     /**
