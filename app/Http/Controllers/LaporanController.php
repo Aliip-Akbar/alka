@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
-use App\Models\detailP;
 use App\Models\transaksi;
 use App\Models\Barang;
 use PDF;
@@ -25,7 +24,7 @@ class LaporanController extends Controller
 
     public function cetak_pembelian()
 {
-    $todayDate = Carbon::now()->isoFormat('dddd, D MMMM Y');
+    $todayDate = Carbon::now()->isoFormat(' dddd, D MMMM Y');
 	$transaksi = transaksi::join('detail_p_s','detail_p_s.trx_id', '=','kd_trx')
                 ->where('detail_p_s.j_transaksi','Transaksi Barang Masuk')
                 ->where('transaksis.j_transaksi','Transaksi Barang Masuk')
