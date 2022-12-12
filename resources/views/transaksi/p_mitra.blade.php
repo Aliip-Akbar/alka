@@ -2,7 +2,7 @@
 @section('isi')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<div class="card shadow mb-2 mt-4">
+<div class="card mb-2 mt-4" id="hide">
     <div class="card-body">
            <form id="transaksi">
             <div class="row">
@@ -31,82 +31,83 @@
     </form>
     </div>
 </div>
-<div class="card shadow">
-    <div class="card-body">
-        <div class="container">
-            <form id="tblData">
-                <table name="tblData" class="table table-borderless">
-                    <thead>
-                        <tr class="bg-primary text-light">
-                            <th>Hapus</th>
-                            <th>Nama Barang</th>
-                            <th>Jumlah</th>
-                            <th>Harga</th>
-                            &nbsp;
-                            <th>Item Total</th>
-                        </tr>
-                    </thead>
+<div class="card">
+    <div class="card-body table-responsive">
+        <form id="tblData">
+            <table name="tblData" class="table table-borderless table-sm">
+                <thead>
+                    <tr id="judul" style="display: none;">
+                        <th colspan="5">
+                            <center>
+                                <h5>Terima kasih Telah berbelanja di Toko Kami</h5>
+                            </center>
+                        </div>
+                    </th>
+                    <tr id="judul" style="display: none;">
+                        <th colspan="5">
+                            <div class="d-flex justify-content-start"><input value="Struk Transaksi No" class="form-control col-2"><strong class="mt-2">:</strong><input type="text" name="trx_id" id="trx_id" value="" class="form-control">
+                        </div>
+                    </th>
+                    </tr>
+                    <tr class="bg-primary text-light" id="inv">
+                        <th id="cols">Hapus</th>
+                        <th id="size">Nama Barang</th>
+                        <th id="sizeJ">Jumlah</th>
+                        <th width="15%">Harga</th>
+                        <th width="15%">Item Total</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
+                <tbody>
 
-                    </tbody>
+                </tbody>
 
-                    <tfoot>
-                        <tr class="table-light">
-                            <td>&nbsp;</td>
-                            <td colspan="1">Pembeli</td>
-                            <input type="hidden" name="trx_id" id="trx_id" value="">
-                            <td><select name="nama" id="nama" class="form-select">
-                                <option>-- Piih Pelanggan --</option>
-                                @foreach ($pelanggans as $i)
-                                <option value="{{ $i->nama_pelanggan }}">{{ $i->nama_pelanggan }}</option>
-                                @endforeach
-                                <option value="Tono">Tono</option>
-                            </select>
-                            </td>
-                            <td>total</td>
-                            &nbsp;
-                            <td><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
-                        </tr>
-                        <tr class="table-light">
-                            <td>&nbsp;</td>
-                            <td colspan="1">Tanggal Transaksi</td>
-                            <td>
-                                <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
-                                <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Mitra">
-                                <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
-                            </td>
-                            <td>
-                                Diskon:
-                            </td>
-                            &nbsp;
-                            <td>
-                                <input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
-                            </td>
-                           <tr class="table-light">
-                            <td></td>
-                            <td colspan="2"></td>
-                            <td colspan="1">
-                                Pajak:
-                            </td>
-                            &nbsp;
-                            <td>
-                                <input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
-                            </td>
-                           </tr>
-                        </tr>
-                        <tr class="line_items">
-                            <td colspan="3">&nbsp;</td>
-                            <td>Grand Total</td>
-                            &nbsp;
-                            <td><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <button type="submit" class="btn btn-primary float-right mr-2" id="saveBtn" value="create">Save changes
-                </button>
-            </form>
-        </div>
+                <tfoot>
+                    <tr>
+                        <td  class="text-end" id="sizeJ">Pembeli :</td>
+                        <td  ><select name="nama" id="nama" class="form-select">
+                            <option>-- Piih Pelanggan --</option>
+                            @foreach ($pelanggans as $i)
+                            <option value="{{ $i->nama_pelanggan }}">{{ $i->nama_pelanggan }}</option>
+                            @endforeach
+                            <option value="Tono">Tono</option>
+                        </select>
+                        </td>
+                        <td class="text-end" id="sizeJ">Total       :</td>
+                        <td colspan="2"><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td  class="text-end">Tanggal Transaksi :</td>
+                        <td >
+                            <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
+                            <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Mitra">
+                            <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
+                        </td>
+                        <td class="text-end">
+                            Diskon      :
+                        </td>
+                        <td colspan="2">
+                            <input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end">
+                            Pajak :
+                        </td>
+                        <td colspan="2">
+                            <input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
+                        </td>
+                       </tr>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">Grand Total :</td>
+                        <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="submit" class="btn btn-primary float-right mr-2" id="saveBtn" value="create">Save changes
+            </button>
+        </form>
     </div>
 </div>
 
@@ -213,7 +214,7 @@ $('#btnAdd').click(function (e) {
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
+                    var dynamicTr ="<tr class='line_items'><td id='cols'><button class='btn btn-danger btn-sm' value='Hapus'><i class='fas fa-minus-circle'></i></button></td><td><span>"+nama_barang+"</span></td><td><center><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td></center><td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");
@@ -250,8 +251,27 @@ $('#btnAdd').click(function (e) {
             type: "POST",
             dataType: 'json',
             success: function (data) {
+                $('#hide').remove();
+                $('#shadow').css("shadow", "none");
+                $('.sidebar, .navbar, .sticky-footer').css("display", "none");
+                $('.table').addClass('table-bordered');
+                $('#judul').css("display", "table-row");
+                $('#size').css("width", "15%");
+                $('#sizeJ').css("width", "15%");
+                $('#sizeJ').css("text-align", "center");
+                $('th#cols').remove();
+                $('#dyjumlah').css('text-align','center');
+                $('td#cols').remove();
+                $('.btn').remove();
+                $('.card').css('width','60%');
+                $('#hapus').css("display", "none");
+                $(".form-control, .form-select, .card").css("border-top-style", "hidden");
+                $(".form-control, .form-select, .card").css("border-bottom-style", "hidden");
+                $(".form-control, .form-select, .card").css("border-right", "hidden");
+                $(".form-control, .form-select, .card").css("border-left-style", "hidden");
+                print();
+                location.reload(true);
                 console.log('success:', data);
-                location.reload();
             },
             error: function (data) {
                 console.log('Error:', data);

@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layout.style')
     <link href="{{ URL::to('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::to('css/PrintArea.css') }}" rel="stylesheet">
     </head>
 
     <body id="page-top">
@@ -30,7 +31,7 @@
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                        
+
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <div class="topbar-divider d-none d-sm-block"></div>
@@ -74,6 +75,8 @@
             <i class="fas fa-angle-up"></i>
         </a>
         <script src="{{ URL::to('js/sb-admin-2.min.js') }}"></script>
+        <script src="{{ URL::to('js/jquery.PrintArea.js') }}"></script>
+        <script src="{{ URL::to('js/jquery-ui-1.10.4.custom.js') }}"></script>
         @include('layout.script')
 </body>
 </html>
