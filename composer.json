@@ -10,7 +10,7 @@
         "dirape/token": "^2.3",
         "guzzlehttp/guzzle": "^7.2",
         "haruncpi/laravel-id-generator": "^1.1",
-        "laravel/framework": "^9.19",
+        "laravel/framework": "^9.19.0",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "milon/barcode": "^9.0",
