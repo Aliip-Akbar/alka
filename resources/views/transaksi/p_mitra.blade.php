@@ -34,27 +34,29 @@
 <div class="card">
     <div class="card-body table-responsive">
         <form id="tblData">
-            <table name="tblData" class="table table-borderless table-sm">
+            <table name="tblData" class="table table-borderless">
                 <thead>
-                    <tr id="judul" style="display: none;">
+                    <tr id="judul" style="display:none;">
                         <th colspan="5">
-                            <center>
-                                <h5>Terima kasih Telah berbelanja di Toko Kami</h5>
-                            </center>
-                        </div>
-                    </th>
-                    <tr id="judul" style="display: none;">
+                                <div class="col text-center">
+                                    <h1 class="m-0 pt-3"><strong>TOKO SAYA</strong></h1>
+                                    <h6 class="m-0 p-0">Jl.SetiaBudi No.212</h6>
+                                    <h5 class="m-0 p-0">Terima kasih Telah berbelanja di Toko Kami</h5>
+                                </div>
+                        </th>
+                    </tr>
+                    <tr id="struk" style="display: none;">
                         <th colspan="5">
-                            <div class="d-flex justify-content-start"><input value="Struk Transaksi No" class="form-control col-2"><strong class="mt-2">:</strong><input type="text" name="trx_id" id="trx_id" value="" class="form-control">
+                            <div class="d-flex justify-content-start"><input value="Struk Transaksi No" class="form-control col-4"><strong class="mt-2">:</strong><input type="text" name="trx_id" id="trx_id" value="" class="form-control">
                         </div>
                     </th>
                     </tr>
                     <tr class="bg-primary text-light" id="inv">
-                        <th id="cols">Hapus</th>
+                        <th id="cols" width="15%">Hapus</th>
                         <th id="size">Nama Barang</th>
-                        <th id="sizeJ">Jumlah</th>
-                        <th width="15%">Harga</th>
-                        <th width="15%">Item Total</th>
+                        <th id="sizeJ" width="10%" class="text-end">Jumlah</th>
+                        <th width="15%" class="text-end">Harga</th>
+                        <th width="15%" class="text-end">Item Total</th>
                     </tr>
                 </thead>
 
@@ -64,7 +66,7 @@
 
                 <tfoot>
                     <tr>
-                        <td  class="text-end" id="sizeJ">Pembeli :</td>
+                        <td  class="text-start" id="sizeJ">Pembeli :</td>
                         <td  ><select name="nama" id="nama" class="form-select">
                             <option>-- Piih Pelanggan --</option>
                             @foreach ($pelanggans as $i)
@@ -74,10 +76,10 @@
                         </select>
                         </td>
                         <td class="text-end" id="sizeJ">Total       :</td>
-                        <td colspan="2"><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                        <td colspan="2"><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control text-end"></td>
                     </tr>
                     <tr>
-                        <td  class="text-end">Tanggal Transaksi :</td>
+                        <td  class="text-start">Tanggal Transaksi :</td>
                         <td >
                             <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
                             <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Mitra">
@@ -87,7 +89,7 @@
                             Diskon      :
                         </td>
                         <td colspan="2">
-                            <input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
+                            <input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control text-end">
                         </td>
                     </tr>
                     <tr>
@@ -95,13 +97,13 @@
                             Pajak :
                         </td>
                         <td colspan="2">
-                            <input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
+                            <input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control text-end">
                         </td>
                        </tr>
                     </tr>
                     <tr class="line_items">
                         <td colspan="3" class="text-end">Grand Total :</td>
-                        <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                        <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control text-end"></td>
                     </tr>
                 </tfoot>
             </table>
@@ -214,7 +216,7 @@ $('#btnAdd').click(function (e) {
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items'><td id='cols'><button class='btn btn-danger btn-sm' value='Hapus'><i class='fas fa-minus-circle'></i></button></td><td><span>"+nama_barang+"</span></td><td><center><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td></center><td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
+                    var dynamicTr ="<tr class='line_items'><td id='cols'><button class='btn btn-danger btn-sm' value='Hapus'><i class='fas fa-minus-circle'></i></button></td><td><span>"+nama_barang+"</span></td><td><center><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control text-end'></td></center><td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control text-end' disabled></td>&nbsp;<td><input type='text' class='form-control text-end' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");
@@ -249,6 +251,7 @@ $('#btnAdd').click(function (e) {
             data: $('#tblData').serialize(),
             url: "{{ route('detailtrx.store') }}",
             type: "POST",
+            title:"Struk Baru",
             dataType: 'json',
             success: function (data) {
                 $('#hide').remove();
@@ -256,11 +259,11 @@ $('#btnAdd').click(function (e) {
                 $('.sidebar, .navbar, .sticky-footer').css("display", "none");
                 $('.table').addClass('table-bordered');
                 $('#judul').css("display", "table-row");
+                $('#struk').css("display", "table-row");
+                $('#trims').css("display", "table-row");
                 $('#size').css("width", "15%");
                 $('#sizeJ').css("width", "15%");
-                $('#sizeJ').css("text-align", "center");
                 $('th#cols').remove();
-                $('#dyjumlah').css('text-align','center');
                 $('td#cols').remove();
                 $('.btn').remove();
                 $('.card').css('width','60%');
@@ -269,7 +272,7 @@ $('#btnAdd').click(function (e) {
                 $(".form-control, .form-select, .card").css("border-bottom-style", "hidden");
                 $(".form-control, .form-select, .card").css("border-right", "hidden");
                 $(".form-control, .form-select, .card").css("border-left-style", "hidden");
-                print();
+                print(data);
                 location.reload(true);
                 console.log('success:', data);
             },
