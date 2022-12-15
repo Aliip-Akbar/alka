@@ -9,6 +9,7 @@ class Stok extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'kd_barang',
         'nama_barang',
         'harga_beli',
         'harga_normal',

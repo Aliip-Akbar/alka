@@ -11,6 +11,7 @@
                     <div class="form-group">
                         <label for="name" class=" control-label">Nama</label>
                         <div class="">
+                            <input type="hidden" name="kd_barang" id="kd_barang">
                             <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Masukkan Nama Barang" value="" maxlength="50" required="">
                         </div>
                     </div>
