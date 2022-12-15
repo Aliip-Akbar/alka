@@ -8,16 +8,13 @@
         </div>
         <div class="sidebar-brand-text mx-3">Labani POS</div>
     </a>
-    <hr class="sidebar-divider my-0">
+
     <li class="nav-item">
         <a class="nav-link">
             <img class="img-profile rounded-circle" src="img/manager.png">
                 <span class="mr-2 d-none d-lg-inline text-light">{{ $user->name }}</span>
         </a>
     </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('home') }}">
@@ -25,10 +22,6 @@
             <span>Dashboard</span>
         </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
     <!-- Heading -->
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -62,10 +55,11 @@
                 <a class="collapse-item" href="/barang">Data Barang</a>
                 <a class="collapse-item" href="/pelanggan">Data Pelanggan</a>
                 <a class="collapse-item" href="/mitra">Data Mitra</a>
+                <a class="collapse-item" href="/stok">Stok</a>
             </div>
         </div>
     </li>
-    <hr class="sidebar-divider">
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -94,13 +88,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
                 <a class="collapse-item" id="" href="/laporan">Laporan</a>
-                
+
             </div>
         </div>
     </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -116,16 +107,13 @@
         </div>
         <div class="sidebar-brand-text mx-3">Labani POS</div>
     </a>
-    <hr class="sidebar-divider my-0">
+
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link">
             <img class="img-profile" src="img/cashier.png">
                 <span class="mr-2 d-none d-lg-inline text-light">{{ $user->name }}</span>
         </a>
     </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('home') }}">
@@ -133,8 +121,7 @@
             <span>Dashboard</span>
         </a>
     </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -164,9 +151,6 @@
             </div>
         </div>
     </li>
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -184,7 +168,7 @@
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle">
             <img class="img-profile rounded-circle" src="img/inventory.png">
@@ -200,7 +184,7 @@
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
@@ -214,10 +198,11 @@
                 <a class="collapse-item" href="/kategori">Kategori Barang</a>
                 <a class="collapse-item" href="/satuan">Data Satuan</a>
                 <a class="collapse-item" href="/barang">Data Barang</a>
+                <a class="collapse-item" href="/stok">Stok</a>
             </div>
         </div>
     </li>
-    <hr class="sidebar-divider">
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -247,7 +232,7 @@
         </div>
     </li>
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

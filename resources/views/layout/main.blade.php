@@ -34,9 +34,7 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <a href="{{ ('logout') }}" class="text-decoration-none">
+                            <a href="{{ ('logout') }}" class="text-decoration-none btn btn-danger">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Logout
                             </a>
@@ -58,7 +56,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
+                            <span>Copyright &copy; Labani Media 2022</span>
                         </div>
                     </div>
                 </footer>

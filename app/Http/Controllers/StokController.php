@@ -30,8 +30,6 @@ class StokController extends Controller
 
                            $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-warning btn-sm editStok"><i class="fas fa-edit"></i></a>';
                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteStok"><i class="fas fa-trash-alt"></i></a>';
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Show" class="show btn btn-primary btn-sm showStok"><i class="fas fa-eye"></i></a>';
-
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -66,7 +64,6 @@ class StokController extends Controller
         ],
         [
             'nama_barang' => $request->nama_barang,
-            'satuan' => $request->satuan,
             'tgl_exp' => $request->tgl_exp,
             'harga_beli' => $request->harga_beli,
             'stok' => $request->stok,

@@ -40,10 +40,10 @@
                         <tr class="bg-primary text-light">
                             <th>Hapus</th>
                             <th>Nama Barang</th>
-                            <th>Jumlah</th>
-                            <th>Harga</th>
+                            <th class="text-end" width="10%">Jumlah</th>
+                            <th class="text-end">Harga</th>
                             &nbsp;
-                            <th>Item Total</th>
+                            <th class="text-end">Item Total</th>
                         </tr>
                     </thead>
 
@@ -53,45 +53,48 @@
 
                     <tfoot>
                         <tr class="table-light line_items">
-                            <td>&nbsp;</td>
                             <td colspan="1">Tanggal Transaksi</td>
                             <input type="hidden" name="trx_id" id="trx_id" value="">
+                            <input type="hidden" name="stok_sekarang" id="stok_sekarang">
+                            <input type="hidden" name="stok" id="stok">
                             <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk" maxlength="50" required>
                             <td>
                             <input type="date" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
                             <input type="hidden" class="form-control" name="nama" id="nama" value="{{ $user->name }}">
                             </td>
-                            <td>total</td>
+                            <td>&nbsp;</td>
+                            <td class="text-end">Total:</td>
                             &nbsp;
-                            <td><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control"></td>
+                            <td class="text-end"><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control text-end"></td>
                         </tr>
                         <tr class="table-light">
-                            <td>&nbsp;</td>
                             <td colspan="1">Keterangan</td>
                             <td>
                                 <textarea name="keterangan" id="keterangan" cols="5" rows="3" class="form-control" style="resize: none;"></textarea>
                             </td>
-                            <td>
+                            <td>&nbsp;</td>
+                            <td class="text-end">
                                 Diskon:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control">
+                            <td class="text-end"><input type="text" id="diskon" name="diskon" value="0" placeholder="0" class="form-control text-end">
                             </td>
                         </tr>
                         <tr class="table-light line_items">
                             <td colspan="3">&nbsp;</td>
-                            <td>
+                            <td class="text-end">
                                 Ongkir:
                             </td>
                             &nbsp;
-                            <td><input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control">
+                            <td class="text-end"><input type="text" id="biaya_tambahan" name="biaya_tambahan" value="0" placeholder="0" class="form-control text-end">
                             </td>
                         </tr>
                         <tr class="line_items">
                             <td colspan="3">&nbsp;</td>
-                            <td>Grand Total</td>
+                            <td class="text-end">Grand Total</td>
                             &nbsp;
-                            <td><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control"></td>
+                            <td><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control
+                                text-end"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -117,29 +120,15 @@ $(function() {
   $('#trx_id').val(kd_trx);
   $('#kd_trx').val(kd_trx);
 });
-// function updateTextView(_obj){
-//   var num = getNumber(_obj.val());
-//   if(num==0){
-//     _obj.val('');
-//   }else{
-//     _obj.val(num.toLocaleString());
-//   }
-// }
-// function getNumber(_str){
-//   var arr = _str.split('');
-//   var out = new Array();
-//   for(var cnt=0;cnt<arr.length;cnt++){
-//     if(isNaN(arr[cnt])==false){
-//       out.push(arr[cnt]);
-//     }
-//   }
-//   return Number(out.join(''));
-// }
-// $(document).ready(function(){
-//   $('input[type=text]').on('keyup',function(){
-//     updateTextView($(this));
-//   });
-// });
+
+$("#stok_sekarang, #jumlah").keyup(function() {
+            var s_sekarang  = $("#stok_sekarang").val();
+            var jumlah = $("#jumlah").val();
+
+            var total = parseInt(s_sekarang) * parseInt(jumlah);
+            $("#stok").val(total);
+        });
+
 $("#jumlah, #harga_barang").keyup(function() {
             var harga  = $("#harga_barang").val();
             var jumlah = $("#jumlah").val();
@@ -202,6 +191,7 @@ $('#btnAdd').click(function (e) {
             if (selectedData && selectedData.item && selectedData.item.data){
                 var data = selectedData.item.data;
                 $('#harga_barang').val(data.harga_beli);
+                $('#stok_sekarang').val(data.stok);
             }
         }
     });
@@ -225,7 +215,7 @@ $('#btnAdd').click(function (e) {
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control'></td>&nbsp;<td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control' disabled></td>&nbsp;<td><input type='text' class='form-control' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control text-end'></td>&nbsp;<td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control text-end' disabled></td>&nbsp;<td><input type='text' class='form-control text-end' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");

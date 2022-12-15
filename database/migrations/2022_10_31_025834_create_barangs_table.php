@@ -14,20 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('barangs', function (Blueprint $table) {
-            $table->id('id_barang');
-            $table->string('id');
+            $table->id();
             $table->string('kd_barang');
-            $table->string('nama_barang');
-            $table->string('kategori');
-            $table->date('exp_date');
-            $table->string('satuan_beli');
-            $table->double('harga_beli');
-            $table->string('satuan_jual');
-            $table->double('harga_normal');
-            $table->double('harga_mitra');
-            $table->double('harga_grosir');
-            $table->double('stok');
-            $table->double('point');
+            $table->string('nama_barang')->nullable();
+            $table->string('kategori')->nullable();
+            $table->string('satuan_beli')->nullable();
+            $table->double('harga_beli')->nullable();
+            $table->string('satuan_jual')->nullable();
+            $table->double('harga_normal')->nullable();
+            $table->double('harga_mitra')->nullable();
+            $table->double('harga_grosir')->nullable();
+            $table->double('point')->nullable();
             $table->timestamps();
         });
     }

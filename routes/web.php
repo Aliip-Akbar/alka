@@ -35,6 +35,7 @@ Route::group(['middleware'=>['auth']],function () {
         Route::resource('produk', App\Http\Controllers\ProdukController::class);
         Route::resource('pembelian', App\Http\Controllers\PembelianController::class);
         Route::resource('penjualan', App\Http\Controllers\PenjualanPelangganController::class);
+        Route::resource('stok', App\Http\Controllers\StokController::class);
         Route::resource('penjualanmitra', App\Http\Controllers\PmitraController::class);
         Route::resource('detailtrx', App\Http\Controllers\DetailTrxController::class);
         Route::get('cetak/pembelian', 'App\Http\Controllers\LaporanController@cetak_pembelian');
@@ -66,6 +67,7 @@ Route::group(['middleware'=>['auth']],function () {
     Route::group(['middleware' => ['CekUserLogin:3']],function () {
         Route::resource('pembelian', App\Http\Controllers\PembelianController::class);
         Route::resource('detailtrx', App\Http\Controllers\DetailTrxController::class);
+        Route::resource('stok', App\Http\Controllers\StokController::class);
         Route::get('pembelian/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getData');
         Route::resource('barang', App\Http\Controllers\BarangController::class);
         Route::resource('satuan', App\Http\Controllers\SatuanController::class);

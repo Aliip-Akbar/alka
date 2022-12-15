@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             DB::table('barangs')->insert(
                 [
                     'nama_barang' => 'Buku',
-                    'kd_barang' => 'Brg1001',
+                    'kd_barang' => 'BRG-1001',
                     'kategori' => 'Atk',
                     'satuan_beli' => 'Lusin',
                     'harga_beli' => 51000,
@@ -49,13 +49,12 @@ class DatabaseSeeder extends Seeder
                     'harga_normal' => 1500,
                     'harga_mitra' => 2000,
                     'harga_grosir' => 1000,
-                    'stok' => 50,
                     'point' => 10,
                 ]);
                 DB::table('barangs')->insert(
                     [
                         'nama_barang' => 'Pulpen',
-                        'kd_barang' => 'Brg1002',
+                        'kd_barang' => 'BRG-1002',
                         'kategori' => 'Atk',
                         'satuan_beli' => 'Lusin',
                         'harga_beli' => 40000,
@@ -63,13 +62,12 @@ class DatabaseSeeder extends Seeder
                         'harga_normal' => 1500,
                         'harga_mitra' => 2000,
                         'harga_grosir' => 1000,
-                        'stok' => 50,
                         'point' => 10,
                     ]);
                     DB::table('barangs')->insert(
                         [
                             'nama_barang' => 'Penggaris',
-                            'kd_barang' => 'Brg1003',
+                            'kd_barang' => 'BRG-1003',
                             'kategori' => 'Atk',
                             'satuan_beli' => 'Lusin',
                             'harga_beli' => 6000,
@@ -77,7 +75,6 @@ class DatabaseSeeder extends Seeder
                             'harga_normal' => 1500,
                             'harga_mitra' => 2000,
                             'harga_grosir' => 1000,
-                            'stok' => 50,
                             'point' => 10,
                         ]);
                         $faker = Faker::create('id_ID');
@@ -86,7 +83,7 @@ class DatabaseSeeder extends Seeder
 
                               // insert data ke table pegawai menggunakan Faker
                             DB::table('pelanggans')->insert([
-                                'nama_pelanggan' => $faker->name,
+                                'nama_pelanggan' => $faker->company,
                                 'alamat'=> $faker->address,
                                 'telp'=> $faker->phoneNumber,
                                 'email' => $faker->email,

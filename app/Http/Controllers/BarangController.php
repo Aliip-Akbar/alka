@@ -70,6 +70,7 @@ class BarangController extends Controller
             'id' => $request->id
         ],
         [
+            'kd_barang' => $request->kd_barang,
             'nama_barang' => $request->nama_barang,
             'kategori'     => $request->kategori,
             'satuan_beli' => $request->satuan_beli,
@@ -78,7 +79,6 @@ class BarangController extends Controller
             'harga_normal' => $request->harga_normal,
             'harga_mitra' => $request->harga_mitra,
             'harga_grosir' => $request->harga_grosir,
-            'stok' => $request->stok,
             'point' => $request->point,
         ]);
 

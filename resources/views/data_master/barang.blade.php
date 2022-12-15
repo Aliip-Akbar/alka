@@ -15,7 +15,6 @@
                         <th>Kategori</th>
                         <th>Satuan Jual</th>
                         <th>Harga Beli</th>
-                        <th>Stok</th>
                         <th>Point</th>
                     </tr>
                 </thead>
@@ -29,10 +28,23 @@
                             <h4 class="modal-title" id="modelHeading"></h4>
                         </div>
                         <div class="modal-body">
-                            <form id="barangForm" name="barangForm" class="form-horizontal">
+                            <form action="" id="barangForm" name="barangForm">
                             <input type="hidden" name="id" id="id">
                             <div class="row">
                                 <div class="col">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-4 control-label">Kode Barang</label>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-sm-9" id="kd_class">
+                                                    <input type="text" name="kd_barang" id="kd_barang" class="form-control col-sm" value="" placeholder="Generate Kode">
+                                                </div>
+                                                <div class="col-sm">
+                                                    <button id="generate" class="btn btn-primary"><i class="fa fa-random"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="name" class="col-sm-4 control-label">Nama</label>
                                         <div class="col-sm-12">
@@ -130,6 +142,13 @@
 
 
 <script type="text/javascript">
+
+$('#generate').one('click',function() {
+  var randomnumber = Math.floor(Math.random() * 10000);
+  var kd = 'BRG-';
+  var kd_barang = kd + randomnumber;
+  $('#kd_barang').val(kd_barang);
+});
         $(function () {
 
         /*------------------------------------------
@@ -159,7 +178,6 @@
         {data: 'kategori', name: 'kategori'},
         {data: 'satuan_jual', name: 'satuan_jual'},
         {data: 'harga_beli', name: 'harga_beli'},
-        {data: 'stok', name: 'stok'},
         {data: 'point', name: 'point'},
 
         ]
@@ -188,8 +206,11 @@
         $.get("{{ route('barang.index') }}" +'/' + id +'/edit', function (data) {
         $('#modelHeading').html("Edit barang");
         $('#saveBtn').val("edit barang");
+        $('#generate').css("display", "none");
+        $('#kd_class').addClass('col-sm-12');
         $('#ajaxModel').modal('show');
         $('#id').val(data.id);
+        $('#kd_barang').val(data.kd_barang).prop('readonly', true);
         $('#nama_barang').val(data.nama_barang).prop('readonly', false);
         $('#kategori').val(data.kategori).attr("disabled", false);
         $('#satuan_beli').val(data.satuan_beli).attr("disabled", false);
@@ -214,8 +235,10 @@
         $.get("{{ route('barang.index') }}" +'/' + id, function (data) {
         $('#modelHeading').html("Edit barang");
         $('#saveBtn').val("edit barang");
+        $('#generate').css("display", "none");
         $('#ajaxModel').modal('show');
         $('#id').val(data.id);
+        $('#kd_barang').val(data.kd_barang).prop('readonly', false);
         $('#nama_barang').val(data.nama_barang).prop('readonly', true);
         $('#kategori').val(data.kategori).attr("disabled", true);
         $('#satuan_beli').val(data.satuan_beli).attr("disabled", true);
