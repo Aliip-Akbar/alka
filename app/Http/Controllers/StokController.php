@@ -63,9 +63,13 @@ class StokController extends Controller
             'id' => $request->id
         ],
         [
+            'kd_barang' => $request->kd_barang,
             'nama_barang' => $request->nama_barang,
-            'tgl_exp' => $request->tgl_exp,
             'harga_beli' => $request->harga_beli,
+            'harga_normal' => $request->harga_normal,
+            'harga_mitra' => $request->harga_mitra,
+            'harga_grosir' => $request->harga_grosir,
+            'tgl_exp' => $request->tgl_exp,
             'stok' => $request->stok,
         ]);
 

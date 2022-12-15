@@ -35,6 +35,19 @@ class PembelianController extends Controller
 
         return $barangs;
     }
+    public function getStok($nama_barang)
+    {
+        if (empty($nama_barang)) {
+            return [];
+        }
+        $barangs = DB::table('stoks')
+            ->select('stoks.*')
+            ->where('nama_barang', 'LIKE', "$nama_barang%")
+            ->limit(25)
+            ->get();
+
+        return $barangs;
+    }
 
     public function getInfo($trx_id)
     {

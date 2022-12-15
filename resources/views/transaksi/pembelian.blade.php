@@ -157,7 +157,7 @@ $('#btnAdd').click(function (e) {
     $("#nama_barang").autocomplete({
         source: function(request, cb){
             $.ajax({
-                url: 'pembelian/get-data/'+request.term,
+                url: 'stok/get-data/'+request.term,
                 method: 'GET',
                 dataType: 'json',
                 success: function(res){

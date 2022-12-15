@@ -45,6 +45,7 @@ Route::group(['middleware'=>['auth']],function () {
         Route::get('cetak/barang_masuk', 'App\Http\Controllers\LaporanController@cetak_masuk');
         Route::get('cetak/barang_keluar', 'App\Http\Controllers\LaporanController@cetak_keluar');
         Route::get('pembelian/{trx_id}', 'App\Http\Controllers\PembelianController@getInfo');
+        Route::get('stok/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getStok');
         Route::get('pembelian/get-data/{nama_barang}', 'App\Http\Controllers\PembelianController@getData');
         Route::resource('laporan', App\Http\Controllers\LaporanController::class);
         Route::resource('user', App\Http\Controllers\DataUserController::class);
