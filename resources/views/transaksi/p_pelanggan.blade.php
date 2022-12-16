@@ -4,23 +4,30 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <div class="card mb-2 mt-4" id="hide">
     <div class="card-body">
-           <form id="transaksi">
+        <form id="transaksi">
             <div class="row">
             <div class="col-md-4 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
                 <input type="hidden" name="id" id="id">
-                <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Reguler">
                 <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
-                <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang" value="">
+                <input type="hidden" class="form-control" id="keterangan" name="keterangan" value="Transaksi Reguler">
                 <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
+                <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang" value="">
             </div>
             <div class="col-md-3 col-sm-6 p-2">
                 <label for="">Jumlah</label>
+                <input type="hidden" name="stok_sekarang" id="stok_sekarang">
                 <input type="number" class="form-control" placeholder="" id="jumlah" name="jumlah" value="">
+                <input type="hidden" name="stok" id="stok">
             </div>
             <div class="col-md-4 col-sm-6 p-2">
                 <label for="">Harga Beli</label>
-                <input type="text" class="form-control" placeholder="" id="harga_barang" name="harga_barang" value="">
+                <input type="number" class="form-control" placeholder="" id="harga_barang" name="harga_barang" value="">
+                <input type="hidden" class="form-control" id="harga_beli" name="harga_beli" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="harga_normal" name="harga_normal" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="harga_mitra" name="harga_mitra" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="harga_grosir" name="harga_grosir" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="tgl_exp" name="tgl_exp" placeholder="Masukkan Harga Barang" value="">
                 <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
             <div class="col-md-1 p-2 mt-2">
@@ -117,40 +124,66 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 	<script type="text/javascript">
     $(function () {
-$.ajaxSetup({
+        $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
 });
-
 $(function() {
   var randomnumber = Math.floor(Math.random() * 10000)
-  var kd = 'Out-';
+  var kd = 'In-';
   var kd_trx = kd + randomnumber;
   $('#trx_id').val(kd_trx);
   $('#kd_trx').val(kd_trx);
 });
 
-$("#jumlah, #harga_barang").keyup(function() {
-            var harga  = $("#harga_barang").val();
+$("#stok_sekarang, #jumlah").keyup(function() {
+            var s_sekarang  = $("#stok_sekarang").val();
+            var jumlah = $("#jumlah").val();
+
+            var total = parseInt(s_sekarang) * parseInt(jumlah);
+            $("#stok").val(total);
+        });
+
+        $("#jumlah, #harga_beli").keyup(function() {
+            var harga  = $("#harga_beli").val();
             var jumlah = $("#jumlah").val();
 
             var total = parseInt(harga) * parseInt(jumlah);
             $("#item_total").val(total);
         });
+        $("#jumlah, #stok_sekarang").keyup(function() {
+            var stok  = $("#stok_sekarang").val();
+            var jumlah = $("#jumlah").val();
+
+            var total = parseInt(stok) - parseInt(jumlah);
+            $("#stok").val(total);
+        });
 $('#btnAdd').click(function (e) {
     e.preventDefault();
     $.ajax({
       data: $('#transaksi').serialize(),
-      url: "{{ route('penjualan.store') }}",
+      url: "{{ route('pembelian.store') }}",
       type: "POST",
       dataType: 'json',
-        success: function (data) {
-            console.log('success:', data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
+      success: function (data) {
+        console.log('SUCCESS:', data);
+      },
+      error: function (data) {
+          console.log('Error:', data);
+      }
+  });
+  $.ajax({
+      data: $('#transaksi').serialize(),
+      url: "{{ route('stok.store') }}",
+      type: "POST",
+      dataType: 'json',
+      success: function (data) {
+        console.log('SUCCESS:', data);
+      },
+      error: function (data) {
+          console.log('Error:', data);
+      }
   });
 });
 });
@@ -159,14 +192,14 @@ $('#btnAdd').click(function (e) {
     $("#nama_barang").autocomplete({
         source: function(request, cb){
             $.ajax({
-                url: 'pembelian/get-data/'+request.term,
+                url: 'stok/get-data/'+request.term,
                 method: 'GET',
                 dataType: 'json',
                 success: function(res){
                     var result;
                     result = [
                         {
-                            label: request.term+ 'Tidak Ditemukan',
+                            label: request.term+ ' Tidak Ditemukan',
                             value: ''
                         }
                     ];
@@ -192,7 +225,14 @@ $('#btnAdd').click(function (e) {
 
             if (selectedData && selectedData.item && selectedData.item.data){
                 var data = selectedData.item.data;
-                $('#harga_barang').val(data.harga_normal);
+                $('#id').val(data.id);
+                $('#harga_beli').val(data.harga_beli);
+                $('#harga_barang').val(data.harga_beli);
+                $('#harga_normal').val(data.harga_normal);
+                $('#harga_mitra').val(data.harga_mitra);
+                $('#harga_grosir').val(data.harga_grosir);
+                $('#tgl_exp').val(data.tgl_exp);
+                $('#stok_sekarang').val(data.stok);
             }
         }
     });

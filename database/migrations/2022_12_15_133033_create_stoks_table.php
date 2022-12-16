@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('harga_normal');
             $table->double('harga_mitra');
             $table->double('harga_grosir');
-            $table->date('tgl_exp');
+            $table->date('tgl_exp')->nullable();
             $table->double('stok');
             $table->timestamps();
         });

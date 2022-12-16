@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label for="name" class=" control-label">Tanggal Expired</label>
                         <div class="">
-                            <input type="date" class="form-control" id="tgl_exp" name="tgl_exp" value="" maxlength="50" required="">
+                            <input type="date" class="form-control" id="tgl_exp" name="tgl_exp">
                         </div>
                     </div>
                     <div class="form-group">
@@ -193,11 +193,10 @@ $(document).ready(function(){
 
         $('#cancelBtn').click(function () {
             $('#barangForm').trigger("reset");
-            $('#nama_barang').prop('readonly', false);
-            $('#harga_beli').prop('readonly', false);
-            $('#harga_normal').prop('readonly', false);
-            $('#harga_mitra').prop('readonly', false);
-            $('#harga_grosir').prop('readonly', false);
+            swal("Tidak Ada Data Yang Diubah!!", "", "success");
+            window.location.reload();
+
+
         });
 
         /*------------------------------------------

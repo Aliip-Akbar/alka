@@ -16,11 +16,18 @@
             </div>
             <div class="col-md-3 col-sm-6 p-2">
                 <label for="">Jumlah</label>
+                <input type="hidden" name="stok_sekarang" id="stok_sekarang">
                 <input type="number" class="form-control" placeholder="" id="jumlah" name="jumlah" value="">
+                <input type="hidden" name="stok" id="stok">
             </div>
             <div class="col-md-4 col-sm-6 p-2">
                 <label for="">Harga Beli</label>
                 <input type="number" class="form-control" placeholder="" id="harga_barang" name="harga_barang" value="">
+                <input type="hidden" class="form-control" id="harga_beli" name="harga_beli" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="harga_normal" name="harga_normal" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="harga_mitra" name="harga_mitra" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="harga_grosir" name="harga_grosir" placeholder="Masukkan Harga Barang" value="">
+                <input type="hidden" class="form-control" id="tgl_exp" name="tgl_exp" placeholder="Masukkan Harga Barang" value="">
                 <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
             <div class="col-md-1 p-2 mt-2">
@@ -129,18 +136,37 @@ $("#stok_sekarang, #jumlah").keyup(function() {
             $("#stok").val(total);
         });
 
-$("#jumlah, #harga_barang").keyup(function() {
-            var harga  = $("#harga_barang").val();
+        $("#jumlah, #harga_beli").keyup(function() {
+            var harga  = $("#harga_beli").val();
             var jumlah = $("#jumlah").val();
 
             var total = parseInt(harga) * parseInt(jumlah);
             $("#item_total").val(total);
+        });
+        $("#jumlah, #stok_sekarang").keyup(function() {
+            var stok  = $("#stok_sekarang").val();
+            var jumlah = $("#jumlah").val();
+
+            var total = parseInt(stok) - parseInt(jumlah);
+            $("#stok").val(total);
         });
 $('#btnAdd').click(function (e) {
     e.preventDefault();
     $.ajax({
       data: $('#transaksi').serialize(),
       url: "{{ route('pembelian.store') }}",
+      type: "POST",
+      dataType: 'json',
+      success: function (data) {
+        console.log('SUCCESS:', data);
+      },
+      error: function (data) {
+          console.log('Error:', data);
+      }
+  });
+  $.ajax({
+      data: $('#transaksi').serialize(),
+      url: "{{ route('stok.store') }}",
       type: "POST",
       dataType: 'json',
       success: function (data) {
@@ -164,7 +190,7 @@ $('#btnAdd').click(function (e) {
                     var result;
                     result = [
                         {
-                            label: request.term+ 'Tidak Ditemukan',
+                            label: request.term+ ' Tidak Ditemukan',
                             value: ''
                         }
                     ];
@@ -190,7 +216,13 @@ $('#btnAdd').click(function (e) {
 
             if (selectedData && selectedData.item && selectedData.item.data){
                 var data = selectedData.item.data;
+                $('#id').val(data.id);
+                $('#harga_beli').val(data.harga_beli);
                 $('#harga_barang').val(data.harga_beli);
+                $('#harga_normal').val(data.harga_normal);
+                $('#harga_mitra').val(data.harga_mitra);
+                $('#harga_grosir').val(data.harga_grosir);
+                $('#tgl_exp').val(data.tgl_exp);
                 $('#stok_sekarang').val(data.stok);
             }
         }
@@ -208,18 +240,18 @@ $('#btnAdd').click(function (e) {
     $("#btnAdd").click(function () {
                 var nama_barang = $("#nama_barang").val().trim();
                 var jumlah = $("#jumlah").val().trim();
-                var harga_barang = $("#harga_barang").val().trim();
+                var harga_beli = $("#harga_beli").val().trim();
 
-                if(nama_barang != "" && jumlah != "" && harga_barang != "" ){
+                if(nama_barang != "" && jumlah != "" && harga_beli != "" ){
                     if ($("tblData tbody").children().children().children().children().lenght == 1){
                         $("#tblData tr").html("");
                     }
 
-                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control text-end'></td>&nbsp;<td><input type='text' id='dyharga_barang' name='harga_barang' value="+harga_barang+" class='form-control text-end' disabled></td>&nbsp;<td><input type='text' class='form-control text-end' name='item_total' jAutoCalc='{jumlah} * {harga_barang}' value=''></td></tr>";
+                    var dynamicTr ="<tr class='line_items  table table-grey'><td><input type='button' class='btn btn-danger btn-sm' value='Hapus'></td><td><span>"+nama_barang+"</span></td><td><input type='text' id='dyjumlah' name='jumlah' value="+jumlah+" class='form-control text-end'></td>&nbsp;<td><input type='text' id='dyharga_beli' name='harga_beli' value="+harga_beli+" class='form-control text-end' disabled></td>&nbsp;<td><input type='text' class='form-control text-end' name='item_total' jAutoCalc='{jumlah} * {harga_beli}' value=''></td></tr>";
                         $("#tblData tbody").append(dynamicTr);
                         $("#barang").val("");
                         $("#jumlah").val("");
-                        $("#harga_barang").val("");
+                        $("#harga_beli").val("");
                         $("#item_total").val("");
                         $(function() {
 
