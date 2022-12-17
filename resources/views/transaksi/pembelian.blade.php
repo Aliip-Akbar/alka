@@ -147,7 +147,7 @@ $("#stok_sekarang, #jumlah").keyup(function() {
             var stok  = $("#stok_sekarang").val();
             var jumlah = $("#jumlah").val();
 
-            var total = parseInt(stok) - parseInt(jumlah);
+            var total = parseInt(stok) + parseInt(jumlah);
             $("#stok").val(total);
         });
 $('#btnAdd').click(function (e) {
