@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\transaksi;
+use App\Models\Pelanggan;
 use Illuminate\Support\Facades\DB;
 use Auth;
 class PmitraController extends Controller
@@ -15,7 +16,8 @@ class PmitraController extends Controller
      */
     public function index()
     {
-        $pelanggans = DB::table('pelanggans')->get();
+        $pelanggans = Pelanggan::where('j_pelanggan', 'mitra')->get();
+
 
         return view('transaksi.p_mitra', ['pelanggans' => $pelanggans])->with([
             'user' => Auth::user()

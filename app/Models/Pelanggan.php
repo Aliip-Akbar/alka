@@ -10,7 +10,6 @@ class Pelanggan extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'kd_user',
         'nama_pelanggan',
         'alamat',
         'telp',

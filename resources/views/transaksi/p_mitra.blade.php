@@ -79,7 +79,6 @@
                             @foreach ($pelanggans as $i)
                             <option value="{{ $i->nama_pelanggan }}">{{ $i->nama_pelanggan }}</option>
                             @endforeach
-                            <option value="Tono">Tono</option>
                         </select>
                         </td>
                         <td class="text-end" id="sizeJ">Total       :</td>

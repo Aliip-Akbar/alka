@@ -18,6 +18,13 @@ class DetailP extends Model
         'j_transaksi',
         'tgl_transaksi',
         'keterangan',
+        'metode_pembayaran',
+        'nama_lengkap',
+        'no_kartu',
+        'exp_kartu',
+        'cvv_kartu',
+        'pembayaran',
+        'kembalian'
 
 
     ];

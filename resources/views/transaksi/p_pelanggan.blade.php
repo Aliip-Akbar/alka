@@ -21,7 +21,7 @@
                 <input type="hidden" name="stok" id="stok">
             </div>
             <div class="col-md-4 col-sm-6 p-2">
-                <label for="">Harga Beli</label>
+                <label for="">Harga Barang</label>
                 <input type="number" class="form-control" placeholder="" id="harga_barang" name="harga_barang" value="">
                 <input type="hidden" class="form-control" id="harga_beli" name="harga_beli" placeholder="Masukkan Harga Barang" value="">
                 <input type="hidden" class="form-control" id="harga_normal" name="harga_normal" placeholder="Masukkan Harga Barang" value="">
@@ -79,7 +79,6 @@
                             @foreach ($pelanggans as $i)
                             <option value="{{ $i->nama_pelanggan }}">{{ $i->nama_pelanggan }}</option>
                             @endforeach
-                            <option value="Tono">Tono</option>
                         </select>
                         </td>
                         <td class="text-end" id="sizeJ">Total       :</td>
@@ -100,7 +99,43 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="text-end">
+                        <td>Metode Pembayaran</td>
+                        <td>
+
+                               <div class="form-check">
+                                <input type="radio" id="chkYes" name="metode_pembayaran" class="form-check-input" value="Debit" />
+                                <label for="chkYes" class="form-check-label">Debit</label>
+                               </div>
+                               <div class="form-check">
+                                <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Tunai" />
+                                <label for="chkNo" class="form-check-label">Tunai</label>
+                               </div>
+                              <hr>
+                              <div id="dvPinNo" style="display: none">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="">Nama Lengkap</label>
+                                         <input type="text" name="nama_lengkap" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Nomor Kartu</label>
+                                        <input type="number" name="no_kartu" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="">Expired</label>
+                                         <input type="number" name="exp_kartu" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Cvv</label>
+                                         <input type="number" name="cvv_kartu" class="form-control" />
+                                    </div>
+                                </div>
+                              </div>
+
+                        </td>
+                        <td class="text-end">
                             Pajak :
                         </td>
                         <td colspan="2">
@@ -111,6 +146,14 @@
                     <tr class="line_items">
                         <td colspan="3" class="text-end">Grand Total :</td>
                         <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control text-end"></td>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">Pembayaran :</td>
+                        <td colspan="2"><input type="text"  name="pembayaran" value="0" placeholder="0" class="form-control text-end"></td>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">Kembalian :</td>
+                        <td colspan="2"><input type="text" jAutoCalc="{grand_total} - {pembayaran}" name="kembalian" value="" placeholder="0" class="form-control text-end"></td>
                     </tr>
                 </tfoot>
             </table>
@@ -136,7 +179,15 @@ $(function() {
   $('#trx_id').val(kd_trx);
   $('#kd_trx').val(kd_trx);
 });
-
+$(function() {
+   $("input[name='metode_pembayaran']").click(function() {
+     if ($("#chkYes").is(":checked")) {
+       $("#dvPinNo").show();
+     } else {
+       $("#dvPinNo").hide();
+     }
+   });
+ });
 $("#stok_sekarang, #jumlah").keyup(function() {
             var s_sekarang  = $("#stok_sekarang").val();
             var jumlah = $("#jumlah").val();
@@ -145,8 +196,8 @@ $("#stok_sekarang, #jumlah").keyup(function() {
             $("#stok").val(total);
         });
 
-        $("#jumlah, #harga_beli").keyup(function() {
-            var harga  = $("#harga_beli").val();
+        $("#jumlah, #harga_barang").keyup(function() {
+            var harga  = $("#harga_barang").val();
             var jumlah = $("#jumlah").val();
 
             var total = parseInt(harga) * parseInt(jumlah);
@@ -227,7 +278,7 @@ $('#btnAdd').click(function (e) {
                 var data = selectedData.item.data;
                 $('#id').val(data.id);
                 $('#harga_beli').val(data.harga_beli);
-                $('#harga_barang').val(data.harga_beli);
+                $('#harga_barang').val(data.harga_normal);
                 $('#harga_normal').val(data.harga_normal);
                 $('#harga_mitra').val(data.harga_mitra);
                 $('#harga_grosir').val(data.harga_grosir);

@@ -24,6 +24,13 @@ return new class extends Migration
             $table->string('grand_total');
             $table->string('keterangan')->nullable();
             $table->date('tgl_transaksi')->nullable();
+            $table->string('metode_pembayaran')->nullable();
+            $table->string('nama_lengkap')->nullable();
+            $table->string('no_kartu')->nullable();
+            $table->string('exp_kartu')->nullable();
+            $table->string('cvv_kartu')->nullable();
+            $table->string('pembayaran')->nullable();
+            $table->string('kembalian')->nullable();
             $table->timestamps();
         });
     }

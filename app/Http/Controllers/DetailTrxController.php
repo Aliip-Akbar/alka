@@ -47,6 +47,13 @@ class DetailTrxController extends Controller
             'j_transaksi' => $request->j_transaksi,
             'keterangan' => $request->keterangan,
             'tgl_transaksi' => $request->tgl_transaksi,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'nama_lengkap' => $request->nama_lengkap,
+            'no_kartu'=> $request->no_kartu,
+            'exp_kartu' =>$request->exp_kartu,
+            'cvv_kartu'=> $request->cvv_kartu,
+            'pembayaran' => $request->pembayaran,
+            'kembalian'=> $request->kembalian
 
         ]);
         return response()->json(['success'=>'transaksi baru Berhasil Ditambahkan.']);

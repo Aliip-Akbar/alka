@@ -55,7 +55,7 @@
                 <a class="collapse-item" href="/barang">Data Barang</a>
                 <a class="collapse-item" href="/pelanggan">Data Pelanggan</a>
                 <a class="collapse-item" href="/mitra">Data Mitra</a>
-                <a class="collapse-item" href="/stok">Stok</a>
+
             </div>
         </div>
     </li>
@@ -70,7 +70,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-dollar-sign"></i> Data Transaksi :</h6>
                 <a class="collapse-item" id="" href="/stok">Set Stok Awal</a>
-                <a class="collapse-item" href="/point">Transaksi Point</a>
+                {{-- <a class="collapse-item" href="/point">Transaksi Point</a> --}}
                 <a class="collapse-item" href="/pembelian">Pembelian Barang</a>
                 <a class="collapse-item" href="/penjualan">Penjualan Barang</a>
                 <a class="collapse-item" href="/penjualanmitra">Penjualan Barang Mitra</a>
@@ -131,7 +131,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-dollar-sign"></i> Data Transaksi :</h6>
-                <a class="collapse-item" href="/point">Transaksi Point</a>
+                {{-- <a class="collapse-item" href="/point">Transaksi Point</a> --}}
                 <a class="collapse-item" href="/penjualan">Penjualan Barang</a>
                 <a class="collapse-item" href="/penjualanmitra">Penjualan Barang Mitra</a>
             </div>
@@ -198,7 +198,7 @@
                 <a class="collapse-item" href="/kategori">Kategori Barang</a>
                 <a class="collapse-item" href="/satuan">Data Satuan</a>
                 <a class="collapse-item" href="/barang">Data Barang</a>
-                <a class="collapse-item" href="/stok">Stok</a>
+
             </div>
         </div>
     </li>

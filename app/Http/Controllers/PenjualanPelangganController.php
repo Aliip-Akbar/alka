@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\transaksi;
 use Illuminate\Support\Facades\DB;
+use App\Models\Pelanggan;
 use Auth;
 class PenjualanPelangganController extends Controller
 {
@@ -15,7 +16,7 @@ class PenjualanPelangganController extends Controller
      */
     public function index()
     {
-        $pelanggans = DB::table('pelanggans')->get();
+        $pelanggans = Pelanggan::where('j_pelanggan', 'biasa')->get();
 
         return view('transaksi.p_pelanggan', ['pelanggans' => $pelanggans])->with([
             'user' => Auth::user()
