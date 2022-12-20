@@ -85,7 +85,7 @@
                         <td colspan="2"><input type="text" id='total' name="total" value="0" jAutoCalc="SUM({item_total})" class="form-control text-end"></td>
                     </tr>
                     <tr>
-                        <td  class="text-start">Tanggal Transaksi :</td>
+                        <td  class="text-start">Tanggal Transaksi</td>
                         <td >
                             <input type="date" id="tgl_transaksi" name="tgl_transaksi" class="form-control">
                             <input type="hidden" name="keterangan" id="keterangan" value="Transaksi Reguler">
@@ -110,30 +110,11 @@
                                 <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Tunai" />
                                 <label for="chkNo" class="form-check-label">Tunai</label>
                                </div>
+                               <div class="form-check">
+                                <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Hutang" />
+                                <label for="chkNo" class="form-check-label">Hutang</label>
+                               </div>
                               <hr>
-                              <div id="dvPinNo" style="display: none">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="">Nama Lengkap</label>
-                                         <input type="text" name="nama_lengkap" class="form-control" />
-                                    </div>
-                                    <div class="col">
-                                        <label for="">Nomor Kartu</label>
-                                        <input type="number" name="no_kartu" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="">Expired</label>
-                                         <input type="number" name="exp_kartu" class="form-control" />
-                                    </div>
-                                    <div class="col">
-                                        <label for="">Cvv</label>
-                                         <input type="number" name="cvv_kartu" class="form-control" />
-                                    </div>
-                                </div>
-                              </div>
-
                         </td>
                         <td class="text-end">
                             Pajak :
@@ -144,7 +125,32 @@
                        </tr>
                     </tr>
                     <tr class="line_items">
-                        <td colspan="3" class="text-end">Grand Total :</td>
+                        <td colspan="2">
+                            <div id="dvPinNo" style="display: none">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="">Nama Lengkap</label>
+                                         <input type="text" name="nama_lengkap" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Nomor Kartu</label>
+                                        <input type="number" name="no_kartu" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="">Expired</label>
+                                         <input type="number" name="exp_kartu" class="form-control" />
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="">Cvv</label>
+                                         <input type="number" name="cvv_kartu" class="form-control" />
+                                    </div>
+                                </div>
+                              </div>
+
+                        </td>
+                        <td  class="text-end">Grand Total :</td>
                         <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control text-end"></td>
                     </tr>
                     <tr class="line_items">

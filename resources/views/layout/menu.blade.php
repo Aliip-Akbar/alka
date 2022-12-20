@@ -82,12 +82,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
             aria-expanded="true" aria-controls="collapsePages2">
             <i class="fas fa-print"></i>
-            <span>Cetak</span>
+            <span>Laporan</span>
         </a>
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
-                <a class="collapse-item" id="" href="/laporan">Laporan</a>
+                <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Riwayat Transaksi :</h6>
+                <a class="collapse-item" id="" href="/laporan">Riwayat Transaksi</a>
+                <a class="collapse-item" id="" href="/hutang">Riwayat Hutang</a>
 
             </div>
         </div>
@@ -141,12 +142,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
             aria-expanded="true" aria-controls="collapsePages2">
             <i class="fas fa-print"></i>
-            <span>Cetak</span>
+            <span>Laporan</span>
         </a>
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
-                <a class="collapse-item" id="" href="/laporan">Laporan</a>
+                <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Riwayat Transaksi :</h6>
+                <a class="collapse-item" id="" href="/laporan">Riwayat Transaksi</a>
+                <a class="collapse-item" id="" href="/hutang">Riwayat Hutang</a>
 
             </div>
         </div>
@@ -221,12 +223,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
             aria-expanded="true" aria-controls="collapsePages2">
             <i class="fas fa-print"></i>
-            <span>Cetak</span>
+            <span>Laporan</span>
         </a>
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Cetak :</h6>
-                <a class="collapse-item" id="" href="/laporan">Laporan</a>
+                <h6 class="collapse-header"><i class="fas fa-copy"></i> Data Riwayat Transaksi :</h6>
+                <a class="collapse-item" id="" href="/laporan">Riwayat Transaksi</a>
+                <a class="collapse-item" id="" href="/hutang">Riwayat Hutang</a>
 
             </div>
         </div>

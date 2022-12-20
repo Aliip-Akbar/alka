@@ -38,6 +38,7 @@ Route::group(['middleware'=>['auth']],function () {
         Route::resource('stok', App\Http\Controllers\StokController::class);
         Route::resource('penjualanmitra', App\Http\Controllers\PmitraController::class);
         Route::resource('detailtrx', App\Http\Controllers\DetailTrxController::class);
+        Route::resource('hutang', App\Http\Controllers\HutangController::class);
         Route::get('cetak/pembelian', 'App\Http\Controllers\LaporanController@cetak_pembelian');
         Route::get('cetak/penjualan_reguler', 'App\Http\Controllers\LaporanController@cetak_penjualan');
         Route::get('cetak/penjualan_mitra', 'App\Http\Controllers\LaporanController@cetak_mitra');

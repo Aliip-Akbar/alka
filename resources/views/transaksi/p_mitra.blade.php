@@ -99,7 +99,24 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="text-end">
+                        <td>Metode Pembayaran</td>
+                        <td>
+
+                               <div class="form-check">
+                                <input type="radio" id="chkYes" name="metode_pembayaran" class="form-check-input" value="Debit" />
+                                <label for="chkYes" class="form-check-label">Debit</label>
+                               </div>
+                               <div class="form-check">
+                                <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Tunai" />
+                                <label for="chkNo" class="form-check-label">Tunai</label>
+                               </div>
+                               <div class="form-check">
+                                <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Hutang" />
+                                <label for="chkNo" class="form-check-label">Hutang</label>
+                               </div>
+                              <hr>
+                        </td>
+                        <td class="text-end">
                             Pajak :
                         </td>
                         <td colspan="2">
@@ -108,8 +125,41 @@
                        </tr>
                     </tr>
                     <tr class="line_items">
-                        <td colspan="3" class="text-end">Grand Total :</td>
+                        <td colspan="2">
+                            <div id="dvPinNo" style="display: none">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="">Nama Lengkap</label>
+                                         <input type="text" name="nama_lengkap" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Nomor Kartu</label>
+                                        <input type="number" name="no_kartu" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="">Expired</label>
+                                         <input type="number" name="exp_kartu" class="form-control" />
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="">Cvv</label>
+                                         <input type="number" name="cvv_kartu" class="form-control" />
+                                    </div>
+                                </div>
+                              </div>
+
+                        </td>
+                        <td  class="text-end">Grand Total :</td>
                         <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control text-end"></td>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">Pembayaran :</td>
+                        <td colspan="2"><input type="text"  name="pembayaran" value="0" placeholder="0" class="form-control text-end"></td>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">Kembalian :</td>
+                        <td colspan="2"><input type="text" jAutoCalc="{grand_total} - {pembayaran}" name="kembalian" value="" placeholder="0" class="form-control text-end"></td>
                     </tr>
                 </tfoot>
             </table>
@@ -135,7 +185,15 @@ $(function() {
   $('#trx_id').val(kd_trx);
   $('#kd_trx').val(kd_trx);
 });
-
+$(function() {
+   $("input[name='metode_pembayaran']").click(function() {
+     if ($("#chkYes").is(":checked")) {
+       $("#dvPinNo").show();
+     } else {
+       $("#dvPinNo").hide();
+     }
+   });
+ });
 $("#stok_sekarang, #jumlah").keyup(function() {
             var s_sekarang  = $("#stok_sekarang").val();
             var jumlah = $("#jumlah").val();
