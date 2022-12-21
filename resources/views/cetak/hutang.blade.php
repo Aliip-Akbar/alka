@@ -10,9 +10,8 @@
                 <thead class="bg-primary text-light">
                     <tr>
                         <th width="10px">#</th>
-                        <th width="100px">Action</th>
                         <th>Nama</th>
-                        <th>Kategori</th>
+                        <th>Total Belanja</th>
                         <th>Satuan Jual</th>
                         <th>Harga Beli</th>
                         <th>Point</th>
@@ -26,31 +25,22 @@
 
 <script type="text/javascript">
         $(function () {
-
-        /*------------------------------------------
-        --------------------------------------------
-        Pass Header Token
-        --------------------------------------------
-        --------------------------------------------*/
         $.ajaxSetup({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
         });
-
-        /*------------------------------------------
-        --------------------------------------------
-        Render DataTable
-        --------------------------------------------
-        --------------------------------------------*/
         var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: "{{ route('hutang.index') }}",
         columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-        {data: 'action', name: 'action', orderable: false, searchable: false},
         {data: 'nama', name: 'nama'},
+        {data: 'jumlah_hutang', name: 'jumlah_hutang'},
+        {data: 'total_bayar', name: 'total_bayar'},
+        {data: 'sisa_hutang', name: 'sisa_hutang'},
+        {data: 'status', name: 'status'},
         ]
         });
         });

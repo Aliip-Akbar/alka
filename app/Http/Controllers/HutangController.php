@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
+use App\Models\DetailP;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use DataTables;
+use App\Models\Hutang;
 use Auth;
 class HutangController extends Controller
 {
@@ -24,24 +25,13 @@ class HutangController extends Controller
 
         if ($request->ajax()) {
 
-            $data = Barang::latest()->get();
+            $data = Hutang::latest()->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('action', function($row){
 
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-warning btn-sm  editBarang"><i class="fas fa-edit "></i></a>';
-
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteBarang"><i class="fas fa-trash-alt"></i></a>';
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Show" class="btn btn-primary btn-sm showBarang"><i class="fas fa-eye"></i></a>';
-
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
                     ->make(true);
         }
-        $satuans = DB::table('satuans')->get();
-        $kategoris = DB::table('kategoris')->get();
 
         return view('cetak.hutang')->with([
             'user' => Auth::user()
@@ -66,20 +56,15 @@ class HutangController extends Controller
      */
     public function store(Request $request)
     {
-        Barang::updateOrCreate([
+        Hutang::updateOrCreate([
             'id' => $request->id
         ],
         [
-            'kd_barang' => $request->kd_barang,
-            'nama_barang' => $request->nama_barang,
-            'kategori'     => $request->kategori,
-            'satuan_beli' => $request->satuan_beli,
-            'satuan_jual' => $request->satuan_jual,
-            'harga_beli' => $request->harga_beli,
-            'harga_normal' => $request->harga_normal,
-            'harga_mitra' => $request->harga_mitra,
-            'harga_grosir' => $request->harga_grosir,
-            'point' => $request->point,
+            'nama' => $request->nama,
+            'jumlah_hutang'=> $request->jumlah_hutang,
+            'total_bayar' => $request->total_bayar,
+            'sisa_hutang' => $request->sisa_hutang,
+            'status' => $request->status,
         ]);
 
         return response()->json(['success'=>'Barang baru Berhasil Ditambahkan.']);

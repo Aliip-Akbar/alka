@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('no_kartu')->nullable();
             $table->string('exp_kartu')->nullable();
             $table->string('cvv_kartu')->nullable();
-            $table->string('pembayaran')->nullable();
+            $table->string('total_bayar')->nullable();
             $table->string('kembalian')->nullable();
             $table->timestamps();
         });

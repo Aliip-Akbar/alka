@@ -111,8 +111,8 @@
                                 <label for="chkNo" class="form-check-label">Tunai</label>
                                </div>
                                <div class="form-check">
-                                <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Hutang" />
-                                <label for="chkNo" class="form-check-label">Hutang</label>
+                                <input type="radio" id="chkHutang" name="metode_pembayaran" class="form-check-input" value="Hutang" />
+                                <label for="chkHutang" class="form-check-label">Hutang</label>
                                </div>
                               <hr>
                         </td>
@@ -148,18 +148,53 @@
                                     </div>
                                 </div>
                               </div>
-
                         </td>
                         <td  class="text-end">Grand Total :</td>
                         <td colspan="2"><input type="text" jAutoCalc="{total} - {diskon} + {biaya_tambahan}" name="grand_total" value="" placeholder="0" class="form-control text-end"></td>
                     </tr>
                     <tr class="line_items">
-                        <td colspan="3" class="text-end">Pembayaran :</td>
-                        <td colspan="2"><input type="text"  name="pembayaran" value="0" placeholder="0" class="form-control text-end"></td>
+                        <td colspan="3" class="text-end">Total Bayar :</td>
+                        <td colspan="2"><input type="text"  name="total_bayar"  value="0" placeholder="0" class="form-control text-end"></td>
                     </tr>
+                    <div>
+
+                        <tr class="line_items">
+
+                            <td colspan="3" class="text-end">
+                                <div id="dvPinHutang1" style="display: none;">
+                                <label for="">Jumlah Hutang</label>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div id="dvPinHutang2" style="display: none;">
+                                <input type="text" name="jumlah_hutang" jAutoCalc="{grand_total} - {total_bayar}" value="0" class="form-control text-end" />
+                                </div>
+                        </td>
+
+                        </tr>
+                        <tr class="line_items">
+                            <td colspan="3" class="text-end">
+                                <div id="dvPinHutang3" style="display: none;">
+                            <label for="">Sisa Hutang</label>
+                                </div>
+                         </td>
+                         <td colspan="2">
+                            <div id="dvPinHutang4" style="display: none;">
+                            <input type="text" id="sisa_hutang" name="sisa_hutang" value="0" jAutoCalc="{jumlah_hutang}"  class="form-control text-end" />
+                            <input type="hidden" name="status" value="Belum Lunas" class="form-control" />
+                            </div>
+                         </td>
+                        </tr>
+                    </div>
                     <tr class="line_items">
-                        <td colspan="3" class="text-end">Kembalian :</td>
-                        <td colspan="2"><input type="text" jAutoCalc="{grand_total} - {pembayaran}" name="kembalian" value="" placeholder="0" class="form-control text-end"></td>
+                        <td colspan="3" class="text-end">
+                            <div id="dvPinHutang5">Kembalian :</div></td>
+
+                        <td colspan="2">
+                            <div id="dvPinHutang6">
+                            <input type="text" jAutoCalc="{grand_total} - {total_bayar}" name="kembalian" value="0" placeholder="0" class="form-control text-end">
+                            </div>
+                        </td>
                     </tr>
                 </tfoot>
             </table>
@@ -194,6 +229,25 @@ $(function() {
      }
    });
  });
+ $(function() {
+   $("input[name='metode_pembayaran']").click(function() {
+     if ($("#chkHutang").is(":checked")) {
+       $("#dvPinHutang1").show();
+       $("#dvPinHutang2").show();
+       $("#dvPinHutang3").show();
+       $("#dvPinHutang4").show();
+       $("#dvPinHutang5").hide();
+       $("#dvPinHutang6").hide();
+     } else {
+       $("#dvPinHutang1").hide();
+       $("#dvPinHutang2").hide();
+       $("#dvPinHutang3").hide();
+       $("#dvPinHutang4").hide();
+       $("#dvPinHutang5").show();
+       $("#dvPinHutang6").show();
+     }
+   });
+ });
 $("#stok_sekarang, #jumlah").keyup(function() {
             var s_sekarang  = $("#stok_sekarang").val();
             var jumlah = $("#jumlah").val();
@@ -216,9 +270,10 @@ $("#stok_sekarang, #jumlah").keyup(function() {
             var total = parseInt(stok) - parseInt(jumlah);
             $("#stok").val(total);
         });
+
 $('#btnAdd').click(function (e) {
     e.preventDefault();
-    $.ajax({
+        $.ajax({
       data: $('#transaksi').serialize(),
       url: "{{ route('pembelian.store') }}",
       type: "POST",
@@ -242,6 +297,7 @@ $('#btnAdd').click(function (e) {
           console.log('Error:', data);
       }
   });
+
 });
 });
     $(document).ready(function(){
@@ -344,39 +400,88 @@ $('#btnAdd').click(function (e) {
 
             $('#saveBtn').click(function (e) {
             e.preventDefault();
-            $.ajax({
-            data: $('#tblData').serialize(),
-            url: "{{ route('detailtrx.store') }}",
-            type: "POST",
-            title:"Struk Baru",
-            dataType: 'json',
-            success: function (data) {
-                $('#hide').remove();
-                $('#shadow').css("shadow", "none");
-                $('.sidebar, .navbar, .sticky-footer').css("display", "none");
-                $('.table').addClass('table-bordered');
-                $('#judul').css("display", "table-row");
-                $('#struk').css("display", "table-row");
-                $('#trims').css("display", "table-row");
-                $('#size').css("width", "15%");
-                $('#sizeJ').css("width", "15%");
-                $('th#cols').remove();
-                $('td#cols').remove();
-                $('.btn').remove();
-                $('.card').css('width','60%');
-                $('#hapus').css("display", "none");
-                $(".form-control, .form-select, .card").css("border-top-style", "hidden");
-                $(".form-control, .form-select, .card").css("border-bottom-style", "hidden");
-                $(".form-control, .form-select, .card").css("border-right", "hidden");
-                $(".form-control, .form-select, .card").css("border-left-style", "hidden");
-                print(data);
-                location.reload(true);
-                console.log('success:', data);
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-        });
+                if ($("#chkHutang").is(":checked")) {
+                    $.ajax({
+                    data: $('#tblData').serialize(),
+                    url: "{{ route('hutang.store') }}",
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (data) {
+
+                        console.log('success:', data);
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+                $.ajax({
+                data: $('#tblData').serialize(),
+                url: "{{ route('detailtrx.store') }}",
+                type: "POST",
+                title:"Struk Baru",
+                dataType: 'json',
+                success: function (data) {
+                    $('#hide').remove();
+                    $('#shadow').css("shadow", "none");
+                    $('.sidebar, .navbar, .sticky-footer').css("display", "none");
+                    $('.table').addClass('table-bordered');
+                    $('#judul').css("display", "table-row");
+                    $('#struk').css("display", "table-row");
+                    $('#trims').css("display", "table-row");
+                    $('#size').css("width", "15%");
+                    $('#sizeJ').css("width", "15%");
+                    $('th#cols').remove();
+                    $('td#cols').remove();
+                    $('.btn').remove();
+                    $('.card').css('width','60%');
+                    $('#hapus').css("display", "none");
+                    $(".form-control, .form-select, .card").css("border-top-style", "hidden");
+                    $(".form-control, .form-select, .card").css("border-bottom-style", "hidden");
+                    $(".form-control, .form-select, .card").css("border-right", "hidden");
+                    $(".form-control, .form-select, .card").css("border-left-style", "hidden");
+                    print(data);
+                    location.reload(true);
+                    console.log('success:', data);
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+                } else {
+                    $.ajax({
+                data: $('#tblData').serialize(),
+                url: "{{ route('detailtrx.store') }}",
+                type: "POST",
+                title:"Struk Baru",
+                dataType: 'json',
+                success: function (data) {
+                    $('#hide').remove();
+                    $('#shadow').css("shadow", "none");
+                    $('.sidebar, .navbar, .sticky-footer').css("display", "none");
+                    $('.table').addClass('table-bordered');
+                    $('#judul').css("display", "table-row");
+                    $('#struk').css("display", "table-row");
+                    $('#trims').css("display", "table-row");
+                    $('#size').css("width", "15%");
+                    $('#sizeJ').css("width", "15%");
+                    $('th#cols').remove();
+                    $('td#cols').remove();
+                    $('.btn').remove();
+                    $('.card').css('width','60%');
+                    $('#hapus').css("display", "none");
+                    $(".form-control, .form-select, .card").css("border-top-style", "hidden");
+                    $(".form-control, .form-select, .card").css("border-bottom-style", "hidden");
+                    $(".form-control, .form-select, .card").css("border-right", "hidden");
+                    $(".form-control, .form-select, .card").css("border-left-style", "hidden");
+                    print(data);
+                    location.reload(true);
+                    console.log('success:', data);
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+                }
         });
 });
 </script>

@@ -52,7 +52,7 @@ class DetailTrxController extends Controller
             'no_kartu'=> $request->no_kartu,
             'exp_kartu' =>$request->exp_kartu,
             'cvv_kartu'=> $request->cvv_kartu,
-            'pembayaran' => $request->pembayaran,
+            'total_bayar' => $request->total_bayar,
             'kembalian'=> $request->kembalian
 
         ]);
