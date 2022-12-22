@@ -9,7 +9,9 @@
             <div class="col-md-4 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
                 <input type="hidden" name="id" id="id">
+                <input type="hidden" name="id_transaksi" id="id_transaksi">
                 <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
+                <input type="hidden" class="form-control" placeholder="" id="kd_barang" name="kd_barang" value="">
                 <input type="hidden" class="form-control" id="keterangan" name="keterangan" value="Transaksi Reguler">
                 <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Keluar">
                 <input type="input" class="form-control typehead" placeholder="" id="nama_barang" name="nama_barang" value="">
@@ -101,21 +103,15 @@
                     <tr>
                         <td>Metode Pembayaran</td>
                         <td>
-
-                               <div class="form-check">
-                                <input type="radio" id="chkYes" name="metode_pembayaran" class="form-check-input" value="Debit" />
-                                <label for="chkYes" class="form-check-label">Debit</label>
-                               </div>
-                               <div class="form-check">
-                                <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Tunai" />
-                                <label for="chkNo" class="form-check-label">Tunai</label>
-                               </div>
-                               <div class="form-check">
-                                <input type="radio" id="chkHutang" name="metode_pembayaran" class="form-check-input" value="Hutang" />
-                                <label for="chkHutang" class="form-check-label">Hutang</label>
-                               </div>
-                              <hr>
-                        </td>
+                            <div class="form-check">
+                             <input type="radio" id="chkYes" name="metode_pembayaran" class="form-check-input" value="Debit" />
+                             <label for="chkYes" class="form-check-label col-3">Debit</label>
+                             <input type="radio" id="chkNo" name="metode_pembayaran" class="form-check-input" value="Tunai" />
+                             <label for="chkNo" class="form-check-label col-3">Tunai</label>
+                             <input type="radio" id="chkHutang" name="metode_pembayaran" class="form-check-input" value="Hutang" />
+                             <label for="chkHutang" class="form-check-label col-3">Hutang</label>
+                            </div>
+                     </td>
                         <td class="text-end">
                             Pajak :
                         </td>
@@ -156,36 +152,6 @@
                         <td colspan="3" class="text-end">Total Bayar :</td>
                         <td colspan="2"><input type="text"  name="total_bayar"  value="0" placeholder="0" class="form-control text-end"></td>
                     </tr>
-                    <div>
-
-                        <tr class="line_items">
-
-                            <td colspan="3" class="text-end">
-                                <div id="dvPinHutang1" style="display: none;">
-                                <label for="">Jumlah Hutang</label>
-                                </div>
-                            </td>
-                            <td colspan="2">
-                                <div id="dvPinHutang2" style="display: none;">
-                                <input type="text" name="jumlah_hutang" jAutoCalc="{grand_total} - {total_bayar}" value="0" class="form-control text-end" />
-                                </div>
-                        </td>
-
-                        </tr>
-                        <tr class="line_items">
-                            <td colspan="3" class="text-end">
-                                <div id="dvPinHutang3" style="display: none;">
-                            <label for="">Sisa Hutang</label>
-                                </div>
-                         </td>
-                         <td colspan="2">
-                            <div id="dvPinHutang4" style="display: none;">
-                            <input type="text" id="sisa_hutang" name="sisa_hutang" value="0" jAutoCalc="{jumlah_hutang}"  class="form-control text-end" />
-                            <input type="hidden" name="status" value="Belum Lunas" class="form-control" />
-                            </div>
-                         </td>
-                        </tr>
-                    </div>
                     <tr class="line_items">
                         <td colspan="3" class="text-end">
                             <div id="dvPinHutang5">Kembalian :</div></td>
@@ -195,6 +161,31 @@
                             <input type="text" jAutoCalc="{grand_total} - {total_bayar}" name="kembalian" value="0" placeholder="0" class="form-control text-end">
                             </div>
                         </td>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">
+                            <div id="dvPinHutang1" style="display: none;">
+                            <label for="">Jumlah Hutang</label>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <div id="dvPinHutang2" style="display: none;">
+                            <input type="text" name="jumlah_hutang" jAutoCalc="{grand_total} - {total_bayar}" value="0" class="form-control text-end" />
+                            </div>
+                    </td>
+                    </tr>
+                    <tr class="line_items">
+                        <td colspan="3" class="text-end">
+                            <div id="dvPinHutang3" style="display: none;">
+                        <label for="">Sisa Hutang</label>
+                            </div>
+                     </td>
+                     <td colspan="2">
+                        <div id="dvPinHutang4" style="display: none;">
+                        <input type="text" id="sisa_hutang" name="sisa_hutang" value="0" jAutoCalc="{jumlah_hutang}"  class="form-control text-end" />
+                        <input type="hidden" name="status" value="Belum Lunas" class="form-control" />
+                        </div>
+                     </td>
                     </tr>
                 </tfoot>
             </table>
@@ -339,6 +330,7 @@ $('#btnAdd').click(function (e) {
             if (selectedData && selectedData.item && selectedData.item.data){
                 var data = selectedData.item.data;
                 $('#id').val(data.id);
+                $('#kd_barang').val(data.kd_barang);
                 $('#harga_beli').val(data.harga_beli);
                 $('#harga_barang').val(data.harga_normal);
                 $('#harga_normal').val(data.harga_normal);
@@ -387,9 +379,9 @@ $('#btnAdd').click(function (e) {
 
                         $(".btn-sm").click(function(e) {
 				        e.preventDefault();
-
                         var form = $(this).parents('form#tblData')
                         $(this).parents('tr').remove();
+                        $("#tblData").trigger('reset');
                         autoCalcSetup();
                         });
                     });

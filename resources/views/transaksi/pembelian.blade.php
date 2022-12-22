@@ -9,6 +9,7 @@
             <div class="col-md-4 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
                 <input type="hidden" name="id" id="id">
+                <input type="hidden" name="id_transaksi" id="id_transaksi">
                 <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
                 <input type="hidden" class="form-control" id="keterangan" name="keterangan" value="Transaksi Masuk">
                 <input type="hidden" class="form-control" id="j_transaksi" name="j_transaksi" value="Transaksi Barang Masuk">
@@ -265,9 +266,9 @@ $('#btnAdd').click(function (e) {
 
                         $(".btn-sm").click(function(e) {
 				        e.preventDefault();
-
                         var form = $(this).parents('form#tblData')
                         $(this).parents('tr').remove();
+                        $("#tblData").trigger('reset');
                         autoCalcSetup();
                         });
                     });

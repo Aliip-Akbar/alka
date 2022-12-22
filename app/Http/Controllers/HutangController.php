@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailP;
+use App\Models\Hutang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use DataTables;
-use App\Models\Hutang;
 use Auth;
 class HutangController extends Controller
 {
@@ -29,11 +28,18 @@ class HutangController extends Controller
 
             return Datatables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('action', function($row){
 
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-warning btn-sm  editHutang"><i class="fas fa-edit "></i></a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
                     ->make(true);
         }
+        $satuans = DB::table('satuans')->get();
+        $kategoris = DB::table('kategoris')->get();
 
-        return view('cetak.hutang')->with([
+        return view('cetak.hutang', ['satuans' => $satuans], ['kategoris' => $kategoris])->with([
             'user' => Auth::user()
         ]);
     }
@@ -61,13 +67,13 @@ class HutangController extends Controller
         ],
         [
             'nama' => $request->nama,
-            'jumlah_hutang'=> $request->jumlah_hutang,
+            'jumlah_hutang' => $request->jumlah_hutang,
             'total_bayar' => $request->total_bayar,
             'sisa_hutang' => $request->sisa_hutang,
             'status' => $request->status,
         ]);
 
-        return response()->json(['success'=>'Barang baru Berhasil Ditambahkan.']);
+        return response()->json(['success'=>'Hutang baru Berhasil Ditambahkan.']);
     }
 
     /**
@@ -78,8 +84,8 @@ class HutangController extends Controller
      */
     public function show($id)
     {
-        $barang = Barang::find($id);
-        return response()->json($barang);
+        $Hutang = Hutang::find($id);
+        return response()->json($Hutang);
     }
 
     /**
@@ -90,8 +96,8 @@ class HutangController extends Controller
      */
     public function edit($id)
     {
-        $barang = Barang::find($id);
-        return response()->json($barang);
+        $Hutang = Hutang::find($id);
+        return response()->json($Hutang);
     }
 
     /**
@@ -114,8 +120,8 @@ class HutangController extends Controller
      */
     public function destroy($id)
     {
-        Barang::find($id)->delete();
+        Hutang::find($id)->delete();
 
-        return response()->json(['success'=>'Barang Berhasil DiHapus.']);
+        return response()->json(['success'=>'Hutang Berhasil DiHapus.']);
     }
 }

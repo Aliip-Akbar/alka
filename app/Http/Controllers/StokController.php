@@ -16,8 +16,6 @@ class StokController extends Controller
      */
     public function index(Request $request)
     {
-        $barangs = DB::table('barangs')->get();
-        $satuans = DB::table('satuans')->get();
         if ($request->ajax()) {
 
             $data = Stok::all();
@@ -36,7 +34,7 @@ class StokController extends Controller
                     ->make(true);
         }
 
-        return view('transaksi.stok', ['satuans' => $satuans], ['barangs' => $barangs])->with([
+        return view('transaksi.stok')->with([
             'user' => Auth::user()
         ]);
     }

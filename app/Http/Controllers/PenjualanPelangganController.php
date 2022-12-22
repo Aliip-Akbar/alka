@@ -56,7 +56,7 @@ class PenjualanPelangganController extends Controller
     public function store(Request $request)
     {
         transaksi::updateOrCreate([
-            'id' => $request->id
+            'id_transaksi' => $request->id_transaksi
         ],
         [
             'kd_trx' => $request->kd_trx,
@@ -113,6 +113,8 @@ class PenjualanPelangganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        transaksi::find($id)->delete();
+
+        return response()->json(['success'=>'Barang Berhasil DiHapus.']);
     }
 }

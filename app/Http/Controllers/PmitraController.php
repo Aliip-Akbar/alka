@@ -57,7 +57,7 @@ class PmitraController extends Controller
     public function store(Request $request)
     {
         transaksi::updateOrCreate([
-            'id' => $request->id
+            'id_transaksi' => $request->id_transaksi
         ],
         [
             'kd_trx' => $request->kd_trx,
