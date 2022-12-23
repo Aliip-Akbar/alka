@@ -2,6 +2,7 @@
 @section('isi')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <div class="card shadow mb-2 mt-4">
     <div class="card-body">
            <form id="transaksi">
