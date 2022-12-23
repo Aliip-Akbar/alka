@@ -69,7 +69,7 @@
                                                  <div class="form-group">
                                                 <label for="name" class="col-sm control-label">Bayar</label>
                                                 <div class="col-sm-12">
-                                                    <input type="text" class="form-control" id="bayar" value="0" name="bayar" placeholder="Masukkan Harga Hutang" value="" maxlength="50" required="">
+                                                    <input type="text" class="form-control" id="bayar" value="0" name="bayar">
                                                 </div>
                                             </div>
                                             </div>
