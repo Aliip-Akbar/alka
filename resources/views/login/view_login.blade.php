@@ -21,45 +21,45 @@
     <link href="{{ URL::to('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
-
-<body class="bg-gradient-primary">
-
-    <div class="container bg-white col-4 align-self-center mt-5 rounded">
-        <div class="card-body ">
-                    <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-b"><strong>P O S - LOGIN</strong></h1>
-                    </div>
+<style>
+    .container{
+        position: absolute;
+        margin: 2%;
+        margin-top: 10%;
+        vertical-align: center;
+        width: 100%;
+        margin-left: 32%;
+    }
+    .bg-img{
+        width: 100%;
+        height: 100vh;
+    }
+</style>
+<body>
+    <div class="container shadow bg-white col-4 align-self-center rounded">
+            <div class="card-body">
+                <div class="text-center">
+                    <h1 class="h1 text-gray-900 mb-4 text-b"><strong>P O S - LOGIN</strong></h1>
+                </div>
                     <form class="user" action="{{ url('login/proses') }}" method="POST">
                         @csrf
+                        @if ($errors->has('username'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ $errors->first('username') }}
+                          </div>
+                         @endif
                         <div class="form-group">
-                            <input autofocus type="text"
-                            @error('username')
-                                is-invalid
-                            @enderror
-                            class="form-control mb-4" placeholder="Masukkan Username Anda" name="username">
+                            <input autofocus type="text" class="form-control mb-4" placeholder="Masukkan Username Anda" name="username" required>
                         </div>
-                        @error('username')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                         <div class="form-group">
-                            <input type="password" name="password"
-                            @error('password')
-                                is-invalid
-                            @enderror
-                            class="form-control mb-4" placeholder="Masukkan Password Anda">
+                            <input type="password" name="password" class="form-control mb-4" placeholder="Masukkan Password Anda" required>
                         </div>
-                        @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                         <button type="submit" class="btn btn-primary col-xl mb-4">Login</button>
-                </div>
+                    </form>
+               </div>
+            </div>
     </div>
-
-    </div>
+    <img src="{{ URL::to('img/bg-login.jpg') }}"  class="bg-img" alt="" srcset="">
     @include('layout.script')
     <script src="{{ URL::to('js/sb-admin-2.min.js') }}"></script>
 </body>

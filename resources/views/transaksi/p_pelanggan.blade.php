@@ -9,7 +9,6 @@
             <div class="col-md-4 col-sm-6 p-2 ui-widget">
                 <label for="">Nama Barang</label>
                 <input type="hidden" name="id" id="id">
-                <input type="hidden" name="id_transaksi" id="id_transaksi">
                 <input type="hidden" class="form-control" placeholder="" id="kd_trx" name="kd_trx" value="">
                 <input type="hidden" class="form-control" placeholder="" id="kd_barang" name="kd_barang" value="">
                 <input type="hidden" class="form-control" id="keterangan" name="keterangan" value="Transaksi Reguler">
@@ -32,12 +31,15 @@
                 <input type="hidden" class="form-control" id="tgl_exp" name="tgl_exp" placeholder="Masukkan Harga Barang" value="">
                 <input type="hidden" class="form-control" placeholder="" id="item_total" name="subtotal" value="">
             </div>
+        </form>
+            <form action="" id="fStok" hidden aria-hidden="true">
+                <input type="hidden" name="id" id="id">
+            </form>
             <div class="col-md-1 p-2 mt-2">
                 <label for=""></label>
                 <button id="btnAdd" class=" form-control btn btn-primary" placeholder="" value="Input"><i class="fas fa-download"></i></button>
             </div>
         </div>
-    </form>
     </div>
 </div>
 <div class="card">

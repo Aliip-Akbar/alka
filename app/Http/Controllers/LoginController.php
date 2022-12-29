@@ -44,7 +44,7 @@ class LoginController extends Controller
         return redirect()->intended('/');
     }
     return back()->withErrors([
-        'username' => 'Salah Hayoooo',
+        'username' => 'Coba Periksa Lagi Username dan Password Kamu Ya!',
     ])->onlyInput('username');
    }
 
