@@ -48,15 +48,5 @@
 			</tr>
 			@endforeach
 	</table>
-    {{-- <h4 class="float-right" id="hasil"></h4>
-<script>
-		var table = document.getElementById("nilai"), sumHsl = 0;
-		for(var t = 1; t < table.rows.length; t++)
-		{
-			sumHsl = sumHsl + parseInt(table.rows[t].cells[7].innerText);
-		}
-		document.getElementById("hasil").innerText = sumHsl;
-
-	</script> --}}
 </body>
 </html>
