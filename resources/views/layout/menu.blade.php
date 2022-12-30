@@ -35,6 +35,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"><i class="fas fa-users"></i> Data User :</h6>
                 <a class="collapse-item" href="/user"> User</a>
+                <a class="collapse-item" href="/menu"> Hak Ases</a>
             </div>
         </div>
     </li>
