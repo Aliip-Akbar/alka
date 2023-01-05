@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [App\Http\Controllers\LayoutController::class, 'index'])->middleware('auth');
-Route::get('/home', [App\Http\Controllers\LayoutController::class, 'index'])->middleware('auth');
+Route::get('/', [App\Http\Controllers\LayoutController::class, 'index'])->middleware('auth');
 // Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
 
 Route::controller(App\Http\Controllers\LoginController::class)->group(function () {
