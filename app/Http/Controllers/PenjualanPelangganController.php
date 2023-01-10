@@ -65,7 +65,8 @@ class PenjualanPelangganController extends Controller
             'jumlah' => $request->jumlah,
             'harga_barang' => $request->harga_barang,
             'subtotal' => $request->subtotal,
-            'j_transaksi' => $request->j_transaksi
+            'j_transaksi' => $request->j_transaksi,
+            'tgl_transaksi' => $request->tgl_transaksi
 
         ]);
         return response()->json(['success'=>'Data baru Berhasil Ditambahkan.']);

@@ -54,6 +54,8 @@ Route::group(['middleware'=>['auth']],function () {
         Route::resource('menu', App\Http\Controllers\MenuController::class);
     });
     Route::group(['middleware' => ['CekUserLogin:2']],function () {
+        Route::get('/chart-data', 'App\Http\Controllers\ChartController@getChartData');
+        Route::get('/chart-tm', 'App\Http\Controllers\ChartController@getChartTm');
         Route::resource('pelanggan', App\Http\Controllers\PelangganController::class);
         Route::resource('barang', App\Http\Controllers\BarangController::class);
         Route::resource('satuan', App\Http\Controllers\SatuanController::class);

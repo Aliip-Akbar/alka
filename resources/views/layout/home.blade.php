@@ -2,57 +2,63 @@
 @section('isi')
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Kodchasan:ital,wght@0,300;1,200;1,300&family=Montserrat:ital,wght@0,200;0,300;0,800;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playball&family=Poppins:ital,wght@0,100;0,200;0,300;0,800;0,900;1,100;1,200;1,300&family=Roboto+Condensed:wght@300;400;700&family=Roboto+Mono:ital,wght@0,100;1,100&family=Roboto:ital,wght@0,100;0,300;1,100&family=Rubik+Beastly&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <div class="row">
-        <div class="col ">
-            <div class="container">
-                <h4><strong>Transaksi Masuk</strong></h4>
-            </div>
-        </div>
-        <div class="col ">
-            <div class="container">
-                <h4><strong>Transaksi Keluar</strong></h4>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col ">
-            <div class="container">
-                -
-            </div>
-        </div>
-        <div class="col ">
-            <div class="container">
-                -
+<style>
+    #chart{
+        margin-bottom: 10px;
+    }
+</style>
+<div class="row">
+    <div class="col">
+        <div class="card shadow" id="chart">
+            <div  class="text-center card-body">
+                <canvas id="StokChart"></canvas>
             </div>
         </div>
     </div>
-    {{-- <script type="text/javascript">
+    <div class="col">
+        <div class="card shadow" id="chart">
+            <div  class="text-center card-body">
+                <canvas id="StokChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "{{ url('/chart-data') }}",
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
 
-        var labels =  {{ Js::from($labels) }};
-        var users =  {{ Js::from($data) }};
+                var label = [];
+                var count = [];
 
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: users,
-            }]
-        };
+                for (var i in data) {
+                    label.push(data[i].nama_barang);
+                    count.push(data[i].stok);
+                }
 
-        const config = {
-            type: 'line',
-            data: data,
-            options: {}
-        };
+                var ctx = $("#StokChart");
 
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
+                var chartData = {
+                    labels: label,
+                    datasets: [{
+                        label: 'Grafik Stok',
+                        backgroundColor: 'transparent',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: count
+                    }]
+                };
 
-    </script> --}}
+                var StokChart = new Chart(ctx, {
+                    type: 'line',
+                    data: chartData
+                });
+            }
+        });
+    });
+</script>
+
 @endsection

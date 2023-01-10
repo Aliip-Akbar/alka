@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('home') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('/') }}">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-cash-register"></i>
         </div>
@@ -17,7 +17,7 @@
     </li>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('home') }}">
+        <a class="nav-link" href="{{ url('/') }}">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -103,7 +103,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('home') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('/') }}">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-cash-register"></i>
         </div>
@@ -118,7 +118,7 @@
     </li>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('home') }}">
+        <a class="nav-link" href="{{ url('/') }}">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -163,7 +163,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('home') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ ('/') }}">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-cash-register"></i>
         </div>
@@ -180,7 +180,7 @@
     </li>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('home') }}">
+        <a class="nav-link" href="{{ url('/') }}">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>

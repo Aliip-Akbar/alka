@@ -16,7 +16,8 @@ class transaksi extends Model
         'jumlah',
         'subtotal',
         'keterangan',
-        'j_transaksi'
+        'j_transaksi',
+        'tgl_transaksi'
 
 
     ];

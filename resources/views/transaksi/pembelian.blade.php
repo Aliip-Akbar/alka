@@ -122,6 +122,16 @@ $.ajaxSetup({
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
 });
+function updateTime() {
+    var now = new Date();
+    var date = now.getDate();
+    var month = now.getMonth() + 1; // since getMonth returns a 0-based value
+    var year = now.getFullYear();
+    var formattedDate = month + '-' + date + '-' + year;
+    $('#tgl_transaksi').val(formattedDate);
+    console.log(formattedDate);
+  }
+  setInterval(updateTime, 1000);
 $(function() {
   var randomnumber = Math.floor(Math.random() * 10000)
   var kd = 'In-';
